@@ -20,7 +20,7 @@
 						and maintain control of your data.
 					</p>
 					<div class="mt-10 ml-1 flex gap-4">
-						<Button href="/signup">
+						<Button href="/login?signup=true">
 							Get started <ArrowRight class="w-4 h-4" />
 						</Button>
 						<Button variant="outline" href="/docs">Documentation</Button>
@@ -74,7 +74,7 @@
 					Experience how effortless building a report sytem can be.
 				</p>
 				<div class="flex flex-wrap gap-4 justify-center">
-					<Button href="/signup">Get Started for Free</Button>
+					<Button href="/login?signup=true">Get Started for Free</Button>
 					<Button variant="outline" href="https://github.com/therealPaulPlay/OpenReport">View on GitHub</Button>
 				</div>
 			</div>

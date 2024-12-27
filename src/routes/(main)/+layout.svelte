@@ -12,7 +12,7 @@
 			</a>
 			<div class="flex gap-5 mr-5">
 				<a href="/dashboard" class="text-muted-foreground transition-colors hover:text-foreground"> Dashboard </a>
-				<a href="/signup" class="text-muted-foreground transition-colors hover:text-foreground"> Account </a>
+				<a href="/login" class="text-muted-foreground transition-colors hover:text-foreground"> Account </a>
 			</div>
 		</nav>
 	</header>
