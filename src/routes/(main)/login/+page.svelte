@@ -26,6 +26,7 @@
 	// Check if we're on the set new password page via URL token
 	$effect(() => {
 		if ($page.url.searchParams.get("token")) currentView = "set-new-password";
+		if ($page.url.searchParams.get("reset")) currentView = "reset";
 		if ($page.url.searchParams.get("signup")) currentView = "signup";
 	});
 

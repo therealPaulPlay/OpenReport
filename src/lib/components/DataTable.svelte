@@ -6,7 +6,7 @@
 </script>
 
 <Table.Root>
-	<Table.Caption>A list of recent records</Table.Caption>
+	<Table.Caption>Entries show up here.</Table.Caption>
 	<Table.Header>
 		<Table.Row>
 			<Table.Head>ID</Table.Head>

@@ -1,37 +1,32 @@
 <script>
-	// Import custom components
 	import DataTable from "$lib/components/DataTable.svelte";
 	import AppOptions from "$lib/components/AppOptions.svelte";
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import AppCreationPopup from "$lib/components/AppCreationPopup.svelte";
 
-	// Import ShadCN Sheet
 	import { Sheet, SheetTrigger, SheetContent } from "$lib/components/ui/sheet";
-
-	// Import library components
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Button } from "$lib/components/ui/button";
-	import { Menu } from "lucide-svelte";
+	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
 
 	// Dashboard state
-	let activeApp = $state(null);
-	let apps = $state([]);
+	let apps = $state([
+		{ name: "TestApp", id: 0 },
+		{ name: "TestApp2", id: 1 },
+	]);
+	let activeApp = $state(0);
+	let activeTab = $state("reports");
+
+	// Loaded Data
 	let reports = $state([]);
 	let warnlist = $state([]);
 	let blacklist = $state([]);
-	let activeTab = $state("reports");
+
 	let selectedType = $state("reports");
-	let dbConfig = $state({
-		host: "",
-		port: 3306,
-		user: "",
-		password: "",
-		database: "",
-	});
 
 	// Handlers for app creation and deletion
-	function onCreateApp({ appName, domains, dbConfig }) {
+	function onCreateApp({ appName, domains }) {
 		const apiKey = crypto.randomUUID();
 		apps = [
 			...apps,
@@ -54,15 +49,31 @@
 	}
 </script>
 
-<div class="flex h-screen w-screen">
+{#snippet sidebarContent()}
+	<div class="w-full flex justify-start">
+		<AppCreationPopup />
+	</div>
+	<p class="text-base font-bold text-gray-500 mt-5">Your Apps</p>
+	<div class="space-y-4 mt-2 bg-gray-200 p-4 rounded-md overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
+		{#each apps as app}
+			<button
+				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
+				style:background-color={app.id == activeApp ? "white" : ""}
+			>
+				<AppOptions {app} />
+				<span class="truncate w-full text-center">{app?.name || "Unnamed App"}</span>
+			</button>
+		{/each}
+	</div>
+	<div class="mt-5">
+		<SettingsPopup />
+	</div>
+{/snippet}
+
+<div class="flex h-screen w-screen fixed">
 	<!-- Sidebar (Desktop) -->
-	<div class="hidden lg:flex flex-col bg-gray-100 w-64 p-4 space-y-4 border-r border-gray-200">
-		<div class="space-y-4 flex-grow">
-			{#each apps as app}
-				<AppOptions {app} onDelete={() => deleteApp(app.id)} />
-			{/each}
-			<AppCreationPopup {onCreateApp} />
-		</div>
+	<div class="hidden lg:block bg-gray-100 w-64 p-4 border-r border-gray-200">
+		{@render sidebarContent()}
 	</div>
 
 	<!-- Mobile Sidebar (Sheet) -->
@@ -73,44 +84,50 @@
 			</Button>
 		</SheetTrigger>
 		<SheetContent side="left" class="lg:hidden w-64 p-4">
-			<div class="space-y-4 mt-16">
-				{#each apps as app}
-					<AppOptions {app} onDelete={() => deleteApp(app.id)} />
-				{/each}
-				<AppCreationPopup {onCreateApp} />
+			<div class="max-h-full overflow-auto">
+				{@render sidebarContent()}
 			</div>
 		</SheetContent>
 	</Sheet>
 
 	<!-- Main Content -->
 	<div class="flex-1 p-6 flex flex-col relative overflow-hidden">
+		<!-- Toolbar -->
+		<div class="flex justify-end items-center mb-4">
+			<!-- !TODO add Cleanup button etc. -->
+		</div>
+
 		<!-- App selection notice -->
-		{#if !activeApp}
+		{#if activeApp == null}
 			<div class="flex items-center justify-center flex-grow text-center text-gray-500 mb-6">
 				<h2 class="text-xl">Please select or create an app first.</h2>
 			</div>
 		{:else}
 			<!-- Table view and settings -->
-			<div class="flex justify-between items-center mb-4">
-				<SettingsPopup {dbConfig} {onTestConnection} />
+			<div class="mt-8">
+				<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
+					<Tabs.List class="w-full flex justify-start max-w-80">
+						<Tabs.Trigger value="reports" class="w-full text-center"
+							>Reports <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+						>
+						<Tabs.Trigger value="warnlist" class="w-full text-center"
+							>Warnlist <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+						>
+						<Tabs.Trigger value="blacklist" class="w-full text-center"
+							>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+						>
+					</Tabs.List>
+					<Tabs.Content value="reports">
+						<DataTable data={reports} />
+					</Tabs.Content>
+					<Tabs.Content value="warnlist">
+						<DataTable data={warnlist} />
+					</Tabs.Content>
+					<Tabs.Content value="blacklist">
+						<DataTable data={blacklist} />
+					</Tabs.Content>
+				</Tabs.Root>
 			</div>
-
-			<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
-				<Tabs.List class="w-full flex justify-between">
-					<Tabs.Trigger value="reports" class="w-full text-center">Reports</Tabs.Trigger>
-					<Tabs.Trigger value="warnlist" class="w-full text-center">Warnlist</Tabs.Trigger>
-					<Tabs.Trigger value="blacklist" class="w-full text-center">Blacklist</Tabs.Trigger>
-				</Tabs.List>
-				<Tabs.Content value="reports">
-					<DataTable data={reports} />
-				</Tabs.Content>
-				<Tabs.Content value="warnlist">
-					<DataTable data={warnlist} />
-				</Tabs.Content>
-				<Tabs.Content value="blacklist">
-					<DataTable data={blacklist} />
-				</Tabs.Content>
-			</Tabs.Root>
 		{/if}
 	</div>
 </div>

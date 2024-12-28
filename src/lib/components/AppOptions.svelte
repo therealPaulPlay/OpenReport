@@ -1,17 +1,22 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
+	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
 	import { Button } from "$lib/components/ui/button";
-	import { Settings, Trash, AlertCircle } from "lucide-svelte";
-	let { app, onDelete } = $props();
+	import { Settings2, Trash, AlertCircle } from "lucide-svelte";
+	let { app } = $props();
+
+	async function deleteApp() {
+		console.log("Deleting app...");
+	}
 </script>
 
 <Dialog.Root>
 	<Dialog.Trigger>
-		<span class="icon-wrapper"><Settings size={16} /></span>
+		<Settings2 size={18} class="hover:scale-110 transition" />
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>App Settings - {app.name}</Dialog.Title>
+			<Dialog.Title>Configure "{app.name || "Default name (Error)"}"</Dialog.Title>
 			<Dialog.Description>Configure app settings or delete the app.</Dialog.Description>
 		</Dialog.Header>
 		<div class="space-y-4">
@@ -19,21 +24,23 @@
 				Default thresholds: Warnlist after {app.defaultWarnThreshold} reports, Blacklist after {app.defaultBlacklistThreshold}
 				reports.
 			</p>
-			<Dialog.Root>
-				<Dialog.Trigger>
+			<AlertDialog.Root>
+				<AlertDialog.Trigger>
 					<Button variant="destructive"><Trash size={16} class="mr-2" />Delete App</Button>
-				</Dialog.Trigger>
-				<Dialog.Content>
-					<Dialog.Header>
-						<Dialog.Title><AlertCircle size={16} class="mr-2" />Confirm App Deletion</Dialog.Title>
-						<Dialog.Description>This action is irreversible. Proceed with caution.</Dialog.Description>
-					</Dialog.Header>
-					<Dialog.Footer>
-						<Button variant="destructive" onclick={onDelete}>Confirm</Button>
-						<Button variant="secondary" onclick={() => Dialog.close()}>Cancel</Button>
-					</Dialog.Footer>
-				</Dialog.Content>
-			</Dialog.Root>
+				</AlertDialog.Trigger>
+				<AlertDialog.Content>
+					<AlertDialog.Header>
+						<AlertDialog.Title>Delete {app.name || "Default name (Error)"}?</AlertDialog.Title>
+						<AlertDialog.Description>
+							This action cannot be undone. This will permanently remove all related tables from the database.
+						</AlertDialog.Description>
+					</AlertDialog.Header>
+					<AlertDialog.Footer>
+						<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+						<AlertDialog.Action onclick={deleteApp}>Delete</AlertDialog.Action>
+					</AlertDialog.Footer>
+				</AlertDialog.Content>
+			</AlertDialog.Root>
 		</div>
 	</Dialog.Content>
 </Dialog.Root>
