@@ -9,6 +9,7 @@
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Button } from "$lib/components/ui/button";
 	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
+	import CleanPopup from "$lib/components/CleanPopup.svelte";
 
 	// Dashboard state
 	let apps = $state([
@@ -59,6 +60,9 @@
 			<button
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
 				style:background-color={app.id == activeApp ? "white" : ""}
+				onclick={() => {
+					activeApp = app.id;
+				}}
 			>
 				<AppOptions {app} />
 				<span class="truncate w-full text-center">{app?.name || "Unnamed App"}</span>
@@ -92,11 +96,6 @@
 
 	<!-- Main Content -->
 	<div class="flex-1 p-6 flex flex-col relative overflow-hidden">
-		<!-- Toolbar -->
-		<div class="flex justify-end items-center mb-4">
-			<!-- !TODO add Cleanup button etc. -->
-		</div>
-
 		<!-- App selection notice -->
 		{#if activeApp == null}
 			<div class="flex items-center justify-center flex-grow text-center text-gray-500 mb-6">
@@ -106,17 +105,21 @@
 			<!-- Table view and settings -->
 			<div class="mt-8">
 				<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
-					<Tabs.List class="w-full flex justify-start max-w-80">
-						<Tabs.Trigger value="reports" class="w-full text-center"
-							>Reports <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
-						>
-						<Tabs.Trigger value="warnlist" class="w-full text-center"
-							>Warnlist <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
-						>
-						<Tabs.Trigger value="blacklist" class="w-full text-center"
-							>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
-						>
-					</Tabs.List>
+					<!-- Tabs and Toolbar -->
+					<div class="flex flex-wrap gap-3">
+						<Tabs.List class="w-full flex justify-start max-w-80">
+							<Tabs.Trigger value="reports" class="w-full text-center"
+								>Reports <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+							>
+							<Tabs.Trigger value="warnlist" class="w-full text-center"
+								>Warnlist <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+							>
+							<Tabs.Trigger value="blacklist" class="w-full text-center"
+								>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+							>
+						</Tabs.List>
+						<CleanPopup />
+					</div>
 					<Tabs.Content value="reports">
 						<DataTable data={reports} />
 					</Tabs.Content>

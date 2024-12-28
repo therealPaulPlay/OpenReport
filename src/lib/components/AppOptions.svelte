@@ -11,7 +11,11 @@
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger>
+	<Dialog.Trigger
+		onclick={(e) => {
+			e.stopPropagation();
+		}}
+	>
 		<Settings2 size={18} class="hover:scale-110 transition" />
 	</Dialog.Trigger>
 	<Dialog.Content>

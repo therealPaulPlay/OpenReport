@@ -15,8 +15,9 @@
 			<p>2.1. Self-Hosted Data</p>
 			<p>
 				As a self-hosted solution, all report data and user information is stored in your own database. By connecting OpenReport
-                to your database, our system gains access to all the data stored on it. We do not save or sell any of this data unless
-                opted in by the user.
+                to your database, our system gains access to all the data stored on it. We do not permanently save or sell any of this data unless
+                opted in by the user. This means that as the website owner, you need to inform your users what data is being stored and how you are using 
+				the information gathered from the report forms.
 			</p>
 
 			<p class="mt-4">2.2. Website Usage</p>
