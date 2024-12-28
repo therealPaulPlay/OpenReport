@@ -54,7 +54,7 @@
 		<AppCreationPopup />
 	</div>
 	<p class="text-base font-bold text-gray-500 mt-5">Your Apps</p>
-	<div class="space-y-4 mt-2 bg-gray-200 p-4 rounded-md overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
+	<div class="space-y-2 mt-2 bg-gray-200 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
 		{#each apps as app}
 			<button
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
