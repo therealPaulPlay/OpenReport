@@ -26,7 +26,7 @@
 						Stop bad actors with <span class="text-violet-800">report forms</span>.
 					</h1>
 					<p class="mt-6 text-lg text-muted-foreground">
-						Open-source reporting system for web games, chat applications, and online communities. Self-host, customize,
+						Open-code reporting system for web games, chat applications, and online communities. Self-host, customize,
 						and maintain control of your data.
 					</p>
 					<div class="mt-10 ml-1 flex gap-4">

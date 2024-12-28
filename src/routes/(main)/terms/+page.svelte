@@ -64,8 +64,8 @@
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">7. Intellectual Property</h2>
 			<p>
-				7.1. The Service's source code is provided under an open-source license. The specific terms of that license
-				apply to the code.
+				7.1. The Service's source code is provided under an MIT + Commons Clause license. The specific terms of that
+				license apply to the code.
 			</p>
 			<p>
 				7.2. All other aspects of the Service, including but not limited to trademarks, logos, and documentation, remain
@@ -90,7 +90,11 @@
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">10. Contact Information</h2>
 			<p>
-				For questions about these Terms of Use, please contact OpenReport through the form at the bottom of the <a href="https://paulplay.studio" target="_blank" class="underline">studio website</a>.
+				For questions about these Terms of Use, please contact OpenReport through the form at the bottom of the <a
+					href="https://paulplay.studio"
+					target="_blank"
+					class="underline">studio website</a
+				>.
 			</p>
 
 			<div class="mt-12 mb-8 text-sm text-muted-foreground">

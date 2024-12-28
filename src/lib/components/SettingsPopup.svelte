@@ -3,7 +3,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
-	import { Database, Lock, Settings, Trash } from "lucide-svelte";
+	import { Database, Lock, LogOut, Settings, Trash } from "lucide-svelte";
 	import { goto } from "$app/navigation";
 	import DatabaseConfig from "$lib/components/DatabaseConfig.svelte";
 
@@ -40,6 +40,13 @@
 			<div class="flex flex-wrap gap-3 !mt-1">
 				<Button variant="outline" onclick={() => goto("/login?reset=true")}
 					><Lock size={16} class="mr-2" />Change Password</Button
+				>
+				<Button
+					variant="outline"
+					onclick={() => {
+						localStorage.removeItem("bearer");
+						window.location.reload();
+					}}><LogOut size={16} class="mr-2" /> Log out</Button
 				>
 				<Dialog.Root>
 					<Dialog.Trigger>

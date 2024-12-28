@@ -4,7 +4,8 @@
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
 	import { Plus } from "lucide-svelte";
-	let { onCreateApp } = $props();
+	import { dbConfig } from "$lib/stores/configStore";
+	import DatabaseConfig from "./DatabaseConfig.svelte";
 
 	let appName = $state("");
 	let domains = $state("");
@@ -19,22 +20,27 @@
 			<Dialog.Title>Create an Application</Dialog.Title>
 			<Dialog.Description>Fill in the details below to create your application.</Dialog.Description>
 		</Dialog.Header>
-		<div class="space-y-4">
-			<div>
-				<Label for="appName">App Name</Label>
-				<Input id="appName" bind:value={appName} />
+		{#if $dbConfig?.host}
+			<div class="space-y-4">
+				<div>
+					<Label for="appName">App Name</Label>
+					<Input id="appName" bind:value={appName} />
+				</div>
+				<div>
+					<Label for="domains">Domain(s) (comma-separated)</Label>
+					<Input id="domains" bind:value={domains} />
+				</div>
 			</div>
-			<div>
-				<Label for="domains">Domain(s) (comma-separated)</Label>
-				<Input id="domains" bind:value={domains} />
-			</div>
+			<Dialog.Footer>
+				<Button>Create App</Button>
+			</Dialog.Footer>
+		{:else}
+		<div class="flex flex-wrap space-y-4 justify-start items-center">
+			<p class="text-muted-200 text-sm">
+				Before creating an app, you need to connect a MySQL database which will be used to store reports for all apps.
+			</p>
+			<DatabaseConfig />
 		</div>
-		<Dialog.Footer>
-			<Button
-				onclick={() => {
-					onCreateApp({ appName, domains });
-				}}>Create App</Button
-			>
-		</Dialog.Footer>
+		{/if}
 	</Dialog.Content>
 </Dialog.Root>

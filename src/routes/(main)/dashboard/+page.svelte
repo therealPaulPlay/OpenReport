@@ -16,7 +16,7 @@
 		{ name: "TestApp", id: 0 },
 		{ name: "TestApp2", id: 1 },
 	]);
-	let activeApp = $state(0);
+	let activeApp = $state();
 	let activeTab = $state("reports");
 
 	// Loaded Data
