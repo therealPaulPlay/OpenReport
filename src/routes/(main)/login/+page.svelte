@@ -89,6 +89,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
+
 <!-- Rest of the template remains unchanged -->
 <div class="min-h-screen flex items-center justify-center p-4">
 	<Card class="w-full max-w-md">

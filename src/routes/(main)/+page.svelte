@@ -1,8 +1,18 @@
 <script>
 	import { Button } from "$lib/components/ui/button/index.js";
 	import ReportForm from "$lib/components/ReportForm.svelte";
-	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks } from "lucide-svelte";
+	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon } from "lucide-svelte";
 </script>
+
+<svelte:head>
+	<title>OpenReport - Free user report forms</title>
+</svelte:head>
+
+<!-- Keywords -->
+<h1 style:display={"none"}>
+	Submit user reports with report forms. Integrate into game websites for free to enable users or players the reporting of others for
+	cheating, spamming, bots or harassment. Handle account bans easily. Open source with self hosted database solution.
+</h1>
 
 <div class="min-h-screen">
 	<!-- Hero Section -->
@@ -94,7 +104,13 @@
 				<nav class="flex gap-6">
 					<a href="/terms" class="text-sm text-muted-foreground hover:text-primary"> Terms of Use </a>
 					<a href="/privacy" class="text-sm text-muted-foreground hover:text-primary"> Privacy Policy </a>
-					<a href="https://paulplay.studio/imprint" target="_blank" class="text-sm text-muted-foreground hover:text-primary"> Imprint </a>
+					<a
+						href="https://paulplay.studio/imprint"
+						target="_blank"
+						class="text-sm text-muted-foreground hover:text-primary"
+					>
+						Imprint
+					</a>
 				</nav>
 			</div>
 		</div>

@@ -50,6 +50,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Dashboard</title>
+</svelte:head>
+
 {#snippet sidebarContent()}
 	<div class="w-full flex justify-start">
 		<AppCreationPopup />

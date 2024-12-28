@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Terms</title>
+</svelte:head>
+
 <div class="min-h-screen max-w-screen-xl mx-auto p-4 py-8">
 	<div class="max-w-3xl mx-auto">
 		<h1 class="text-4xl font-bold mb-8">Terms of Use</h1>
