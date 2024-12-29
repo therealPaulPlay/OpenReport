@@ -11,7 +11,7 @@
 <!-- Keywords -->
 <h1 style:display={"none"}>
 	Submit user reports with report forms. Integrate into game websites for free to enable users or players the reporting of others for
-	cheating, spamming, bots or harassment. Handle account bans easily. Open source with self hosted database solution.
+	cheating, spamming, bots or harassment. Handle account bans easily with this open source moderation tool that works with a self hosted database.
 </h1>
 
 <div class="min-h-screen">
