@@ -1,9 +1,11 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
+	import { Progress } from "$lib/components/ui/progress/index.js";
 	import { Button } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Settings2, Trash, AlertCircle } from "lucide-svelte";
+	import { reportLimit } from "$lib/stores/accountStore";
 
 	let { app } = $props();
 	let warnThreshold = $state(app.defaultWarnThreshold);
@@ -52,13 +54,29 @@
 			<Dialog.Title>Configure "{app.name || "Default name (Error)"}"</Dialog.Title>
 			<Dialog.Description>Configure app settings or delete the app.</Dialog.Description>
 		</Dialog.Header>
-		<div class="space-y-6">
+		<div class="space-y-10">
+			<div>
+				<!-- svelte-ignore a11y_label_has_associated_control -->
+				<label class="text-sm font-medium">Monthly report limit</label>
+				<p class="text-sm text-gray-500 mt-1">
+					You have currently used {app.monthly_report_count?.toLocaleString()} of your {$reportLimit.toLocaleString()} monthly reports for this app.
+				</p>
+			</div>
+			<Progress value={Math.max(100, Number(app.monthly_report_count))} max={$reportLimit} class="w-[60%]" />
+			<div>
+				<!-- svelte-ignore a11y_label_has_associated_control -->
+				<label class="text-sm font-medium">Moderators</label>
+				<p class="text-sm text-gray-500 mt-1">
+					Add moderators by their OpenReport email.
+				</p>
+			</div>
 			<div class="space-y-4">
 				<div>
 					<!-- svelte-ignore a11y_label_has_associated_control -->
 					<label class="text-sm font-medium">Default Report Thresholds</label>
 					<p class="text-sm text-gray-500 mt-1">
-						Current: Warnlist after {app.warnThreshold || "UNSET"} reports, Blacklist after {app.blacklistThreshold || "UNSET"} reports
+						Current: Warnlist after {app.warnThreshold || "UNSET"} reports, Blacklist after {app.blacklistThreshold ||
+							"UNSET"} reports
 					</p>
 				</div>
 
@@ -94,7 +112,7 @@
 					<p class="text-sm text-gray-500">Warnlist threshold must be lower than blacklist threshold.</p>
 				{/if}
 
-				<Button variant="outline" onclick={updateThresholds} disabled={!isValid}>Save</Button>
+				<Button variant="outline" onclick={updateThresholds} disabled={!isValid}>Save thresholds</Button>
 			</div>
 
 			<div class="pt-2 border-t">

@@ -14,7 +14,7 @@
 
 	// Dashboard state
 	let apps = $state([
-		{ name: "TestApp", id: 0 },
+		{ name: "TestApp", id: 0, monthly_report_count: 0 },
 		{ name: "TestApp2", id: 1 },
 	]);
 	let activeApp = $state();
