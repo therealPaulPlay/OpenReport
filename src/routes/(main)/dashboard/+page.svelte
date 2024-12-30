@@ -10,6 +10,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
+	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
 
 	// Dashboard state
 	let apps = $state([
@@ -107,7 +108,7 @@
 			</div>
 		{:else}
 			<!-- Table view and settings -->
-			<div class="mt-8">
+			<div class="mt-10">
 				<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
 					<!-- Tabs and Toolbar -->
 					<div class="flex flex-wrap gap-3">
@@ -123,6 +124,7 @@
 							>
 						</Tabs.List>
 						<CleanPopup />
+						<AddEntryPopup />
 					</div>
 					<Tabs.Content value="reports">
 						<DataTable data={reports} />

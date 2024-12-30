@@ -16,7 +16,7 @@
 			<Dialog.Title>Connect a MySQL database</Dialog.Title>
 			<Dialog.Description
 				>For security and data integrity reasons, it is recommended that you use a new (empty) database just for
-				OpenReport.</Dialog.Description
+				OpenReport. Make sure to allow connections from all IPs.</Dialog.Description
 			>
 		</Dialog.Header>
 		<div>

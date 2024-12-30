@@ -12,6 +12,7 @@
 			<Table.Head>ID</Table.Head>
 			<Table.Head>Type</Table.Head>
 			<Table.Head>Reason</Table.Head>
+			<Table.Head>Link</Table.Head>
 			<Table.Head>Timestamp</Table.Head>
 			<Table.Head>Reporter IP</Table.Head>
 			<Table.Head>Actions</Table.Head>
