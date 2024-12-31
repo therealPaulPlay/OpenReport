@@ -12,12 +12,34 @@
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { onMount } from "svelte";
+	import { blur } from "svelte/transition";
 
 	// Dashboard state
-	let apps = $state([
-		{ name: "TestApp", id: 0, monthly_report_count: 0 },
-		{ name: "TestApp2", id: 1 },
-	]);
+	let apps = $state([]);
+
+	async function fetchApps() {
+		try {
+			const response = await fetchWithErrorHandling(`https://api.openreport.dev/app/apps/` + Number(localStorage.getItem("id")), {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+			});
+			
+			apps = await response.json()
+		} catch (error) {
+			toast.error(error.message);
+		}
+	}
+
+	// Load data on mount
+	onMount(() => {
+		fetchApps();
+	});
+
 	let activeApp = $state();
 	let activeTab = $state("reports");
 
@@ -57,7 +79,9 @@
 </svelte:head>
 
 {#if !$isAuthenticated}
-	<div class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-[rgba(255,255,255,0.5)] backdrop-blur-md">
+	<div
+		class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-[rgba(255,255,255,0.5)] backdrop-blur-md"
+	>
 		<p class="font-bold text-4xl">You are logged out.</p>
 		<p class="text-base text-gray-500 mt-5"><a href="/login" class="underline">Log in</a> to use the dashboard.</p>
 	</div>
@@ -73,6 +97,7 @@
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<div
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
+				transition:blur
 				style:background-color={app.id == activeApp ? "white" : ""}
 				role="button"
 				tabindex="0"
@@ -81,7 +106,7 @@
 				}}
 			>
 				<AppOptions {app} />
-				<span class="truncate w-full text-center">{app?.name || "Unnamed App"}</span>
+				<span class="truncate w-full text-center">{app?.app_name || "Unnamed App"}</span>
 			</div>
 		{/each}
 	</div>

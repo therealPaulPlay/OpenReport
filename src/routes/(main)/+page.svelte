@@ -3,6 +3,7 @@
 	import ReportForm from "$lib/components/ReportForm.svelte";
 	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon } from "lucide-svelte";
 	import GithubReposView from "$lib/components/GithubReposView.svelte";
+	import { isAuthenticated } from "$lib/stores/accountStore";
 </script>
 
 <svelte:head>
@@ -31,9 +32,15 @@
 						and maintain control of your data.
 					</p>
 					<div class="mt-10 ml-1 flex gap-4">
+						{#if !$isAuthenticated}
 						<Button href="/login?signup=true">
 							Get started <ArrowRight class="w-4 h-4" />
 						</Button>
+						{:else}
+						<Button href="/dashboard">
+							Open Dashboard <ArrowRight class="w-4 h-4" />
+						</Button>
+						{/if}
 						<GithubReposView />
 					</div>
 				</div>

@@ -51,7 +51,7 @@
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>Configure "{app.name || "Default name (Error)"}"</Dialog.Title>
+			<Dialog.Title>Configure "{app.app_name || "Default name (Error)"}"</Dialog.Title>
 			<Dialog.Description>Configure app settings or delete the app.</Dialog.Description>
 		</Dialog.Header>
 		<div class="space-y-10">

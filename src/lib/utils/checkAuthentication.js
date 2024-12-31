@@ -1,7 +1,7 @@
-import { isAuthenticated, username } from "$lib/stores/accountStore";
+import { isAuthenticated, moderatorLimit, reportLimit, userDatabase, username } from "$lib/stores/accountStore";
 import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
 
-async function getUser() {
+export async function getUser() {
     try {
         const userId = localStorage.getItem("id") || "-1";
         const response = await fetchWithErrorHandling("https://api.openreport.dev/account/user/" + userId, {
@@ -13,7 +13,7 @@ async function getUser() {
         });
 
         const data = await response.json();
-        return data.user;
+        return data;
     } catch (error) {
         console.error("Error occurred while fetching the user: ", error);
         error = error;
@@ -29,8 +29,13 @@ export async function checkAuthenticationStatus() {
         isAuthenticated.set(true);
 
         // Load basic details
-        const user = await getUser();
-        if (user) username.set(user?.user_name);
+        const data = await getUser();
+        if (data) {
+            username.set(data.user?.user_name);
+            reportLimit.set(data.user?.report_limit);
+            moderatorLimit.set(data.user?.moderator_limit);
+            userDatabase.set(data.userDatabase);
+        }
     } else {
         isAuthenticated.set(false);
     }
