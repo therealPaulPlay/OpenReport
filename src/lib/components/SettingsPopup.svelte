@@ -5,18 +5,32 @@
 	import { Label } from "$lib/components/ui/label";
 	import { Database, Lock, LogOut, Settings, Trash } from "lucide-svelte";
 	import { goto } from "$app/navigation";
+	import { toast } from "svelte-sonner";
 	import DatabaseConfig from "$lib/components/DatabaseConfig.svelte";
+	import { signOut } from "$lib/utils/checkAuthentication";
+	import { username } from "$lib/stores/accountStore";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 
+	const baseURL = "https://api.openreport.dev/account";
 	let confirmPassword = $state("");
 
-	async function testConnection() {
-		if (success) {
-			// Add feedback logic for a successful test
-		}
-	}
-
 	async function deleteAccount() {
-		console.log("Account deleted...");
+		try {
+			const userId = localStorage.getItem("id");
+			await fetchWithErrorHandling(`${baseURL}/delete`, {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					id: Number(userId),
+					password: confirmPassword,
+				}),
+			});
+			toast.success("Account deleted successfully");
+			signOut();
+			window.location.reload();
+		} catch (error) {
+			toast.error(error.message);
+		}
 	}
 </script>
 
@@ -36,7 +50,7 @@
 			<div class="!mt-1">
 				<DatabaseConfig />
 			</div>
-			<p class="text-sm text-muted-foreground">Account</p>
+			<p class="text-sm text-muted-foreground">Account - {$username}</p>
 			<div class="flex flex-wrap gap-3 !mt-1">
 				<Button variant="outline" onclick={() => goto("/login?reset=true")}
 					><Lock size={16} class="mr-2" />Change Password</Button
@@ -44,13 +58,13 @@
 				<Button
 					variant="outline"
 					onclick={() => {
-						localStorage.removeItem("bearer");
+						signOut();
 						window.location.reload();
 					}}><LogOut size={16} class="mr-2" /> Log out</Button
 				>
 				<Dialog.Root>
 					<Dialog.Trigger>
-						<Button variant="destructive"><Trash size={16} class="mr-2" />Delete Account</Button>
+						<Button variant="destructive"><Trash size={16} class="mr-2" />Delete</Button>
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>

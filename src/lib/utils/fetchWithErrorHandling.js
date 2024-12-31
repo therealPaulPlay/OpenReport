@@ -4,12 +4,9 @@ export async function fetchWithErrorHandling(url, options) {
 
         if (!response.ok) {
             // Try to parse error message from response if available
-            try {
-                const errorData = await response.json();
-                throw new Error(errorData.message || `Request failed with status: ${response.status}`);
-            } catch (parseError) {
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
+            let errorData;
+            try { errorData = await response.json(); } catch { }
+            throw new Error(errorData.message || errorData.error || `Request failed with status: ${response.status}`);
         }
 
         return response;

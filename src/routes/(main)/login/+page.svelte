@@ -6,24 +6,26 @@
 	import { toast } from "svelte-sonner";
 	import { page } from "$app/stores";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { goto } from "$app/navigation";
+	import { username } from "$lib/stores/accountStore";
+	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
+
+	const baseURL = "https://api.openreport.dev/account";
 
 	let currentView = $state("login");
 	let loading = $state(false);
 
-	// Form data
 	let email = $state("");
 	let password = $state("");
-	let fullName = $state("");
+	let userName = $state("");
 
-	// Reset any form data when switching views
 	function resetForm() {
 		email = "";
 		password = "";
-		fullName = "";
+		userName = "";
 		loading = false;
 	}
 
-	// Check if we're on the set new password page via URL token
 	$effect(() => {
 		if ($page.url.searchParams.get("token")) currentView = "set-new-password";
 		if ($page.url.searchParams.get("reset")) currentView = "reset";
@@ -38,28 +40,34 @@
 		try {
 			switch (currentView) {
 				case "login": {
-					await fetchWithErrorHandling("/api/login", {
+					const response = await fetchWithErrorHandling(`${baseURL}/login`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ email, password }),
 					});
+					const data = await response.json();
+					localStorage.setItem("bearer", data.bearerToken);
+					localStorage.setItem("id", data.id);
+					username.set(data.userName);
+					checkAuthenticationStatus();
 					toast.success("Successfully logged in!");
+					goto("/dashboard");
 					break;
 				}
 
 				case "signup": {
-					await fetchWithErrorHandling("/api/signup", {
+					await fetchWithErrorHandling(`${baseURL}/register`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ email, password, fullName }),
+						body: JSON.stringify({ userName, email, password }),
 					});
-					toast.success("Account created successfully!");
+					toast.success("Registered successfully! Please log in.");
 					currentView = "login";
 					break;
 				}
 
 				case "reset": {
-					await fetchWithErrorHandling("/api/reset-password", {
+					await fetchWithErrorHandling(`${baseURL}/reset-password-request`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ email }),
@@ -71,10 +79,10 @@
 
 				case "set-new-password": {
 					const token = $page.url.searchParams.get("token");
-					await fetchWithErrorHandling("/api/set-new-password", {
+					await fetchWithErrorHandling(`${baseURL}/reset-password`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ password, token }),
+						body: JSON.stringify({ token, newPassword: password }),
 					});
 					toast.success("Password updated successfully!");
 					currentView = "login";
@@ -93,7 +101,6 @@
 	<title>Login</title>
 </svelte:head>
 
-<!-- Rest of the template remains unchanged -->
 <div class="min-h-screen flex items-center justify-center p-4">
 	<Card class="w-full max-w-md">
 		<CardHeader>
@@ -114,8 +121,8 @@
 			<CardContent class="space-y-4 min-w-80">
 				{#if currentView === "signup"}
 					<div class="space-y-2">
-						<Label for="fullName">Full Name</Label>
-						<Input type="text" id="fullName" bind:value={fullName} required disabled={loading} />
+						<Label for="userName">Full Name</Label>
+						<Input type="text" id="userName" bind:value={userName} required disabled={loading} />
 					</div>
 				{/if}
 

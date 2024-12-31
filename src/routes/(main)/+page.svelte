@@ -2,6 +2,7 @@
 	import { Button } from "$lib/components/ui/button/index.js";
 	import ReportForm from "$lib/components/ReportForm.svelte";
 	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon } from "lucide-svelte";
+	import GithubReposView from "$lib/components/GithubReposView.svelte";
 </script>
 
 <svelte:head>
@@ -33,7 +34,7 @@
 						<Button href="/login?signup=true">
 							Get started <ArrowRight class="w-4 h-4" />
 						</Button>
-						<Button variant="outline" href="/docs">Documentation</Button>
+						<GithubReposView />
 					</div>
 				</div>
 			</div>
@@ -85,7 +86,7 @@
 				</p>
 				<div class="flex flex-wrap gap-4 justify-center">
 					<Button href="/login?signup=true">Get Started for Free</Button>
-					<Button variant="outline" href="https://github.com/therealPaulPlay/OpenReport">View on GitHub</Button>
+					<GithubReposView />
 				</div>
 			</div>
 		</section>

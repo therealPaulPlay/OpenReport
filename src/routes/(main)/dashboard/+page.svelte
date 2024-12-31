@@ -11,6 +11,7 @@
 	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
+	import { isAuthenticated } from "$lib/stores/accountStore";
 
 	// Dashboard state
 	let apps = $state([
@@ -55,6 +56,13 @@
 	<title>Dashboard</title>
 </svelte:head>
 
+{#if !$isAuthenticated}
+	<div class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-[rgba(255,255,255,0.5)] backdrop-blur-md">
+		<p class="font-bold text-4xl">You are logged out.</p>
+		<p class="text-base text-gray-500 mt-5"><a href="/login" class="underline">Log in</a> to use the dashboard.</p>
+	</div>
+{/if}
+
 {#snippet sidebarContent()}
 	<div class="w-full flex justify-start">
 		<AppCreationPopup />
@@ -62,16 +70,19 @@
 	<p class="text-base font-bold text-gray-500 mt-5">Your Apps</p>
 	<div class="space-y-2 mt-2 bg-gray-200 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
 		{#each apps as app}
-			<button
+			<!-- svelte-ignore a11y_click_events_have_key_events -->
+			<div
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
 				style:background-color={app.id == activeApp ? "white" : ""}
+				role="button"
+				tabindex="0"
 				onclick={() => {
 					activeApp = app.id;
 				}}
 			>
 				<AppOptions {app} />
 				<span class="truncate w-full text-center">{app?.name || "Unnamed App"}</span>
-			</button>
+			</div>
 		{/each}
 	</div>
 	<div class="mt-5">

@@ -1,6 +1,12 @@
 <script>
+	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
 	import { Goal } from "lucide-svelte";
+	import { onMount } from "svelte";
 	let { children } = $props();
+
+	onMount(async () => {
+		checkAuthenticationStatus();
+	});
 </script>
 
 <div class="min-h-screen w-full">
