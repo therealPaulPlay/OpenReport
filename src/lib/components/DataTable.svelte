@@ -9,7 +9,7 @@
 	<Table.Caption>Entries show up here.</Table.Caption>
 	<Table.Header>
 		<Table.Row>
-			<Table.Head>ID</Table.Head>
+			<Table.Head>Ref. ID</Table.Head>
 			<Table.Head>Type</Table.Head>
 			<Table.Head>Reason</Table.Head>
 			<Table.Head>Link</Table.Head>
