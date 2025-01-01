@@ -1,6 +1,6 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Plus } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -53,10 +53,8 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger>
-		<Button variant="secondary">
-			<Plus class="mr-2" /> Add
-		</Button>
+	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
+		<Plus class="mr-2" /> Add
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>

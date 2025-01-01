@@ -1,7 +1,7 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Settings2, Trash, AlertCircle, Eraser, Plus, Minus } from "lucide-svelte";
 	import { toast } from "svelte-sonner";
@@ -59,10 +59,8 @@
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger>
-		<Button variant="secondary">
-			<Eraser class="mr-2" /> Clean
-		</Button>
+	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
+		<Eraser class="mr-2" /> Clean
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
@@ -98,10 +96,8 @@
 			</div>
 
 			<AlertDialog.Root bind:open={confirmOpen}>
-				<AlertDialog.Trigger>
-					<Button variant="destructive" class="w-full">
+				<AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
 						<Trash size={16} class="mr-2" />Delete entries
-					</Button>
 				</AlertDialog.Trigger>
 				<AlertDialog.Content>
 					<AlertDialog.Header>

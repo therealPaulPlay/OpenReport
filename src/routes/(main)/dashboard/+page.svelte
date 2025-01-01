@@ -7,7 +7,7 @@
 	import { Sheet, SheetTrigger, SheetContent } from "$lib/components/ui/sheet";
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
@@ -123,10 +123,8 @@
 
 	<!-- Mobile Sidebar (Sheet) -->
 	<Sheet>
-		<SheetTrigger asChild>
-			<Button class="lg:hidden fixed top-20 left-4 z-10">
-				<Menu size={24} />
-			</Button>
+		<SheetTrigger asChild class="{buttonVariants()} lg:hidden fixed top-20 left-4 z-10">
+			<Menu size={24} />
 		</SheetTrigger>
 		<SheetContent side="left" class="lg:hidden w-64 p-4">
 			<div class="max-h-full overflow-auto">

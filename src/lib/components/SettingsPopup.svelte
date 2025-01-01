@@ -1,6 +1,6 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
 	import { Database, Lock, LogOut, Settings, Trash } from "lucide-svelte";
@@ -35,10 +35,8 @@
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger class="w-full">
-		<Button variant="outline" class="w-full bg-gray-200 rounded-md">
-			<span class="icon-wrapper flex items-center gap-3 w-full"><Settings size={20} /> Settings</span>
-		</Button>
+	<Dialog.Trigger class="{buttonVariants({ variant: 'secondary' })} w-full !bg-gray-200 hover:!bg-gray-300">
+		<span class="icon-wrapper flex items-center gap-3 w-full"><Settings size={20} /> Settings</span>
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
@@ -63,8 +61,8 @@
 					}}><LogOut size={16} class="mr-2" /> Log out</Button
 				>
 				<Dialog.Root>
-					<Dialog.Trigger>
-						<Button variant="destructive"><Trash size={16} class="mr-2" />Delete</Button>
+					<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
+						<Trash size={16} class="mr-2" />Delete
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>

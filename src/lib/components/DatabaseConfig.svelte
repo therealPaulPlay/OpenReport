@@ -1,7 +1,7 @@
 <script>
 	import { Database } from "lucide-svelte";
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -46,8 +46,8 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger>
-		<Button variant="outline"><Database size={16} class="mr-2" />Database config</Button>
+	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
+		<Database size={16} class="mr-2" />Database config
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>

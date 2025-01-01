@@ -3,7 +3,7 @@
 	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
 	import { ScrollArea } from "$lib/components/ui/scroll-area";
 	import { Progress } from "$lib/components/ui/progress/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Settings2, Trash, Plus, X } from "lucide-svelte";
 	import { reportLimit } from "$lib/stores/accountStore";
@@ -252,10 +252,8 @@
 
 			<div class="pt-2 border-t">
 				<AlertDialog.Root>
-					<AlertDialog.Trigger>
-						<Button variant="destructive">
-							<Trash size={16} class="mr-2" />Delete App
-						</Button>
+					<AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
+						<Trash size={16} class="mr-2" />Delete App
 					</AlertDialog.Trigger>
 					<AlertDialog.Content>
 						<AlertDialog.Header>

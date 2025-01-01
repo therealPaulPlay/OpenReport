@@ -1,6 +1,6 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
-	import { Button } from "$lib/components/ui/button";
+	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
 	import { Plus, Info } from "lucide-svelte";
@@ -10,7 +10,7 @@
 	import DatabaseConfig from "./DatabaseConfig.svelte";
 
 	let { fetchApps } = $props();
-	
+
 	let appName = $state("");
 	let domains = $state("");
 	let dialogOpen = $state(false);
@@ -56,8 +56,8 @@
 </script>
 
 <Dialog.Root bind:open={dialogOpen}>
-	<Dialog.Trigger>
-		<Button><Plus size={16} class="mr-2" />Create App</Button>
+	<Dialog.Trigger class={buttonVariants()}>
+		<Plus size={16} class="mr-2" />Create App
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
@@ -70,8 +70,8 @@
 				<div class="flex items-center p-4 bg-gray-100 rounded-md text-sm text-gray-700">
 					<Info size={50} class="mr-4" />
 					<p>
-						Your app name must be in lowercase and without spaces. This is required
-						because the app name will be used as part of the table's names in your database.
+						Your app name must be in lowercase and without spaces. This is required because the app name will be used as
+						part of the table's names in your database.
 					</p>
 				</div>
 
