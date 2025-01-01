@@ -4,8 +4,14 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Settings2, Trash, AlertCircle, Eraser, Plus, Minus } from "lucide-svelte";
+	import { toast } from "svelte-sonner";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+
+	let { appId, table } = $props();
 
 	let days = $state(7);
+
+	let confirmOpen = $state(false);
 
 	function incrementDays() {
 		if (days < 365) {
@@ -29,7 +35,26 @@
 	}
 
 	async function deleteOldEntries() {
-		console.log("Deleting old entries...");
+		try {
+			const response = await fetchWithErrorHandling("https://api.openreport.dev/report/clean", {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: Number(localStorage.getItem("id")),
+					appId: appId,
+					days: days,
+					table: table,
+				}),
+			});
+
+			toast.success(`Successfully deleted entries older than ${days} days.`);
+			confirmOpen = false;
+		} catch (error) {
+			toast.error(error.message);
+		}
 	}
 </script>
 
@@ -42,7 +67,7 @@
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Clean up old entries</Dialog.Title>
-			<Dialog.Description>Remove old entries to clean your database.</Dialog.Description>
+			<Dialog.Description>Remove old entries from the {table} table.</Dialog.Description>
 		</Dialog.Header>
 		<div class="space-y-4">
 			<div class="flex flex-col space-y-2">
@@ -62,7 +87,7 @@
 							oninput={handleDaysInput}
 							style="appearance: textfield"
 						/>
-						<span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 pointer-events-none">
+						<span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">
 							days
 						</span>
 					</div>
@@ -72,7 +97,7 @@
 				</div>
 			</div>
 
-			<AlertDialog.Root>
+			<AlertDialog.Root bind:open={confirmOpen}>
 				<AlertDialog.Trigger>
 					<Button variant="destructive" class="w-full">
 						<Trash size={16} class="mr-2" />Delete entries

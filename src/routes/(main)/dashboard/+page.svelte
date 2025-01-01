@@ -14,22 +14,25 @@
 	import { isAuthenticated } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { onMount } from "svelte";
-	import { blur } from "svelte/transition";
+	import { blur, fade } from "svelte/transition";
 
 	// Dashboard state
 	let apps = $state([]);
 
 	async function fetchApps() {
 		try {
-			const response = await fetchWithErrorHandling(`https://api.openreport.dev/app/apps/` + Number(localStorage.getItem("id")), {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+			const response = await fetchWithErrorHandling(
+				`https://api.openreport.dev/app/apps/` + Number(localStorage.getItem("id")),
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+					},
 				},
-			});
-			
-			apps = await response.json()
+			);
+
+			apps = await response.json();
 		} catch (error) {
 			toast.error(error.message);
 		}
@@ -42,11 +45,6 @@
 
 	let activeApp = $state();
 	let activeTab = $state("reports");
-
-	// Loaded Data
-	let reports = $state([]);
-	let warnlist = $state([]);
-	let blacklist = $state([]);
 
 	let selectedType = $state("reports");
 
@@ -83,29 +81,31 @@
 		class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-[rgba(255,255,255,0.5)] backdrop-blur-md"
 	>
 		<p class="font-bold text-4xl">You are logged out.</p>
-		<p class="text-base text-gray-500 mt-5"><a href="/login" class="underline">Log in</a> to use the dashboard.</p>
+		<p class="text-base text-muted-foreground mt-5">
+			<a href="/login" class="underline">Log in</a> to use the dashboard.
+		</p>
 	</div>
 {/if}
 
 {#snippet sidebarContent()}
 	<div class="w-full flex justify-start">
-		<AppCreationPopup />
+		<AppCreationPopup {fetchApps} />
 	</div>
-	<p class="text-base font-bold text-gray-500 mt-5">Your Apps</p>
+	<p class="text-base font-bold text-muted-foreground mt-5">Your Apps</p>
 	<div class="space-y-2 mt-2 bg-gray-200 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
 		{#each apps as app}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<div
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
 				transition:blur
-				style:background-color={app.id == activeApp ? "white" : ""}
+				style:background-color={app.app_id == activeApp ? "white" : ""}
 				role="button"
 				tabindex="0"
 				onclick={() => {
-					activeApp = app.id;
+					activeApp = app.app_id;
 				}}
 			>
-				<AppOptions {app} />
+				<AppOptions {app} {fetchApps} />
 				<span class="truncate w-full text-center">{app?.app_name || "Unnamed App"}</span>
 			</div>
 		{/each}
@@ -115,7 +115,7 @@
 	</div>
 {/snippet}
 
-<div class="flex h-screen w-screen fixed">
+<div class="flex h-screen w-screen fixed max-h-screen">
 	<!-- Sidebar (Desktop) -->
 	<div class="hidden lg:block bg-gray-100 w-64 p-4 border-r border-gray-200">
 		{@render sidebarContent()}
@@ -136,11 +136,11 @@
 	</Sheet>
 
 	<!-- Main Content -->
-	<div class="flex-1 p-6 flex flex-col relative overflow-hidden">
+	<div class="flex-1 p-6 flex flex-col relative overflow-auto mb-14">
 		<!-- App selection notice -->
 		{#if activeApp == null}
-			<div class="flex items-center justify-center flex-grow text-center text-gray-500 mb-6">
-				<h2 class="text-xl">Please select or create an app first.</h2>
+			<div class="flex items-center justify-center flex-grow text-center text-muted-foreground mb-6">
+				<h2 class="text-lg">Please select or create an app.</h2>
 			</div>
 		{:else}
 			<!-- Table view and settings -->
@@ -159,18 +159,16 @@
 								>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 						</Tabs.List>
-						<CleanPopup />
-						<AddEntryPopup />
+						<CleanPopup table={activeTab} appId={activeApp} />
+						{#if activeTab != "reports"}
+							<div transition:fade={{ duration: 150 }}>
+								<AddEntryPopup appId={activeApp} table={activeTab} />
+							</div>
+						{/if}
 					</div>
-					<Tabs.Content value="reports">
-						<DataTable data={reports} />
-					</Tabs.Content>
-					<Tabs.Content value="warnlist">
-						<DataTable data={warnlist} />
-					</Tabs.Content>
-					<Tabs.Content value="blacklist">
-						<DataTable data={blacklist} />
-					</Tabs.Content>
+					<div class="mt-5">
+						<DataTable table={activeTab} appId={activeApp} />
+					</div>
 				</Tabs.Root>
 			</div>
 		{/if}

@@ -9,7 +9,8 @@
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import DatabaseConfig from "./DatabaseConfig.svelte";
 
-	const baseURL = "https://api.openreport.dev/app";
+	let { fetchApps } = $props();
+	
 	let appName = $state("");
 	let domains = $state("");
 	let dialogOpen = $state(false);
@@ -31,7 +32,7 @@
 		}
 
 		try {
-			await fetchWithErrorHandling(`${baseURL}/create`, {
+			await fetchWithErrorHandling(`https://api.openreport.dev/app/create`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -47,6 +48,7 @@
 			appName = "";
 			domains = "";
 			dialogOpen = false;
+			fetchApps?.();
 		} catch (error) {
 			toast.error(error.message);
 		}
@@ -69,7 +71,7 @@
 					<Info size={50} class="mr-4" />
 					<p>
 						Your app name must be in lowercase and without spaces. This is required
-						because the app name will be used as part of the table's names in the database.
+						because the app name will be used as part of the table's names in your database.
 					</p>
 				</div>
 
@@ -79,7 +81,7 @@
 				</div>
 				<div>
 					<Label for="domains">Domains (comma-separated)</Label>
-					<Input id="domains" bind:value={domains} placeholder="example.com" />
+					<Input id="domains" bind:value={domains} placeholder="your-website.com" />
 				</div>
 			</div>
 			<Dialog.Footer>
