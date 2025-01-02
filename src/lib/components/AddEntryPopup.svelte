@@ -7,6 +7,7 @@
 	import { toast } from "svelte-sonner";
 	import { tableData } from "$lib/stores/tableStore";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let dialogOpen = $state(false);
 	let referenceId = $state("");
@@ -18,7 +19,7 @@
 
 	async function handleCreate() {
 		try {
-			await fetchWithErrorHandling("https://api.openreport.dev/report/add-manually", {
+			await fetchWithErrorHandling(`${$BASE_API_URL}report/add-manually`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

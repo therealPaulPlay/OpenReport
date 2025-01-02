@@ -1,12 +1,15 @@
 <script>
 	import { RadioGroup, RadioGroupItem } from "$lib/components/ui/radio-group";
+	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { Button } from "$lib/components/ui/button";
 	import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "$lib/components/ui/card";
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Check } from "lucide-svelte";
-	import { slide } from "svelte/transition";
+	import { blur, slide } from "svelte/transition";
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { renderCaptcha } from "$lib/utils/renderCaptcha";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let {
 		reportReasons = ["Spam", "Cheating", "Harassment"],
@@ -25,49 +28,71 @@
 	let selectedReason = $state(reportReasons[0]);
 	let notes = $state("");
 
-	async function handleSubmit() {
-		if (loading) return;
-		loading = true;
+	let captchaVisible = $state(false);
+	let captchaToken = $state();
 
-		if (demo) {
-			submitted = true;
-			loading = false;
-			return;
+	$effect(() => {
+		if (captchaVisible) {
+			renderCaptcha("#captchaContainer", window.onReportTurnstile);
 		}
+	});
 
-		try {
-			await fetchWithErrorHandling("https://api.openreport.dev/report/submit", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					key: apiKey,
-					referenceId,
-					type: type,
-					reason: selectedReason,
-					notes: notes || null,
-					link: link || null,
-				}),
-			});
+	if (typeof window !== "undefined") {
+		window.onReportTurnstile = async function (token) {
+			captchaVisible = false;
+			captchaToken = token;
 
-			submitted = true;
-		} catch (error) {
-			toast.error(error.message);
-		} finally {
-			loading = false;
-		}
+			if (loading) return;
+			loading = true;
+
+			try {
+				await fetchWithErrorHandling(`${$BASE_API_URL}/report/submit`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						"cf-turnstile-response": captchaToken,
+					},
+					body: JSON.stringify({
+						key: apiKey,
+						referenceId,
+						type: type,
+						reason: selectedReason,
+						notes: notes || null,
+						link: link || null,
+					}),
+				});
+
+				submitted = true;
+			} catch (error) {
+				toast.error(error.message);
+			} finally {
+				loading = false;
+			}
+		};
 	}
 </script>
 
+<Dialog.Root open={captchaVisible}>
+	<Dialog.Content>
+		<div class="rounded-md bg-white">
+			<h2 class="font-bold mb-4 text-lg">Captcha</h2>
+			<div id="captchaContainer" class="min-h-20" transition:blur>
+				<!-- Captcha will be loaded here -->
+			</div>
+		</div>
+	</Dialog.Content>
+</Dialog.Root>
+
 <Card class="w-full max-w-md mx-auto">
 	<CardHeader>
-		<CardTitle>Submit Report</CardTitle>
+		{#if !submitted}
+			<CardTitle>Submit Report</CardTitle>
+		{/if}
 	</CardHeader>
 
 	<CardContent class="space-y-4">
 		{#if !submitted}
-			<RadioGroup value={selectedReason}>
+			<RadioGroup bind:value={selectedReason}>
 				{#each reportReasons as reason}
 					<div class="flex items-center space-x-2">
 						<RadioGroupItem value={reason} id={reason} />
@@ -104,8 +129,19 @@
 	</CardContent>
 
 	<CardFooter class="flex justify-end gap-2">
-		<Button onclick={handleSubmit} disabled={submitted || loading || (requireNotes && notes.length < 15 && allowNotes)}
-			>{loading ? "Submitting..." : "Submit"}</Button
-		>
+		{#if !submitted}
+			<Button
+				onclick={() => {
+					if (demo) {
+						submitted = true;
+						loadind = false;
+						return;
+					}
+					captchaVisible = true;
+				}}
+				disabled={loading || (requireNotes && notes.length < 15 && allowNotes)}
+				>{loading ? "Submitting..." : "Submit"}</Button
+			>
+		{/if}
 	</CardFooter>
 </Card>

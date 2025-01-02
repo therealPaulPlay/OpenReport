@@ -8,8 +8,8 @@
 	import { Settings2, Trash, Plus, X } from "lucide-svelte";
 	import { reportLimit } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { toast } from "svelte-sonner";
-
 	let { app, fetchApps } = $props();
 
 	let warnThreshold = $state(app.warnlist_threshold);
@@ -20,7 +20,7 @@
 
 	async function loadModerators() {
 		try {
-			const response = await fetchWithErrorHandling(`https://api.openreport.dev/moderator/moderators`, {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/moderator/moderators`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -42,7 +42,7 @@
 		if (!newModeratorEmail.trim()) return;
 
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/moderator/add`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/moderator/add`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -64,7 +64,7 @@
 
 	async function removeModerator(email) {
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/moderator/remove`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/moderator/remove`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
@@ -85,7 +85,7 @@
 
 	async function deleteApp() {
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/app/delete`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/app/delete`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
@@ -107,7 +107,7 @@
 		if (!isValid) return;
 
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/app/update-thresholds`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/app/update-thresholds`, {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",

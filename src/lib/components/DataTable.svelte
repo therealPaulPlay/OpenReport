@@ -5,7 +5,9 @@
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
 	import { currentPage, hasNextPage, tableData } from "$lib/stores/tableStore";
+	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	// Props
 	let { table, appId } = $props();
@@ -16,7 +18,7 @@
 
 	async function deleteEntry(entryId) {
 		try {
-			const response = await fetchWithErrorHandling("https://api.openreport.dev/report/delete", {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/report/delete`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
@@ -36,6 +38,9 @@
 			toast.error(error.message || "An error occurred while deleting the entry.");
 		}
 	}
+
+	let expandNotes = $state(false);
+	let expandNotesContent = $state();
 </script>
 
 <Table.Root>
@@ -58,8 +63,14 @@
 					<Table.Cell>{item.referenceId}</Table.Cell>
 					<Table.Cell>{item.type}</Table.Cell>
 					<Table.Cell>{item.reason}</Table.Cell>
-					<Table.Cell>{item.notes}</Table.Cell>
-					<Table.Cell>{item.link}</Table.Cell>
+					<Table.Cell
+						class="text-ellipsis overflow-hidden max-w-52 text-nowrap cursor-pointer"
+						onclick={() => {
+							expandNotes = true;
+							expandNotesContent = item.notes;
+						}}>{item.notes}</Table.Cell
+					>
+					<Table.Cell><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell>
 					<Table.Cell>{new Date(item.timestamp).toLocaleString()}</Table.Cell>
 					<Table.Cell>{item.reporterIp}</Table.Cell>
 					<Table.Cell>
@@ -93,3 +104,17 @@
 		{/if}
 	</Table.Caption>
 </Table.Root>
+
+<Dialog.Root bind:open={expandNotes}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Notes</Dialog.Title>
+			<Dialog.Description>
+				{expandNotesContent || "No content."}
+			</Dialog.Description>
+		</Dialog.Header>
+		<Dialog.Footer>
+			<Dialog.Cancel>Ok</Dialog.Cancel>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>

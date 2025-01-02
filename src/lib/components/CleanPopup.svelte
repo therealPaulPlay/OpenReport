@@ -6,6 +6,7 @@
 	import { Settings2, Trash, AlertCircle, Eraser, Plus, Minus } from "lucide-svelte";
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	let { appId, table } = $props();
@@ -37,7 +38,7 @@
 
 	async function deleteOldEntries() {
 		try {
-			const response = await fetchWithErrorHandling("https://api.openreport.dev/report/clean", {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/report/clean`, {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
@@ -99,7 +100,7 @@
 
 			<AlertDialog.Root bind:open={confirmOpen}>
 				<AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
-						<Trash size={16} class="mr-2" />Delete entries
+					<Trash size={16} class="mr-2" />Delete entries
 				</AlertDialog.Trigger>
 				<AlertDialog.Content>
 					<AlertDialog.Header>

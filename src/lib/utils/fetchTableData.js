@@ -2,6 +2,7 @@ import { tableData, hasNextPage, currentPage, itemsPerPage } from "$lib/stores/t
 import { get } from "svelte/store";
 import { toast } from "svelte-sonner";
 import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+import { BASE_API_URL } from "$lib/stores/configStore";
 
 let lastAppId;
 let lastTable;
@@ -17,7 +18,7 @@ export async function fetchTableData(appId, table, refresh) {
     lastTable = table;
 
     try {
-        const response = await fetchWithErrorHandling("https://api.openreport.dev/report/get-table", {
+        const response = await fetchWithErrorHandling(`${get(BASE_API_URL)}/report/get-table`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

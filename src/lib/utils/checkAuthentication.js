@@ -1,10 +1,12 @@
 import { isAuthenticated, moderatorLimit, reportLimit, userDatabase, username } from "$lib/stores/accountStore";
 import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
+import { BASE_API_URL } from "$lib/stores/configStore";
+import { get } from "svelte/store";
 
 export async function getUser() {
     try {
         const userId = localStorage.getItem("id") || "-1";
-        const response = await fetchWithErrorHandling("https://api.openreport.dev/account/user/" + userId, {
+        const response = await fetchWithErrorHandling(`${get(BASE_API_URL)}/account/user/` + userId, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

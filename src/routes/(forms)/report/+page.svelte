@@ -30,6 +30,7 @@
 
 <svelte:head>
 	<title>Submit Report</title>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 </svelte:head>
 
 <main class="w-full h-screen flex justify-center items-center p-4">

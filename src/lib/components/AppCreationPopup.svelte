@@ -8,6 +8,7 @@
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import DatabaseConfig from "./DatabaseConfig.svelte";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let { fetchApps } = $props();
 
@@ -32,7 +33,7 @@
 		}
 
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/app/create`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/app/create`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

@@ -8,7 +8,7 @@
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
-	import { Ban, Flag, Menu, SidebarClose, TriangleAlert } from "lucide-svelte";
+	import { Ban, Flag, Menu, RefreshCcw, SidebarClose, TriangleAlert } from "lucide-svelte";
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
@@ -16,22 +16,22 @@
 	import { onMount } from "svelte";
 	import { blur, fade } from "svelte/transition";
 	import FormLinkCreator from "$lib/components/FormLinkCreator.svelte";
+	import { BASE_API_URL } from "$lib/stores/configStore";
+	import { toast } from "svelte-sonner";
+	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	// Dashboard state
 	let apps = $state([]);
 
 	async function fetchApps() {
 		try {
-			const response = await fetchWithErrorHandling(
-				`https://api.openreport.dev/app/apps/` + Number(localStorage.getItem("id")),
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${localStorage.getItem("bearer")}`,
-					},
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/app/apps/` + Number(localStorage.getItem("id")), {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
 				},
-			);
+			});
 
 			apps = await response.json();
 		} catch (error) {
@@ -135,7 +135,7 @@
 	</Sheet>
 
 	<!-- Main Content -->
-	<div class="flex-1 p-6 flex flex-col relative overflow-auto mb-14">
+	<div class="flex-1 p-6 flex flex-col relative overflow-auto mb-20">
 		<!-- App selection notice -->
 		{#if activeApp == null}
 			<div class="flex items-center justify-center flex-grow text-center text-muted-foreground mb-6">
@@ -143,7 +143,7 @@
 			</div>
 		{:else}
 			<!-- Table view and settings -->
-			<div class="mt-10">
+			<div class="max-lg:mt-12">
 				<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
 					<!-- Tabs and Toolbar -->
 					<div class="flex flex-wrap gap-3">
@@ -158,6 +158,12 @@
 								>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 						</Tabs.List>
+						<Button
+							variant="secondary"
+							onclick={() => {
+								fetchTableData(activeApp.app_id, activeTab, true);
+							}}><RefreshCcw /></Button
+						>
 						<CleanPopup table={activeTab} appId={activeApp.app_id} />
 						{#if activeTab == "reports"}
 							<FormLinkCreator apiKey={activeApp.api_key} />

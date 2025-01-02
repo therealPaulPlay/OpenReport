@@ -5,6 +5,7 @@
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { Captions, Copy } from "lucide-svelte";
 	import { toast } from "svelte-sonner";
+	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
 	import Checkbox from "./ui/checkbox/checkbox.svelte";
 
 	let { apiKey } = $props();
@@ -41,8 +42,7 @@
 	  width="500px"
 	  height="600px"
 	  style="border: none; border-radius: 8px; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
-></iframe>`;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></iframe>`;
 	};
 </script>
 
@@ -50,7 +50,7 @@
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
 		<Captions /> Create Form
 	</Dialog.Trigger>
-	<Dialog.Content class="max-w-2xl max-h-[80vh] overflow-y-auto">
+	<Dialog.Content class="max-w-2xl max-h-[80vh] overflow-y-auto overflow-x-hidden">
 		<Dialog.Header>
 			<Dialog.Title>Form Link Creator</Dialog.Title>
 		</Dialog.Header>
@@ -58,8 +58,8 @@
 		<div class="space-y-6">
 			<div class="space-y-2 mt-4">
 				<Label class="font-bold">Direct Link</Label>
-				<div class="p-4 bg-muted rounded-lg break-all">
-					<p class="font-mono text-sm">{currentUrl}</p>
+				<div class="p-4 bg-muted rounded-lg">
+					<p class="font-mono text-xs text-break-chars">{currentUrl}</p>
 					<Button variant="outline" size="sm" class="mt-2" onclick={() => copyToClipboard(currentUrl)}>
 						<Copy class="w-4 h-4 mr-2" />Copy URL
 					</Button>
@@ -69,7 +69,7 @@
 			<div class="space-y-2 mt-4">
 				<Label class="font-bold">Iframe Code</Label>
 				<div class="p-4 bg-muted rounded-lg">
-					<pre class="font-mono text-sm whitespace-pre-wrap">{getFormattedCode(currentUrl)}</pre>
+					<pre class="font-mono text-xs text-break-chars">{getFormattedCode(currentUrl)}</pre>
 					<Button
 						variant="outline"
 						size="sm"
@@ -86,12 +86,36 @@
 					<Label class="font-bold">Required Parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
-							<Label for="type">Type *</Label>
-							<Input id="type" bind:value={type} placeholder="e.g. comment" />
+							<Tooltip.Provider>
+								<Tooltip.Root>
+									<Tooltip.Trigger class="text-left">
+										<Label for="type">Type *</Label>
+										<Input id="type" bind:value={type} placeholder="e.g. comment" />
+									</Tooltip.Trigger>
+									<Tooltip.Content>
+										<p class="max-w-52">
+											The type refers to the reported entity - for example, a post, user or comment. It is purely
+											informational.
+										</p>
+									</Tooltip.Content>
+								</Tooltip.Root>
+							</Tooltip.Provider>
 						</div>
 						<div>
-							<Label for="reference">Reference ID *</Label>
-							<Input id="reference" bind:value={referenceId} placeholder="e.g. comment-33295" />
+							<Tooltip.Provider>
+								<Tooltip.Root>
+									<Tooltip.Trigger class="text-left">
+										<Label for="reference">Reference ID *</Label>
+										<Input id="reference" bind:value={referenceId} placeholder="e.g. comment-33295" />
+									</Tooltip.Trigger>
+									<Tooltip.Content>
+										<p class="max-w-52">
+											The reference ID should correlate to the ID of the reported entity in your backend. It is
+											recommended that you adjust this URL query dynamically in your code.
+										</p>
+									</Tooltip.Content>
+								</Tooltip.Root>
+							</Tooltip.Provider>
 						</div>
 						<div>
 							<Label for="apiKey">API Key (public)</Label>
@@ -104,8 +128,20 @@
 					<Label class="font-bold">Optional Parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
-							<Label for="link">Link</Label>
-							<Input id="link" bind:value={link} placeholder="e.g. https://site.com/?comment=33295" />
+							<Tooltip.Provider>
+								<Tooltip.Root>
+									<Tooltip.Trigger class="text-left">
+										<Label for="link">Link</Label>
+										<Input id="link" bind:value={link} placeholder="e.g. https://site.com/?comment=33295" />
+									</Tooltip.Trigger>
+									<Tooltip.Content>
+										<p class="max-w-52">
+											Adding a link to the reported entitiy on your site (e.g. the comment section where the comment is
+											from) makes it easier for moderators to evaluate the report.
+										</p>
+									</Tooltip.Content>
+								</Tooltip.Root>
+							</Tooltip.Provider>
 						</div>
 						<div>
 							<Label for="reasons">Reasons (comma-separated)</Label>
@@ -131,3 +167,10 @@
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>
+
+<style>
+	.text-break-chars {
+		word-break: break-all;
+		white-space: normal;
+	}
+</style>

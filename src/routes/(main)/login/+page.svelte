@@ -10,8 +10,7 @@
 	import { goto } from "$app/navigation";
 	import { username } from "$lib/stores/accountStore";
 	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
-
-	const baseURL = "https://api.openreport.dev/account";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let currentView = $state("login");
 	let loading = $state(false);
@@ -49,7 +48,7 @@
 		try {
 			switch (currentView) {
 				case "login": {
-					const response = await fetchWithErrorHandling(`${baseURL}/login`, {
+					const response = await fetchWithErrorHandling(`${$BASE_API_URL}/account/login`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ email, password }),
@@ -153,7 +152,7 @@
 					<div class="flex items-center space-x-2">
 						<Checkbox id="terms" bind:checked={acceptedTerms} disabled={loading} />
 						<Label for="terms" class="text-sm">
-							I agree to the <a href="/terms" class="text-primary hover:underline">Terms</a> and 
+							I agree to the <a href="/terms" class="text-primary hover:underline">Terms</a> and
 							<a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
 						</Label>
 					</div>

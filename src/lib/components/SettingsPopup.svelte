@@ -10,14 +10,14 @@
 	import { signOut } from "$lib/utils/checkAuthentication";
 	import { username } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
-	const baseURL = "https://api.openreport.dev/account";
 	let confirmPassword = $state("");
 
 	async function deleteAccount() {
 		try {
 			const userId = localStorage.getItem("id");
-			await fetchWithErrorHandling(`${baseURL}/delete`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/account/delete`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({

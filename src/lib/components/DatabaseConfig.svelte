@@ -8,6 +8,7 @@
 	import { toast } from "svelte-sonner";
 	import { getUser } from "$lib/utils/checkAuthentication";
 	import { userDatabase } from "$lib/stores/accountStore";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let dialogOpen = $state(false);
 
@@ -21,7 +22,7 @@
 
 	async function handleSubmit() {
 		try {
-			await fetchWithErrorHandling(`https://api.openreport.dev/user-database/update`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/user-database/update`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
