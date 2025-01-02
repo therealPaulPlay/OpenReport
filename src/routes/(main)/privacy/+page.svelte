@@ -25,7 +25,7 @@
 			</p>
 
 			<p class="mt-4">2.2. Website Usage</p>
-			<p>When you visit our documentation or website, we may collect standard technical information such as:</p>
+			<p>When you visit our website or use our services, we may collect standard technical information such as:</p>
 			<ul class="list-disc pl-6 mb-4">
 				<li>IP addresses</li>
 				<li>Browser type and version</li>

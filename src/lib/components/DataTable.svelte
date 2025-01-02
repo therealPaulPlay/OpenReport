@@ -4,18 +4,14 @@
 	import { ArrowDownIcon, Trash } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
+	import { currentPage, hasNextPage, tableData } from "$lib/stores/tableStore";
+	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	// Props
 	let { table, appId } = $props();
 
-	// Local state
-	let currentPage = $state(1);
-	let data = $state([]);
-	let itemsPerPage = 50;
-	let hasNextPage = $state(false);
-
-	$effect((table, appId) => {
-		fetchTableData();
+	$effect(() => {
+		fetchTableData(appId, table);
 	});
 
 	async function deleteEntry(entryId) {
@@ -35,48 +31,9 @@
 			});
 
 			toast.success("Entry deleted successfully.");
-			data = data.filter((item) => item.id !== entryId);
+			$tableData = $tableData.filter((item) => item.id !== entryId);
 		} catch (error) {
 			toast.error(error.message || "An error occurred while deleting the entry.");
-		}
-	}
-
-	let lastAppId;
-	let lastTable;
-
-	async function fetchTableData() {
-		if (lastAppId != appId || lastTable != table) {
-			data = [];
-			hasNextPage = false;
-			currentPage = 1;
-		}
-
-		lastAppId = appId;
-		lastTable = table;
-
-		try {
-			const response = await fetchWithErrorHandling("https://api.openreport.dev/report/get-table", {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
-				},
-				body: JSON.stringify({
-					id: Number(localStorage.getItem("id")),
-					appId: appId,
-					table: table,
-					page: currentPage,
-				}),
-			});
-
-			const parsedResponse = await response.json();
-			const newData = parsedResponse.data;
-			data = [...data, ...newData]; // Append new data to existing data
-
-			// Check if there are more pages
-			hasNextPage = newData.length === itemsPerPage;
-		} catch (error) {
-			toast.error(error.message);
 		}
 	}
 </script>
@@ -95,8 +52,8 @@
 		</Table.Row>
 	</Table.Header>
 	<Table.Body>
-		{#if data.length > 0}
-			{#each data as item}
+		{#if $tableData.length > 0}
+			{#each $tableData as item}
 				<Table.Row>
 					<Table.Cell>{item.referenceId}</Table.Cell>
 					<Table.Cell>{item.type}</Table.Cell>
@@ -121,10 +78,11 @@
 
 	<Table.Caption>
 		<!-- Load More Button -->
-		{#if hasNextPage}
+		{#if $hasNextPage}
 			<Button
 				onclick={() => {
-					currentPage += 1;
+					$currentPage += 1;
+					fetchTableData(appId, table);
 				}}
 				variant="outline"
 				class="mt-2"

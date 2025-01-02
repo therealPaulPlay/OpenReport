@@ -5,6 +5,8 @@
 	import { Plus } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
+	import { tableData } from "$lib/stores/tableStore";
+	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	let dialogOpen = $state(false);
 	let referenceId = $state("");
@@ -24,7 +26,7 @@
 				},
 				body: JSON.stringify({
 					id: Number(localStorage.getItem("id")),
-					appId: Number(appId),
+					appId: appId,
 					table,
 					referenceId,
 					type,
@@ -35,6 +37,7 @@
 			toast.success("Entry created successfully");
 			dialogOpen = false;
 			resetForm();
+			fetchTableData(appId, table, true);
 		} catch (error) {
 			toast.error(error.message);
 		}

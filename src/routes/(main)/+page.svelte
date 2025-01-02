@@ -12,8 +12,9 @@
 
 <!-- Keywords -->
 <h1 style:display={"none"}>
-	Submit user reports with report forms. Integrate into game websites for free to enable users or players the reporting of others for
-	cheating, spamming, bots or harassment. Handle account bans easily with this open source moderation tool that works with a self hosted database.
+	Submit user reports with report forms. Integrate into game websites for free to enable users or players the reporting
+	of others for cheating, spamming, bots or harassment. Handle account bans easily with this open source moderation tool
+	that works with a self hosted database.
 </h1>
 
 <div class="min-h-screen">
@@ -33,13 +34,13 @@
 					</p>
 					<div class="mt-10 ml-1 flex gap-4">
 						{#if !$isAuthenticated}
-						<Button href="/login?signup=true">
-							Get started <ArrowRight class="w-4 h-4" />
-						</Button>
+							<Button href="/login?signup=true">
+								Get started <ArrowRight class="w-4 h-4" />
+							</Button>
 						{:else}
-						<Button href="/dashboard">
-							Open Dashboard <ArrowRight class="w-4 h-4" />
-						</Button>
+							<Button href="/dashboard">
+								Open Dashboard <ArrowRight class="w-4 h-4" />
+							</Button>
 						{/if}
 						<GithubReposView />
 					</div>
@@ -57,7 +58,7 @@
 						<div class="absolute -bottom-4 left-2 right-2 h-full bg-black/5 blur-xl rounded-2xl -z-10"></div>
 						<!-- Form -->
 						<div class="relative bg-background rounded-xl shadow-2xl">
-							<ReportForm reportReasons={["Spam", "Cheating", "Harassment"]} />
+							<ReportForm reportReasons={["Spam", "Cheating", "Harassment"]} allowNotes={true} demo={true} />
 						</div>
 					</div>
 				</div>

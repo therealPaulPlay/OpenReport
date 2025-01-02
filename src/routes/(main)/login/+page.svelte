@@ -2,6 +2,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
+	import { Checkbox } from "$lib/components/ui/checkbox";
 	import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "$lib/components/ui/card";
 	import { toast } from "svelte-sonner";
 	import { page } from "$app/stores";
@@ -14,6 +15,7 @@
 
 	let currentView = $state("login");
 	let loading = $state(false);
+	let acceptedTerms = $state(false);
 
 	let email = $state("");
 	let password = $state("");
@@ -23,6 +25,7 @@
 		email = "";
 		password = "";
 		userName = "";
+		acceptedTerms = false;
 		loading = false;
 	}
 
@@ -35,6 +38,12 @@
 	async function handleSubmit(event) {
 		event.preventDefault();
 		if (loading) return;
+
+		if (currentView === "signup" && !acceptedTerms) {
+			toast.error("Please accept the terms and privacy policy");
+			return;
+		}
+
 		loading = true;
 
 		try {
@@ -137,6 +146,16 @@
 					<div class="space-y-2">
 						<Label for="password">Password</Label>
 						<Input type="password" id="password" bind:value={password} required disabled={loading} minlength="8" />
+					</div>
+				{/if}
+
+				{#if currentView === "signup"}
+					<div class="flex items-center space-x-2">
+						<Checkbox id="terms" bind:checked={acceptedTerms} disabled={loading} />
+						<Label for="terms" class="text-sm">
+							I agree to the <a href="/terms" class="text-primary hover:underline">Terms</a> and 
+							<a href="/privacy" class="text-primary hover:underline">Privacy Policy</a>
+						</Label>
 					</div>
 				{/if}
 			</CardContent>

@@ -6,6 +6,7 @@
 	import { Settings2, Trash, AlertCircle, Eraser, Plus, Minus } from "lucide-svelte";
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
+	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	let { appId, table } = $props();
 
@@ -51,6 +52,7 @@
 			});
 
 			toast.success(`Successfully deleted entries older than ${days} days.`);
+			fetchTableData(appId, table, true);
 			confirmOpen = false;
 		} catch (error) {
 			toast.error(error.message);
