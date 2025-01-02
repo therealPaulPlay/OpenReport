@@ -81,7 +81,7 @@
 					<Input id="appName" bind:value={appName} placeholder="your_app_name" />
 				</div>
 				<div>
-					<Label for="domains">Domains (comma-separated)</Label>
+					<Label for="domains">Domains (allowed referrers, comma-separated)</Label>
 					<Input id="domains" bind:value={domains} placeholder="your-website.com" />
 				</div>
 			</div>

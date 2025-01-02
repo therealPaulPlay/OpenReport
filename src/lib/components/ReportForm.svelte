@@ -134,7 +134,7 @@
 				onclick={() => {
 					if (demo) {
 						submitted = true;
-						loadind = false;
+						loading = false;
 						return;
 					}
 					captchaVisible = true;

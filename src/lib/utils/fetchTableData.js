@@ -6,9 +6,10 @@ import { BASE_API_URL } from "$lib/stores/configStore";
 
 let lastAppId;
 let lastTable;
+let lastCurrentPage;
 
 export async function fetchTableData(appId, table, refresh) {
-    if (lastAppId != appId || lastTable != table || refresh) {
+    if (lastAppId != appId || lastTable != table || get(currentPage) == lastCurrentPage || refresh) {
         tableData.set([]);
         hasNextPage.set(false);
         currentPage.set(1);
@@ -16,6 +17,7 @@ export async function fetchTableData(appId, table, refresh) {
 
     lastAppId = appId;
     lastTable = table;
+    lastCurrentPage = get(currentPage);
 
     try {
         const response = await fetchWithErrorHandling(`${get(BASE_API_URL)}/report/get-table`, {
