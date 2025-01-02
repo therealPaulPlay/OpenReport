@@ -58,7 +58,7 @@
 						<div class="absolute -bottom-4 left-2 right-2 h-full bg-black/5 blur-xl rounded-2xl -z-10"></div>
 						<!-- Form -->
 						<div class="relative bg-background rounded-xl shadow-2xl">
-							<ReportForm reportReasons={["Spam", "Cheating", "Harassment"]} allowNotes={true} demo={true} />
+							<ReportForm allowNotes={true} demo={true} />
 						</div>
 					</div>
 				</div>

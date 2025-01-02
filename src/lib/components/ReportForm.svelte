@@ -5,22 +5,58 @@
 	import { Textarea } from "$lib/components/ui/textarea";
 	import { Check } from "lucide-svelte";
 	import { slide } from "svelte/transition";
+	import { toast } from "svelte-sonner";
+	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 
-	let { reportReasons, allowNotes = true, requireNotes = false, demo = false, apiKey, link } = $props();
+	let {
+		reportReasons = ["Spam", "Cheating", "Harassment"],
+		allowNotes = true,
+		requireNotes = false,
+		demo = false,
+		apiKey,
+		link,
+		type,
+		referenceId,
+	} = $props();
 
 	let submitted = $state(false);
+	let loading = $state(false);
 
 	let selectedReason = $state(reportReasons[0]);
 	let notes = $state("");
 
-	function handleSubmit() {
-		// Handle form submission
-		console.log("Submitted report:", {
-			reason: selectedReason,
-			notes,
-		});
+	async function handleSubmit() {
+		if (loading) return;
+		loading = true;
 
-		submitted = true;
+		if (demo) {
+			submitted = true;
+			loading = false;
+			return;
+		}
+
+		try {
+			await fetchWithErrorHandling("https://api.openreport.dev/report/submit", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					key: apiKey,
+					referenceId,
+					type: type,
+					reason: selectedReason,
+					notes: notes || null,
+					link: link || null,
+				}),
+			});
+
+			submitted = true;
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			loading = false;
+		}
 	}
 </script>
 
@@ -52,9 +88,11 @@
 
 			{#if !demo}
 				<p class="text-sm text-muted-foreground">
-					By submitting a report, you agree to the <a href="/terms" class=" hover:underline">Terms of Use</a>
+					By submitting a report, you agree to the <a href="/terms" target="_blank" class=" hover:underline"
+						>Terms of Use</a
+					>
 					and the
-					<a href="/privacy" class="hover:underline">Privacy Policy</a>.
+					<a href="/privacy" target="_blank" class="hover:underline">Privacy Policy</a>.
 				</p>
 			{/if}
 		{:else}
@@ -66,8 +104,8 @@
 	</CardContent>
 
 	<CardFooter class="flex justify-end gap-2">
-		<Button onclick={handleSubmit} disabled={submitted || (requireNotes && notes.length < 15 && allowNotes)}
-			>Submit</Button
+		<Button onclick={handleSubmit} disabled={submitted || loading || (requireNotes && notes.length < 15 && allowNotes)}
+			>{loading ? "Submitting..." : "Submit"}</Button
 		>
 	</CardFooter>
 </Card>

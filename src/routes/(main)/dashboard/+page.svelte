@@ -15,6 +15,7 @@
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { onMount } from "svelte";
 	import { blur, fade } from "svelte/transition";
+	import FormLinkCreator from "$lib/components/FormLinkCreator.svelte";
 
 	// Dashboard state
 	let apps = $state([]);
@@ -102,7 +103,7 @@
 				role="button"
 				tabindex="0"
 				onclick={() => {
-					activeApp = app.app_id;
+					activeApp = app;
 				}}
 			>
 				<AppOptions {app} {fetchApps} />
@@ -157,15 +158,15 @@
 								>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 						</Tabs.List>
-						<CleanPopup table={activeTab} appId={activeApp} />
-						{#if activeTab != "reports"}
-							<div transition:fade={{ duration: 150 }}>
-								<AddEntryPopup appId={activeApp} table={activeTab} />
-							</div>
+						<CleanPopup table={activeTab} appId={activeApp.app_id} />
+						{#if activeTab == "reports"}
+							<FormLinkCreator apiKey={activeApp.api_key} />
+						{:else}
+							<AddEntryPopup appId={activeApp.app_id} table={activeTab} />
 						{/if}
 					</div>
 					<div class="mt-5">
-						<DataTable table={activeTab} appId={activeApp} />
+						<DataTable table={activeTab} appId={activeApp.app_id} />
 					</div>
 				</Tabs.Root>
 			</div>

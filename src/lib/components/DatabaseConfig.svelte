@@ -47,7 +47,7 @@
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-		<Database size={16} class="mr-2" />Database config
+		<Database size={16} class="mr-2" />Database Config
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
