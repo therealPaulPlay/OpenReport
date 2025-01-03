@@ -1,7 +1,7 @@
 <script>
 	import { Button } from "$lib/components/ui/button/index.js";
 	import ReportForm from "$lib/components/ReportForm.svelte";
-	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon } from "lucide-svelte";
+	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon, LayoutDashboard } from "lucide-svelte";
 	import GithubReposView from "$lib/components/GithubReposView.svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
 </script>
@@ -75,7 +75,7 @@
 			</div>
 
 			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{#each [{ icon: Database, title: "Your Database", description: "Bring your own database and keep full control over your data." }, { icon: Shield, title: "Secure By Design", description: "Built with security best practices. Your data stays on your db." }, { icon: BarChart3, title: "Advanced Analytics", description: "Track and analyze reports with a beautiful dashboard." }, { icon: Code2, title: "Easy Integration", description: "Simple API and form site. Integrate in minutes, not days." }, { icon: Settings2, title: "Customizable", description: "Custom fields, automated warnings and bans, and more." }, { icon: Blocks, title: "Multiple Apps", description: "Manage reports from multiple applications in one central dashboard." }] as feature}
+				{#each [{ icon: Database, title: "Your Database", description: "Bring your own database and keep full control over your data." }, { icon: Shield, title: "Secure By Design", description: "Built with security best practices. Your data stays on your db." }, { icon: LayoutDashboard, title: "Advanced Dashboard", description: "Manage reports with a beautiful dashboard. Invite mods for collaboration." }, { icon: Code2, title: "Easy Integration", description: "Simple API and form site. Integrate in minutes, not days." }, { icon: Settings2, title: "Customizable", description: "Custom fields, automated warnings and bans, and more." }, { icon: Blocks, title: "Multiple Apps", description: "Manage reports from multiple applications in one central dashboard." }] as feature}
 					<div class="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
 						<svelte:component this={feature.icon} class="w-12 h-12 mb-4 text-primary" />
 						<h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
