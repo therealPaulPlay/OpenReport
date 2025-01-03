@@ -17,6 +17,7 @@
 				<span class="bold">OpenReport</span>
 			</a>
 			<div class="flex gap-5 mr-5">
+				<a href="/pricing" class="text-muted-foreground transition-colors hover:text-foreground"> Pricing </a>
 				<a href="/dashboard" class="text-muted-foreground transition-colors hover:text-foreground"> Dashboard </a>
 				<a href="/login" class="text-muted-foreground transition-colors hover:text-foreground"> Login </a>
 			</div>

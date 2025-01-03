@@ -5,3 +5,4 @@ export const userDatabase = writable(null);
 export const username = writable("Guest");
 export const reportLimit = writable(1);
 export const moderatorLimit = writable(1);
+export const selectedTier = writable(1);

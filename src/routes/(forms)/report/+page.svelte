@@ -14,6 +14,7 @@
 		showError = missingParams.length > 0;
 	});
 
+	// Get spread props from URL Search params
 	const getReportParams = () => {
 		const params = $page.url.searchParams;
 		return {
@@ -23,7 +24,7 @@
 			link: params.get("link"),
 			allowNotes: params.get("allow-notes") === "false" ? false : true,
 			requireNotes: params.get("require-notes") === "true",
-			reportReasons: params.get("reasons")?.split(",") ?? ["Spam", "Cheating", "Scam", "Harassment"],
+			reportReasons: params.get("reasons")?.split(","),
 		};
 	};
 </script>

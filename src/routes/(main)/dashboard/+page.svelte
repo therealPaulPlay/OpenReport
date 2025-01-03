@@ -8,7 +8,7 @@
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
-	import { Ban, Flag, Menu, RefreshCcw, SidebarClose, TriangleAlert } from "lucide-svelte";
+	import { Ban, Flag, Menu, RefreshCcw, SidebarClose, TriangleAlert, UsersRound } from "lucide-svelte";
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
@@ -106,8 +106,11 @@
 					activeApp = app;
 				}}
 			>
-				<AppOptions {app} {fetchApps} />
+				<AppOptions {app} {fetchApps} disabled={app.owner == 0} />
 				<span class="truncate w-full text-center">{app?.app_name || "Unnamed App"}</span>
+				{#if app.owner == 0}
+					<p class="flex items-center text-xs">MOD <UsersRound size={14} class="ml-1" /></p>
+				{/if}
 			</div>
 		{/each}
 	</div>

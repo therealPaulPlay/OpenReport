@@ -19,7 +19,7 @@
 
 	async function handleCreate() {
 		try {
-			await fetchWithErrorHandling(`${$BASE_API_URL}report/add-manually`, {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/report/add-manually`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

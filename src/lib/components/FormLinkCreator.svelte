@@ -145,7 +145,7 @@
 						</div>
 						<div>
 							<Label for="reasons">Reasons (comma-separated)</Label>
-							<Input id="reasons" bind:value={reasons} placeholder="Spam,Cheating,Harassment" />
+							<Input id="reasons" bind:value={reasons} placeholder="Spam, Cheating, Harassment" />
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox type="checkbox" id="allowNotes" bind:checked={allowNotes} />

@@ -64,7 +64,7 @@
 				}
 
 				case "signup": {
-					await fetchWithErrorHandling(`${baseURL}/register`, {
+					await fetchWithErrorHandling(`${$BASE_API_URL}/account/register`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ userName, email, password }),
@@ -75,7 +75,7 @@
 				}
 
 				case "reset": {
-					await fetchWithErrorHandling(`${baseURL}/reset-password-request`, {
+					await fetchWithErrorHandling(`${$BASE_API_URL}/account/reset-password-request`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ email }),
@@ -87,7 +87,7 @@
 
 				case "set-new-password": {
 					const token = $page.url.searchParams.get("token");
-					await fetchWithErrorHandling(`${baseURL}/reset-password`, {
+					await fetchWithErrorHandling(`${$BASE_API_URL}/account/reset-password`, {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify({ token, newPassword: password }),
@@ -130,14 +130,22 @@
 				{#if currentView === "signup"}
 					<div class="space-y-2">
 						<Label for="userName">Full Name</Label>
-						<Input type="text" id="userName" bind:value={userName} required disabled={loading} />
+						<Input
+							type="text"
+							id="userName"
+							bind:value={userName}
+							required
+							disabled={loading}
+							maxlength={50}
+							minlength={3}
+						/>
 					</div>
 				{/if}
 
 				{#if currentView !== "set-new-password"}
 					<div class="space-y-2">
 						<Label for="email">Email</Label>
-						<Input type="email" id="email" bind:value={email} required disabled={loading} />
+						<Input type="email" id="email" bind:value={email} required disabled={loading} maxlength={100} />
 					</div>
 				{/if}
 
