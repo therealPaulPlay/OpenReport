@@ -78,8 +78,17 @@
 				modifications constitutes acceptance of the updated terms.
 			</p>
 			<p>8.2. It is your responsibility to review these terms periodically for changes.</p>
+			<h2 class="text-2xl font-semibold mt-8 mb-4">9. Payments and Subscriptions</h2>
+			<p>
+				We do not take any responsibility for defects that can cause issues in your user experience and/or issues
+				with in-game purchases or subscriptions. When issues arise, we may be able to help you or offer a refund if applicable by law,
+				but cannot guarantee the functionality of the service, as it depends on various factors that can be tied to
+				device-specific properties. Some features of the Service require payment. By purchasing a digital or physical
+				item or by subscribing, you authorize Paul Rhomberg ("PaulPlay") to charge your selected payment method. Payment fees are
+				non-refundable except as required by law. Subscription prices are subject to change.
+			</p>
 
-			<h2 class="text-2xl font-semibold mt-8 mb-4">9. Termination</h2>
+			<h2 class="text-2xl font-semibold mt-8 mb-4">10. Termination</h2>
 			<p>
 				9.1. We reserve the right to terminate or suspend access to the Service without prior notice for any reason.
 			</p>
@@ -88,7 +97,7 @@
 				survive, including ownership provisions, warranty disclaimers, and limitations of liability.
 			</p>
 
-			<h2 class="text-2xl font-semibold mt-8 mb-4">10. Contact Information</h2>
+			<h2 class="text-2xl font-semibold mt-8 mb-4">11. Contact Information</h2>
 			<p>
 				For questions about these Terms of Use, please contact OpenReport through the form at the bottom of the <a
 					href="https://paulplay.studio"

@@ -18,10 +18,10 @@
 			<h2 class="text-2xl font-semibold mt-8 mb-4">2. Information Collection</h2>
 			<p>2.1. Self-Hosted Data</p>
 			<p>
-				As a self-hosted solution, all report data and user information is stored in your own database. By connecting OpenReport
-                to your database, our system gains access to all the data stored on it. We do not permanently save or sell any of this data unless
-                opted in by the user. This means that as the website owner, you need to inform your users what data is being stored and how you are using 
-				the information gathered from the report forms.
+				As a self-hosted solution, all report data and user information is stored in your own database. By connecting
+				OpenReport to your database, our system gains access to all the data stored on it. We do not permanently save or
+				sell any of this data unless opted in by the user. This means that as the website owner, you need to inform your
+				users what data is being stored and how you are using the information gathered from the report forms.
 			</p>
 
 			<p class="mt-4">2.2. Website Usage</p>
@@ -56,9 +56,17 @@
 			<ul class="list-disc pl-6 mb-4">
 				<li>Analytics</li>
 				<li>Error tracking</li>
-				<li>Documentation hosting</li>
+				<li>Purchases / Subscriptions</li>
+				<li>Hosting</li>
 			</ul>
 			<p>5.2. These services have their own privacy policies and data collection practices.</p>
+			<ul class="list-disc pl-6 mb-4">
+				<li>
+					If you purchase any item in the game/on the site, the data you provide might be stored and processed using
+					stripe. Please refer to stripe's
+					<a href="https://stripe.com/privacy" target="_blank" class="hover:underline">privacy policy</a> for more information.
+				</li>
+			</ul>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">6. Your Rights and Choices</h2>
 			<p>6.1. As a self-hosted solution, you maintain full control over:</p>

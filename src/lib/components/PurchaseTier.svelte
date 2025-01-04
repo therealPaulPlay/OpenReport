@@ -1,7 +1,7 @@
 <script>
 	import { Check } from "lucide-svelte";
 	import { Button } from "$lib/components/ui/button";
-	import { selectedTier } from "$lib/stores/accountStore";
+	import { subscriptionTier } from "$lib/stores/accountStore";
 	let { title, price, features, comingSoon = false, highlight = false, tier = 1 } = $props();
 </script>
 
@@ -25,6 +25,6 @@
 	{#if comingSoon}
 		<p class="text-sm text-primary font-bold mt-8">Coming Soon</p>
 	{:else}
-		<Button variant="outline" disabled={tier == $selectedTier}>{tier == $selectedTier ? "Selected" : "Select"}</Button>
+		<Button variant="outline" disabled={tier == $subscriptionTier}>{tier == $subscriptionTier ? "Selected" : "Select"}</Button>
 	{/if}
 </div>

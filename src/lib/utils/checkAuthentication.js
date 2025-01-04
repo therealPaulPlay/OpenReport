@@ -1,4 +1,4 @@
-import { isAuthenticated, moderatorLimit, reportLimit, userDatabase, username } from "$lib/stores/accountStore";
+import { isAuthenticated, moderatorLimit, reportLimit, subscriptionTier, userDatabase, username } from "$lib/stores/accountStore";
 import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
 import { BASE_API_URL } from "$lib/stores/configStore";
 import { get } from "svelte/store";
@@ -37,6 +37,7 @@ export async function checkAuthenticationStatus() {
             reportLimit.set(data.user?.report_limit);
             moderatorLimit.set(data.user?.moderator_limit);
             userDatabase.set(data.userDatabase);
+            subscriptionTier.set(data.user?.subscription_tier);
         }
     } else {
         isAuthenticated.set(false);
