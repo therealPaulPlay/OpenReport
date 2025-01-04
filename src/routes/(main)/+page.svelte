@@ -1,9 +1,32 @@
 <script>
 	import { Button } from "$lib/components/ui/button/index.js";
 	import ReportForm from "$lib/components/ReportForm.svelte";
-	import { ArrowRight, Database, Shield, BarChart3, Code2, Settings2, Blocks, FolderMinusIcon, LayoutDashboard } from "lucide-svelte";
+	import {
+		ArrowRight,
+		Database,
+		Shield,
+		BarChart3,
+		Code2,
+		Settings2,
+		Blocks,
+		FolderMinusIcon,
+		LayoutDashboard,
+	} from "lucide-svelte";
 	import GithubReposView from "$lib/components/GithubReposView.svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
+	import * as Dialog from "$lib/components/ui/dialog/index.js";
+	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
+	import { onMount } from "svelte";
+	import Footer from "$lib/components/Footer.svelte";
+
+	let showSuccessDialog = $state(false);
+
+	onMount(() => {
+		if ($page.url.searchParams.get("success") === "true") {
+			showSuccessDialog = true;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -77,7 +100,7 @@
 			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{#each [{ icon: Database, title: "Your Database", description: "Bring your own database and keep full control over your data." }, { icon: Shield, title: "Secure By Design", description: "Built with security best practices. Your data stays on your db." }, { icon: LayoutDashboard, title: "Advanced Dashboard", description: "Manage reports with a beautiful dashboard. Invite mods for collaboration." }, { icon: Code2, title: "Easy Integration", description: "Simple API and form site. Integrate in minutes, not days." }, { icon: Settings2, title: "Customizable", description: "Custom fields, automated warnings and bans, and more." }, { icon: Blocks, title: "Multiple Apps", description: "Manage reports from multiple applications in one central dashboard." }] as feature}
 					<div class="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
-						<svelte:component this={feature.icon} class="w-12 h-12 mb-4 text-primary" />
+						<feature.icon class="w-12 h-12 mb-4 text-primary" />
 						<h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
 						<p class="text-muted-foreground">{feature.description}</p>
 					</div>
@@ -86,7 +109,7 @@
 		</section>
 
 		<!-- CTA Section -->
-		<section class="py-20">
+		<section class="py-10">
 			<div class="bg-primary/5 rounded-2xl p-8 md:p-12 text-center">
 				<h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
 				<p class="text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -101,27 +124,25 @@
 	</div>
 
 	<!-- Footer -->
-	<footer class="border-t">
-		<div class="max-w-screen-xl mx-auto px-4 py-8">
-			<div class="flex flex-col md:flex-row justify-between items-center gap-4">
-				<div class="flex items-center space-x-1">
-					<span class="text-sm text-muted-foreground">© {new Date().getFullYear()}</span>
-					<span class="text-sm text-muted-foreground"
-						><a href="https://paulplay.studio" target="_blank">PaulPlay</a></span
-					>
-				</div>
-				<nav class="flex gap-6">
-					<a href="/terms" class="text-sm text-muted-foreground hover:text-primary"> Terms of Use </a>
-					<a href="/privacy" class="text-sm text-muted-foreground hover:text-primary"> Privacy Policy </a>
-					<a
-						href="https://paulplay.studio/imprint"
-						target="_blank"
-						class="text-sm text-muted-foreground hover:text-primary"
-					>
-						Imprint
-					</a>
-				</nav>
-			</div>
-		</div>
-	</footer>
+	<Footer />
 </div>
+
+<!-- Purchase success popup -->
+<Dialog.Root bind:open={showSuccessDialog}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Thank You for Subscribing!</Dialog.Title>
+			<Dialog.Description>
+				Your subscription has been successfully activated. You can now access all the features of your new plan.
+			</Dialog.Description>
+		</Dialog.Header>
+		<Dialog.Footer>
+			<Button
+				onclick={() => {
+					showSuccessDialog = false;
+					goto("/dashboard");
+				}}>Open Dashboard</Button
+			>
+		</Dialog.Footer>
+	</Dialog.Content>
+</Dialog.Root>
