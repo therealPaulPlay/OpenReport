@@ -3,6 +3,7 @@
 	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
 	import { Goal } from "lucide-svelte";
 	import { onMount } from "svelte";
+	import { blur } from "svelte/transition";
 	let { children } = $props();
 
 	onMount(async () => {
@@ -17,7 +18,7 @@
 				<Goal class="h-6 w-6" />
 				<span class="bold max-sm:hidden">OpenReport</span>
 				{#if $subscriptionTier > 0}
-					<span class="rounded-sm text-sm bg-violet-800 px-1 text-white mt-0.5">{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span>
+					<span class="rounded-sm text-sm bg-violet-800 px-1 text-white mt-0.5" transition:blur>{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span>
 				{/if}
 			</a>
 			<div class="flex gap-5 mr-5">

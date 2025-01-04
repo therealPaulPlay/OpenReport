@@ -80,12 +80,15 @@
 			<p>8.2. It is your responsibility to review these terms periodically for changes.</p>
 			<h2 class="text-2xl font-semibold mt-8 mb-4">9. Payments and Subscriptions</h2>
 			<p>
-				We do not take any responsibility for defects that can cause issues in your user experience and/or issues
-				with in-game purchases or subscriptions. When issues arise, we may be able to help you or offer a refund if applicable by law,
-				but cannot guarantee the functionality of the service, as it depends on various factors that can be tied to
-				device-specific properties. Some features of the Service require payment. By purchasing a digital or physical
-				item or by subscribing, you authorize Paul Rhomberg ("PaulPlay") to charge your selected payment method. Payment fees are
-				non-refundable except as required by law. Subscription prices are subject to change.
+				We do not take any responsibility for defects that can cause issues in your user experience and/or issues with
+				in-game purchases or subscriptions. When issues arise, we may be able to help you or offer a refund if
+				applicable by law, but cannot guarantee the functionality of the service, as it depends on various factors that
+				can be tied to device-specific properties. Some features of the Service require payment. By purchasing a digital
+				or physical item or by subscribing, you authorize Paul Rhomberg ("PaulPlay") to charge your selected payment
+				method. Payment fees are non-refundable except as required by law. Subscription prices are subject to change.
+				<br /><br />
+				Trying to circumvent subscription fees utilizing multiple accounts or multiple apps for the same site is not permitted
+				and will result in an account termination.
 			</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">10. Termination</h2>
