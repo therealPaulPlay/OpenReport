@@ -16,9 +16,14 @@
 	let domains = $state("");
 	let dialogOpen = $state(false);
 
+	let loading = $state(false);
+
 	async function handleCreate() {
+		loading = true;
+
 		if (!appName.trim()) {
 			toast.error("App name is required");
+			loading = false;
 			return;
 		}
 
@@ -29,6 +34,7 @@
 
 		if (domainList.length === 0) {
 			toast.error("At least one domain is required");
+			loading = false;
 			return;
 		}
 
@@ -46,12 +52,15 @@
 				}),
 			});
 			toast.success("Application created successfully");
+			loading = false;
 			appName = "";
 			domains = "";
 			dialogOpen = false;
 			fetchApps?.();
 		} catch (error) {
 			toast.error(error.message);
+			loading = false;
+			fetchApps?.();
 		}
 	}
 </script>
@@ -86,7 +95,7 @@
 				</div>
 			</div>
 			<Dialog.Footer>
-				<Button onclick={handleCreate}>Create App</Button>
+				<Button onclick={handleCreate} disabled={loading}>Create App</Button>
 			</Dialog.Footer>
 		{:else}
 			<div class="flex flex-wrap space-y-4 justify-start items-center">

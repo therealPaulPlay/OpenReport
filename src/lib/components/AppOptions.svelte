@@ -20,6 +20,8 @@
 	let newModeratorEmail = $state("");
 	let domains = $state("");
 
+	let dialogOpen = $state(false);
+
 	async function loadModerators() {
 		try {
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/moderator/moderators`, {
@@ -99,6 +101,7 @@
 				}),
 			});
 			toast.success("App deleted successfully");
+			dialogOpen = false;
 			fetchApps();
 		} catch (error) {
 			toast.error(error.message);
@@ -130,6 +133,8 @@
 	}
 
 	async function updateDomains() {
+		if (domains.length == 0) return;
+
 		try {
 			const domainArray = domains
 				.split(",")
@@ -168,7 +173,6 @@
 		}
 	}
 
-	let dialogOpen = $state(false);
 	$effect(() => {
 		if (dialogOpen) loadModerators();
 	});
@@ -192,7 +196,7 @@
 			<div>
 				<Label for="monthlyReports">Monthly report limit</Label>
 				<p class="text-sm text-muted-foreground mt-1" id="monthlyReports">
-					You have currently used {app.monthly_report_count?.toLocaleString()} of your {$reportLimit.toLocaleString()} monthly
+					You have used {app.monthly_report_count?.toLocaleString()} of your {$reportLimit.toLocaleString()} monthly
 					reports for this app.
 				</p>
 				<Progress value={Number(app.monthly_report_count)} max={$reportLimit} class="w-[60%] mt-2" />
@@ -200,14 +204,14 @@
 			<div class="space-y-2">
 				<div>
 					<Label for="domains">Update allowed domains (comma-separated)</Label>
-					<div class="flex flex-wrap justify-center items-center gap-2">
+					<div class="flex flex-wrap items-center gap-2">
 						<Input
 							id="domains"
 							bind:value={domains}
 							placeholder="new-website.com, localhost:5173"
 							class="mt-2 grow grow-[4] w-fit"
 						/>
-						<Button variant="outline" onclick={updateDomains} class="mt-2 grow">Update</Button>
+						<Button variant="outline" onclick={updateDomains} class="mt-2 grow max-w-28">Update</Button>
 					</div>
 				</div>
 			</div>
@@ -292,7 +296,7 @@
 				<Button variant="outline" onclick={updateThresholds} disabled={!isValid}><Save />Save thresholds</Button>
 			</div>
 
-			<div class="pt-2 border-t">
+			<div class="pt-2 border-t pt-5">
 				<AlertDialog.Root>
 					<AlertDialog.Trigger class={buttonVariants({ variant: "destructive" })}>
 						<Trash size={16} class="mr-2" />Delete App

@@ -3,7 +3,7 @@
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
-	import { Database, Lock, LogOut, Settings, Trash } from "lucide-svelte";
+	import { Database, ExternalLink, Lock, LogOut, Settings, Trash } from "lucide-svelte";
 	import { goto } from "$app/navigation";
 	import { toast } from "svelte-sonner";
 	import DatabaseConfig from "$lib/components/DatabaseConfig.svelte";
@@ -58,11 +58,11 @@
 					onclick={() => {
 						signOut();
 						window.location.reload();
-					}}><LogOut size={16} class="mr-2" /> Log out</Button
+					}}><LogOut size={16} class="mr-2" />Log out</Button
 				>
 				<Dialog.Root>
 					<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-						<Trash size={16} class="mr-2" />Delete
+						<Trash size={16} class="mr-2" />Delete Account
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>
@@ -81,6 +81,7 @@
 						</Dialog.Footer>
 					</Dialog.Content>
 				</Dialog.Root>
+				<Button variant="outline" href="/pricing">Subscription <ExternalLink /></Button>
 			</div>
 		</div>
 	</Dialog.Content>

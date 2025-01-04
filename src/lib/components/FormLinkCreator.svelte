@@ -7,6 +7,7 @@
 	import { toast } from "svelte-sonner";
 	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
 	import Checkbox from "./ui/checkbox/checkbox.svelte";
+	import * as Accordion from "$lib/components/ui/accordion/index.js";
 
 	let { apiKey } = $props();
 	let type = $state("");
@@ -48,7 +49,7 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Captions /> Create Form
+		<Captions /><span class="max-sm:hidden">Create Form</span>
 	</Dialog.Trigger>
 	<Dialog.Content class="max-w-2xl max-h-[80vh] overflow-y-auto overflow-x-hidden">
 		<Dialog.Header>
@@ -57,45 +58,38 @@
 
 		<div class="space-y-6">
 			<div class="space-y-2 mt-4">
-				<Label class="font-bold">Direct Link</Label>
-				<div class="p-4 bg-muted rounded-lg">
-					<p class="font-mono text-xs text-break-chars">{currentUrl}</p>
-					<Button variant="outline" size="sm" class="mt-2" onclick={() => copyToClipboard(currentUrl)}>
-						<Copy class="w-4 h-4 mr-2" />Copy URL
+				<Label>Direct Link</Label>
+				<div class="flex flex-wrap gap-2 items-center">
+					<div class="p-3 bg-muted rounded-md flex text-gray-500">
+						<p class="font-mono text-xs text-break-chars">{currentUrl}</p>
+					</div>
+					<Button variant="secondary" onclick={() => copyToClipboard(currentUrl)}>
+						<Copy class="w-4 h-4 mr-2" />Copy
 					</Button>
 				</div>
 			</div>
 
-			<div class="space-y-2 mt-4">
-				<Label class="font-bold">Iframe Code</Label>
-				<div class="p-4 bg-muted rounded-lg">
+			<div class="space-y-2">
+				<Label>Iframe Code</Label>
+				<div class="p-4 bg-muted rounded-md text-gray-500">
 					<pre class="font-mono text-xs text-break-chars">{getFormattedCode(currentUrl)}</pre>
-					<Button
-						variant="outline"
-						size="sm"
-						class="mt-2"
-						onclick={() => copyToClipboard(getFormattedCode(currentUrl))}
-					>
-						<Copy class="w-4 h-4 mr-2" />Copy Code
-					</Button>
 				</div>
 			</div>
 
 			<div class="grid gap-4">
-				<div class="space-y-2">
-					<Label class="font-bold">Required Parameters</Label>
+				<div class="space-y-2 border-y py-5">
+					<Label>Required Parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>
 								<Tooltip.Root>
 									<Tooltip.Trigger class="text-left">
-										<Label for="type">Type *</Label>
+										<Label for="type">Type</Label>
 										<Input id="type" bind:value={type} placeholder="e.g. comment" />
 									</Tooltip.Trigger>
 									<Tooltip.Content>
 										<p class="max-w-52">
-											The type refers to the reported entity - for example, a post, user or comment. It is purely
-											informational.
+											The type refers to the reported content - for example, a post, user or comment.
 										</p>
 									</Tooltip.Content>
 								</Tooltip.Root>
@@ -105,27 +99,26 @@
 							<Tooltip.Provider>
 								<Tooltip.Root>
 									<Tooltip.Trigger class="text-left">
-										<Label for="reference">Reference ID *</Label>
+										<Label for="reference">Reference ID</Label>
 										<Input id="reference" bind:value={referenceId} placeholder="e.g. comment-33295" />
 									</Tooltip.Trigger>
 									<Tooltip.Content>
 										<p class="max-w-52">
-											The reference ID should correlate to the ID of the reported entity in your backend. It is
-											recommended that you adjust this URL query dynamically in your code.
+											The reference ID should correlate to the ID of the reported content in your backend.
 										</p>
 									</Tooltip.Content>
 								</Tooltip.Root>
 							</Tooltip.Provider>
 						</div>
 						<div>
-							<Label for="apiKey">API Key (public)</Label>
+							<Label for="apiKey">Public API Key</Label>
 							<Input id="apiKey" value={apiKey} disabled class="bg-muted" />
 						</div>
 					</div>
 				</div>
 
-				<div class="space-y-2">
-					<Label class="font-bold">Optional Parameters</Label>
+				<div class="space-y-2 border-b pb-5">
+					<Label>Optional Parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>
@@ -136,8 +129,7 @@
 									</Tooltip.Trigger>
 									<Tooltip.Content>
 										<p class="max-w-52">
-											Adding a link to the reported entitiy on your site (e.g. the comment section where the comment is
-											from) makes it easier for moderators to evaluate the report.
+											Adding a link to the reported content makes it easier for moderators to evaluate the report.
 										</p>
 									</Tooltip.Content>
 								</Tooltip.Root>
@@ -160,11 +152,21 @@
 			</div>
 		</div>
 
-		<Dialog.Footer>
-			<Dialog.Close asChild>
-				<Button variant="outline">Close</Button>
-			</Dialog.Close>
-		</Dialog.Footer>
+		<Accordion.Root type="single" class="-mt-2">
+			<Accordion.Item value="item-1">
+				<Accordion.Trigger>What is a Reference ID?</Accordion.Trigger>
+				<Accordion.Content>
+					<div class="p-4 bg-muted rounded-lg">
+						<p class="text-sm">
+							The reference ID can be used to trace back a report to an entry in your own database. It is recommended to
+							set this dynamically. For example, if you have a <span class="italic">users</span> table with an
+							<span class="italic">id</span> field, you can dynamically construct the reference-id query parameter to include
+							that in the URL in your frontend code.
+						</p>
+					</div></Accordion.Content
+				>
+			</Accordion.Item>
+		</Accordion.Root>
 	</Dialog.Content>
 </Dialog.Root>
 

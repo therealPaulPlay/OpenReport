@@ -63,7 +63,7 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Eraser class="mr-2" /> Clean
+		<Eraser class="mr-1" /><span class="max-sm:hidden">Clean</span>
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>

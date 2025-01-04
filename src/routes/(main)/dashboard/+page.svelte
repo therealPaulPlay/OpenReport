@@ -3,22 +3,24 @@
 	import AppOptions from "$lib/components/AppOptions.svelte";
 	import SettingsPopup from "$lib/components/SettingsPopup.svelte";
 	import AppCreationPopup from "$lib/components/AppCreationPopup.svelte";
+	import CleanPopup from "$lib/components/CleanPopup.svelte";
+	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
+	import FormLinkCreator from "$lib/components/FormLinkCreator.svelte";
 
 	import { Sheet, SheetTrigger, SheetContent } from "$lib/components/ui/sheet";
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
-	import { Ban, Flag, Menu, RefreshCcw, SidebarClose, TriangleAlert, UsersRound } from "lucide-svelte";
-	import CleanPopup from "$lib/components/CleanPopup.svelte";
-	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
+	import { Input } from "$lib/components/ui/input";
+	import { Ban, Flag, Menu, RefreshCcw, Search, SidebarClose, TriangleAlert, UsersRound } from "lucide-svelte";
 	import { isAuthenticated } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { onMount } from "svelte";
 	import { blur, fade } from "svelte/transition";
-	import FormLinkCreator from "$lib/components/FormLinkCreator.svelte";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { toast } from "svelte-sonner";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
+	import { searchQuery } from "$lib/stores/tableStore";
 
 	// Dashboard state
 	let apps = $state([]);
@@ -99,7 +101,7 @@
 			<div
 				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
 				transition:blur
-				style:background-color={app.app_id == activeApp ? "white" : ""}
+				style:background-color={app.app_id == activeApp?.app_id ? "white" : ""}
 				role="button"
 				tabindex="0"
 				onclick={() => {
@@ -173,6 +175,28 @@
 						{:else}
 							<AddEntryPopup appId={activeApp.app_id} table={activeTab} />
 						{/if}
+						<div class="flex items-center space-x-2 lg:ml-auto">
+							<!-- Search Input -->
+							<Input
+								bind:value={$searchQuery}
+								placeholder="Search..."
+								class="w-64 max-lg:w-24 px-3 py-2"
+								onkeydown={() => {
+									if (event.key === "Enter") {
+										fetchTableData(activeApp.app_id, activeTab);
+									}
+								}}
+							/>
+
+							<!-- Search Button -->
+							<Button
+								variant="secondary"
+								onclick={() => fetchTableData(activeApp.app_id, activeTab)}
+								class="flex items-center space-x-2 px-4 py-2"
+							>
+								<Search class="w-5 h-5" />
+							</Button>
+						</div>
 					</div>
 					<div class="mt-5">
 						<DataTable table={activeTab} appId={activeApp.app_id} />

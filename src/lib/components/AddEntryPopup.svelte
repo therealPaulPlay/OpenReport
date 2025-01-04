@@ -58,7 +58,7 @@
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Plus class="mr-2" /> Add
+		<Plus class="mr-1" /><span class="max-sm:hidden">Add</span>
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>

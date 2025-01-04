@@ -1,4 +1,4 @@
-import { tableData, hasNextPage, currentPage, itemsPerPage } from "$lib/stores/tableStore";
+import { tableData, hasNextPage, currentPage, itemsPerPage, searchQuery } from "$lib/stores/tableStore";
 import { get } from "svelte/store";
 import { toast } from "svelte-sonner";
 import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -7,9 +7,10 @@ import { BASE_API_URL } from "$lib/stores/configStore";
 let lastAppId;
 let lastTable;
 let lastCurrentPage;
+let lastSearchQuery;
 
 export async function fetchTableData(appId, table, refresh) {
-    if (lastAppId != appId || lastTable != table || get(currentPage) == lastCurrentPage || refresh) {
+    if (lastAppId != appId || lastTable != table || get(currentPage) == lastCurrentPage || lastSearchQuery != get(searchQuery) || refresh) {
         tableData.set([]);
         hasNextPage.set(false);
         currentPage.set(1);
@@ -18,6 +19,7 @@ export async function fetchTableData(appId, table, refresh) {
     lastAppId = appId;
     lastTable = table;
     lastCurrentPage = get(currentPage);
+    lastSearchQuery = get(searchQuery);
 
     try {
         const response = await fetchWithErrorHandling(`${get(BASE_API_URL)}/report/get-table`, {
@@ -31,6 +33,7 @@ export async function fetchTableData(appId, table, refresh) {
                 appId: Number(appId),
                 table: table,
                 page: get(currentPage),
+                search: get(searchQuery)
             }),
         });
 

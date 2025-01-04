@@ -60,7 +60,7 @@
 		{#if $tableData.length > 0}
 			{#each $tableData as item}
 				<Table.Row>
-					<Table.Cell>{item.referenceId}</Table.Cell>
+					<Table.Cell>{item.reference_id}</Table.Cell>
 					<Table.Cell>{item.type}</Table.Cell>
 					<Table.Cell>{item.reason}</Table.Cell>
 					<Table.Cell
@@ -72,7 +72,7 @@
 					>
 					<Table.Cell><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell>
 					<Table.Cell>{new Date(item.timestamp).toLocaleString()}</Table.Cell>
-					<Table.Cell>{item.reporterIp}</Table.Cell>
+					<Table.Cell>{item.reporter_ip}</Table.Cell>
 					<Table.Cell>
 						<Button variant="outline" size="sm" onclick={() => deleteEntry(item.id)}>
 							<Trash size={16} />
