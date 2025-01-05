@@ -44,7 +44,7 @@
 
 	// Load data on mount
 	onMount(() => {
-		fetchApps();
+		if ($isAuthenticated) fetchApps();
 	});
 
 	let activeApp = $state();
@@ -84,7 +84,7 @@
 	<div
 		class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-md"
 	>
-		<p class="font-bold text-4xl">You are logged out.</p>
+		<p class="font-bold text-3xl">You are logged out.</p>
 		<p class="text-base text-muted-foreground mt-5">
 			<a href="/login" class="underline">Log in</a> to use the dashboard.
 		</p>
