@@ -15,6 +15,15 @@ export async function getUser() {
         });
 
         const data = await response.json();
+
+        if (data) {
+            username.set(data.user?.user_name);
+            reportLimit.set(data.user?.report_limit);
+            moderatorLimit.set(data.user?.moderator_limit);
+            userDatabase.set(data.userDatabase);
+            subscriptionTier.set(data.user?.subscription_tier);
+        }
+
         return data;
     } catch (error) {
         console.error("Error occurred while fetching the user: ", error);
@@ -32,13 +41,6 @@ export async function checkAuthenticationStatus() {
 
         // Load basic details
         const data = await getUser();
-        if (data) {
-            username.set(data.user?.user_name);
-            reportLimit.set(data.user?.report_limit);
-            moderatorLimit.set(data.user?.moderator_limit);
-            userDatabase.set(data.userDatabase);
-            subscriptionTier.set(data.user?.subscription_tier);
-        }
     } else {
         isAuthenticated.set(false);
     }
