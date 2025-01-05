@@ -49,7 +49,7 @@
 				<div class="flex flex-col max-w-xl">
 					<p class="uppercase ml-1 text-md font-bold tracking-wide">Free & Selfhost-ready</p>
 					<h1 class="text-4xl md:text-6xl font-bold mt-2">
-						Stop bad actors with <span class="text-violet-800">report forms</span>.
+						Stop bad actors with <span class="text-violet-800 dark:text-violet-500">report forms</span>.
 					</h1>
 					<p class="mt-6 text-lg text-muted-foreground">
 						Open-code reporting system for web games, chat applications, and online communities. Self-host, customize,
@@ -78,7 +78,7 @@
 				>
 					<div class="relative">
 						<!-- Shadow overlay -->
-						<div class="absolute -bottom-4 left-2 right-2 h-full bg-black/5 blur-xl rounded-2xl -z-10"></div>
+						<div class="absolute -bottom-4 left-2 right-2 h-full bg-black/1 dark:bg-black blur-xl rounded-2xl -z-10"></div>
 						<!-- Form -->
 						<div class="relative bg-background rounded-xl shadow-2xl">
 							<ReportForm allowNotes={true} demo={true} />
@@ -110,7 +110,7 @@
 
 		<!-- CTA Section -->
 		<section class="py-10">
-			<div class="bg-primary/5 rounded-2xl p-8 md:p-12 text-center">
+			<div class="bg-neutral-100 dark:bg-neutral-900 rounded-2xl p-8 md:p-12 text-center">
 				<h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
 				<p class="text-muted-foreground max-w-2xl mx-auto mb-8">
 					Experience how effortless integrating a report sytem can be.

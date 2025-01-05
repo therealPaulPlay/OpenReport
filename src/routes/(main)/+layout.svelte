@@ -1,6 +1,9 @@
 <script>
 	import { subscriptionTier } from "$lib/stores/accountStore";
 	import { checkAuthenticationStatus } from "$lib/utils/checkAuthentication";
+	import { Sun, Moon } from "lucide-svelte";
+	import { Button } from "$lib/components/ui/button";
+	import { toggleMode } from "mode-watcher";
 	import { Goal } from "lucide-svelte";
 	import { onMount } from "svelte";
 	import { blur } from "svelte/transition";
@@ -18,13 +21,20 @@
 				<Goal class="h-6 w-6" />
 				<span class="bold max-sm:hidden">OpenReport</span>
 				{#if $subscriptionTier > 0}
-					<span class="rounded-sm text-sm bg-violet-800 px-1 text-white mt-0.5" transition:blur>{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span>
+					<span class="rounded-sm text-sm bg-violet-800 dark:bg-violet-500 px-1 text-white mt-0.5" transition:blur
+						>{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span
+					>
 				{/if}
 			</a>
-			<div class="flex gap-5 mr-5">
-				<a href="/pricing" class="text-muted-foreground transition-colors hover:text-foreground"> Pricing </a>
-				<a href="/dashboard" class="text-muted-foreground transition-colors hover:text-foreground"> Dashboard </a>
-				<a href="/login" class="text-muted-foreground transition-colors hover:text-foreground"> Login </a>
+			<div class="flex gap-5 items-center">
+				<a href="/pricing" class="text-muted-foreground transition-colors hover:text-foreground">Pricing</a>
+				<a href="/dashboard" class="text-muted-foreground transition-colors hover:text-foreground">Dashboard</a>
+				<a href="/login" class="text-muted-foreground transition-colors hover:text-foreground">Login</a>
+				<Button onclick={toggleMode} variant="outline" size="icon">
+					<Sun class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+					<Moon class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+					<span class="sr-only">Toggle theme</span>
+				</Button>
 			</div>
 		</nav>
 	</header>

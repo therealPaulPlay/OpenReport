@@ -77,7 +77,7 @@
 		{#if $userDatabase}
 			<div class="space-y-4">
 				<!-- Info Note -->
-				<div class="flex items-center p-4 bg-gray-100 rounded-md text-sm text-gray-700">
+				<div class="flex items-center p-4 bg-neutral-100 dark:bg-neutral-800 rounded-md text-sm text-neutral-700 dark:text-neutral-200">
 					<Info size={50} class="mr-4" />
 					<p>
 						Your app name must be in lowercase and without spaces. This is required because the app name will be used as

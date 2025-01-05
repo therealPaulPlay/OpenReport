@@ -5,9 +5,9 @@
 	let { title, price, features, highlight = false, tier = 0, onclick } = $props();
 </script>
 
-<div class="p-6 rounded-lg border {highlight ? 'border-violet-800 border-2' : ''} relative">
+<div class="p-6 rounded-lg border {highlight ? 'border-violet-800 dark:border-violet-500 border-2' : ''} relative">
 	{#if highlight}
-		<div class="p-1 px-2 absolute -top-5 h-5 left-2 bg-violet-800 rounded-t-md flex items-center justify-center">
+		<div class="p-1 px-2 absolute -top-5 h-5 left-2 bg-violet-800 dark:bg-violet-500 rounded-t-md flex items-center justify-center">
 			<p class="text-white text-xs">Business choice</p>
 		</div>
 	{/if}

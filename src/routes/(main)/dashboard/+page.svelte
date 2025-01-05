@@ -21,6 +21,7 @@
 	import { toast } from "svelte-sonner";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
 	import { searchQuery } from "$lib/stores/tableStore";
+	import GetEntryDocPopup from "$lib/components/GetEntryDocPopup.svelte";
 
 	// Dashboard state
 	let apps = $state([]);
@@ -81,7 +82,7 @@
 
 {#if !$isAuthenticated}
 	<div
-		class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-[rgba(255,255,255,0.5)] backdrop-blur-md"
+		class="flex justify-center flex-col items-center fixed top-0 bottom-0 left-0 right-0 z-[999] bg-neutral-50/50 dark:bg-neutral-900/50 backdrop-blur-md"
 	>
 		<p class="font-bold text-4xl">You are logged out.</p>
 		<p class="text-base text-muted-foreground mt-5">
@@ -95,13 +96,18 @@
 		<AppCreationPopup {fetchApps} />
 	</div>
 	<p class="text-base font-bold text-muted-foreground mt-5">Your Apps</p>
-	<div class="space-y-2 mt-2 bg-gray-200 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]">
+	<div
+		class="space-y-2 mt-2 bg-neutral-200 dark:bg-neutral-800 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]"
+	>
 		{#each apps as app}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<div
-				class="flex justify-between gap-5 overflow-hidden rounded-md bg-gray-100 p-2 max-w-full w-full transition hover:opacity-75"
+				class="flex justify-between gap-5 overflow-hidden rounded-md p-2 max-w-full w-full transition hover:opacity-75 {app.app_id ==
+				activeApp?.app_id
+					? 'bg-neutral-50 dark:bg-neutral-600'
+					: 'bg-neutral-100/75 dark:bg-neutral-700'}"
 				transition:blur
-				style:background-color={app.app_id == activeApp?.app_id ? "white" : ""}
+				style:background-color={app.app_id == activeApp?.app_id ? "" : ""}
 				role="button"
 				tabindex="0"
 				onclick={() => {
@@ -123,7 +129,9 @@
 
 <div class="flex h-screen w-screen fixed max-h-screen">
 	<!-- Sidebar (Desktop) -->
-	<div class="hidden lg:block bg-gray-100 w-64 p-4 border-r border-gray-200">
+	<div
+		class="hidden lg:block bg-neutral-100 dark:bg-neutral-900 w-64 p-4 border-r border-neutral-200 dark:border-neutral-800"
+	>
 		{@render sidebarContent()}
 	</div>
 
@@ -174,6 +182,7 @@
 							<FormLinkCreator apiKey={activeApp.api_key} />
 						{:else}
 							<AddEntryPopup appId={activeApp.app_id} table={activeTab} />
+							<GetEntryDocPopup appId={activeApp.app_id} table={activeTab} />
 						{/if}
 						<div class="flex items-center space-x-2 lg:ml-auto">
 							<!-- Search Input -->

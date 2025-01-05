@@ -60,7 +60,7 @@
 			<div class="space-y-2 mt-4">
 				<Label>Direct Link</Label>
 				<div class="flex flex-wrap gap-2 items-center">
-					<div class="p-3 bg-muted rounded-md flex text-gray-500">
+					<div class="p-3 bg-muted rounded-md flex text-neutral-500 dark:text-neutral-400">
 						<p class="font-mono text-xs text-break-chars">{currentUrl}</p>
 					</div>
 					<Button variant="secondary" onclick={() => copyToClipboard(currentUrl)}>
@@ -71,7 +71,7 @@
 
 			<div class="space-y-2">
 				<Label>Iframe Code</Label>
-				<div class="p-4 bg-muted rounded-md text-gray-500">
+				<div class="p-4 bg-muted rounded-md text-neutral-500 dark:text-neutral-400">
 					<pre class="font-mono text-xs text-break-chars">{getFormattedCode(currentUrl)}</pre>
 				</div>
 			</div>
