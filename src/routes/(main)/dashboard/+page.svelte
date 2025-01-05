@@ -117,7 +117,7 @@
 				<AppOptions {app} {fetchApps} disabled={app.owner == 0} />
 				<span class="truncate w-full text-center">{app?.app_name || "Unnamed App"}</span>
 				{#if app.owner == 0}
-					<p class="flex items-center text-xs">MOD <UsersRound size={14} class="ml-1" /></p>
+					<p class="flex items-center text-xs">MOD <UsersRound size={14} strokeWidth={2.5} class="ml-1" /></p>
 				{/if}
 			</div>
 		{/each}
