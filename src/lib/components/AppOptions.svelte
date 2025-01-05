@@ -58,7 +58,7 @@
 					email: newModeratorEmail.trim(),
 				}),
 			});
-			toast.success("Moderator added successfully");
+			toast.success("Moderator added successfully.");
 			newModeratorEmail = "";
 			await loadModerators();
 		} catch (error) {
@@ -80,7 +80,7 @@
 					email,
 				}),
 			});
-			toast.success("Moderator removed successfully");
+			toast.success("Moderator removed successfully.");
 			await loadModerators();
 		} catch (error) {
 			toast.error(error.message);
@@ -100,7 +100,7 @@
 					appId: app.app_id,
 				}),
 			});
-			toast.success("App deleted successfully");
+			toast.success("App deleted successfully.");
 			dialogOpen = false;
 			fetchApps();
 		} catch (error) {
@@ -125,7 +125,7 @@
 					blacklistThreshold: blacklistThreshold,
 				}),
 			});
-			toast.success("Thresholds updated successfully");
+			toast.success("Thresholds updated successfully.");
 			fetchApps?.();
 		} catch (error) {
 			toast.error(error.message);
@@ -153,7 +153,7 @@
 					domains: domainArray,
 				}),
 			});
-			toast.success("Domains updated successfully");
+			toast.success("Domains updated successfully.");
 		} catch (error) {
 			toast.error(error.message);
 		}

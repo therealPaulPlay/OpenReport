@@ -74,11 +74,11 @@
 
 <Dialog.Root open={captchaVisible}>
 	<Dialog.Content>
-		<div class="rounded-md bg-white">
-			<h2 class="font-bold mb-4 text-lg">Captcha</h2>
-			<div id="captchaContainer" class="min-h-20" transition:blur>
-				<!-- Captcha will be loaded here -->
-			</div>
+		<Dialog.Header>
+			<Dialog.Title>Captcha</Dialog.Title>
+		</Dialog.Header>
+		<div id="captchaContainer" class="min-h-20" transition:blur>
+			<!-- Captcha will be loaded here -->
 		</div>
 	</Dialog.Content>
 </Dialog.Root>

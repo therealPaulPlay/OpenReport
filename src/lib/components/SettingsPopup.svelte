@@ -25,7 +25,7 @@
 					password: confirmPassword,
 				}),
 			});
-			toast.success("Account deleted successfully");
+			toast.success("Account deleted successfully.");
 			signOut();
 			window.location.reload();
 		} catch (error) {

@@ -35,7 +35,7 @@
 					link,
 				}),
 			});
-			toast.success("Entry created successfully");
+			toast.success("Entry created successfully.");
 			dialogOpen = false;
 			resetForm();
 			fetchTableData(appId, table, true);

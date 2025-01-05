@@ -3,7 +3,7 @@
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Label } from "$lib/components/ui/label";
 	import { Input } from "$lib/components/ui/input";
-	import { Code } from "lucide-svelte";
+	import { Code, FlaskConical } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
 	import { BASE_API_URL } from "$lib/stores/configStore";
@@ -105,7 +105,7 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 				<Label for="key">Your secret key</Label>
 				<div class="flex w-full max-w-sm items-center gap-2 mt-">
 					<Input id="key" readonly={true} value={keyInputValue}></Input>
-					<Button onclick={loadSecretKey}>{showKey ? "Hide" : "Reveal"}</Button>
+					<Button variant="outline" onclick={loadSecretKey}>{showKey ? "Hide" : "Reveal"}</Button>
 				</div>
 			</div>
 			<div>
@@ -117,7 +117,7 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 				<Input id="type" bind:value={exampleType} placeholder="Enter type" />
 			</div>
 			<div>
-				<Button onclick={() => getTestEntry(exampleReferenceId, exampleType)}>Test Request</Button>
+				<Button variant="outline" onclick={() => getTestEntry(exampleReferenceId, exampleType)}><FlaskConical />Test Request</Button>
 			</div>
 			<div>
 				<Label for="codeField">Example Node.js integration</Label>

@@ -8,6 +8,7 @@
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
 	import { BASE_API_URL } from "$lib/stores/configStore";
+	import ExpiryEditPopup from "./ExpiryEditPopup.svelte";
 
 	// Props
 	let { table, appId } = $props();
@@ -49,10 +50,17 @@
 			<Table.Head>Ref. ID</Table.Head>
 			<Table.Head>Type</Table.Head>
 			<Table.Head>Reason</Table.Head>
-			<Table.Head>Notes</Table.Head>
+			{#if table == "reports"}
+				<Table.Head>Notes</Table.Head>
+			{/if}
 			<Table.Head>Link</Table.Head>
 			<Table.Head>Timestamp</Table.Head>
-			<Table.Head>Reporter IP</Table.Head>
+			{#if table == "warnlist" || table == "blacklist"}
+				<Table.Head>Expiry</Table.Head>
+			{/if}
+			{#if table == "reports"}
+				<Table.Head>Reporter IP</Table.Head>
+			{/if}
 			<Table.Head>Actions</Table.Head>
 		</Table.Row>
 	</Table.Header>
@@ -63,26 +71,38 @@
 					<Table.Cell>{item.reference_id}</Table.Cell>
 					<Table.Cell>{item.type}</Table.Cell>
 					<Table.Cell>{item.reason}</Table.Cell>
-					<Table.Cell
-						class="text-ellipsis overflow-hidden max-w-52 text-nowrap cursor-pointer"
-						onclick={() => {
-							expandNotes = true;
-							expandNotesContent = item.notes;
-						}}>{item.notes}</Table.Cell
-					>
+					{#if table == "reports"}
+						<Table.Cell
+							class="text-ellipsis overflow-hidden max-w-52 text-nowrap cursor-pointer"
+							onclick={() => {
+								expandNotes = true;
+								expandNotesContent = item.notes;
+							}}>{item.notes}</Table.Cell
+						>
+					{/if}
 					<Table.Cell><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell>
 					<Table.Cell>{new Date(item.timestamp).toLocaleString()}</Table.Cell>
-					<Table.Cell>{item.reporter_ip}</Table.Cell>
+					{#if table == "warnlist" || table == "blacklist"}
+						<Table.Cell>{item.expires_at ? new Date(item.expires_at).toLocaleString() : "never"}</Table.Cell>
+					{/if}
+					{#if table == "reports"}
+						<Table.Cell>{item.reporter_ip}</Table.Cell>
+					{/if}
 					<Table.Cell>
-						<Button variant="outline" size="sm" onclick={() => deleteEntry(item.id)}>
-							<Trash size={16} />
-						</Button>
+						<div class="space-x-2">
+							{#if table == "warnlist" || table == "blacklist"}
+								<ExpiryEditPopup {appId} {table} entryId={item.id} />
+							{/if}
+							<Button variant="outline" size="sm" onclick={() => deleteEntry(item.id)}>
+								<Trash size={16} />
+							</Button>
+						</div>
 					</Table.Cell>
 				</Table.Row>
 			{/each}
 		{:else}
 			<Table.Row>
-				<Table.Cell colspan="7">No entries available.</Table.Cell>
+				<Table.Cell colspan="3">No entries available.</Table.Cell>
 			</Table.Row>
 		{/if}
 	</Table.Body>

@@ -9,7 +9,11 @@ let lastTable;
 let lastCurrentPage;
 let lastSearchQuery;
 
+let currentlyFetching = false;
+
 export async function fetchTableData(appId, table, refresh) {
+    if (currentlyFetching) return toast.error("Already fetching table data.");
+
     if (lastAppId != appId || lastTable != table || get(currentPage) == lastCurrentPage || lastSearchQuery != get(searchQuery) || refresh) {
         tableData.set([]);
         hasNextPage.set(false);
@@ -20,6 +24,8 @@ export async function fetchTableData(appId, table, refresh) {
     lastTable = table;
     lastCurrentPage = get(currentPage);
     lastSearchQuery = get(searchQuery);
+
+    currentlyFetching = true;
 
     try {
         const response = await fetchWithErrorHandling(`${get(BASE_API_URL)}/report/get-table`, {
@@ -43,7 +49,9 @@ export async function fetchTableData(appId, table, refresh) {
 
         // Check if there are more pages
         hasNextPage.set(newData.length === get(itemsPerPage));
+        currentlyFetching = false;
     } catch (error) {
         toast.error(error.message);
+        currentlyFetching = false;
     }
 }

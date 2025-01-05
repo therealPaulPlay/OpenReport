@@ -38,13 +38,13 @@
 
 			apps = await response.json();
 		} catch (error) {
-			toast.error(error.message);
+			if ($isAuthenticated) toast.error(error.message);
 		}
 	}
 
 	// Load data on mount
 	onMount(() => {
-		if ($isAuthenticated) fetchApps();
+		fetchApps();
 	});
 
 	let activeApp = $state();
@@ -97,7 +97,7 @@
 	</div>
 	<p class="text-base font-bold text-muted-foreground mt-5">Your Apps</p>
 	<div
-		class="space-y-2 mt-2 bg-neutral-200 dark:bg-neutral-800 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)]"
+		class="space-y-2 mt-2 bg-neutral-200 dark:bg-neutral-800 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)] relative"
 	>
 		{#each apps as app}
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -122,7 +122,7 @@
 			</div>
 		{/each}
 		{#if apps.length == 0}
-			<div class="w-full h-full flex items-center justify-center">
+			<div class="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center" transition:blur>
 				<p class="opacity-50 text-sm">No apps yet.</p>
 			</div>
 		{/if}

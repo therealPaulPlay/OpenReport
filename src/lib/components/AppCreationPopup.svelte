@@ -51,7 +51,7 @@
 					domains: domainList,
 				}),
 			});
-			toast.success("Application created successfully");
+			toast.success("Application created successfully.");
 			loading = false;
 			appName = "";
 			domains = "";
