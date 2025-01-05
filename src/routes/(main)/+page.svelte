@@ -35,9 +35,9 @@
 
 <!-- Keywords -->
 <h1 style:display={"none"}>
-	Submit user reports with report forms. Integrate into game websites for free to enable users or players the reporting
-	of others for cheating, spamming, bots or harassment. Handle account bans easily with this open source moderation tool
-	that works with a self hosted database.
+	Submit user reports with report forms that make site moderation simple and open source. Integrate into game websites
+	for free to enable users or players the reporting of others for cheating, spamming, bots or harassment. Handle account
+	bans easily with this open source moderation tool that works with a self hosted database.
 </h1>
 
 <div class="min-h-screen">
@@ -52,8 +52,8 @@
 						Stop bad actors with <span class="text-violet-800 dark:text-violet-500">report forms</span>.
 					</h1>
 					<p class="mt-6 text-lg text-muted-foreground">
-						Open-code reporting system for web games, chat applications, and online communities. Self-host, customize,
-						and maintain control of your data.
+						Open-code reporting and moderation system for websites, online communities or web games. Self-hostable and
+						customizable.
 					</p>
 					<div class="mt-10 ml-1 flex gap-4">
 						{#if !$isAuthenticated}
@@ -78,7 +78,9 @@
 				>
 					<div class="relative">
 						<!-- Shadow overlay -->
-						<div class="absolute -bottom-4 left-2 right-2 h-full bg-black/1 dark:bg-black blur-xl rounded-2xl -z-10"></div>
+						<div
+							class="absolute -bottom-4 left-2 right-2 h-full bg-black/1 dark:bg-black blur-xl rounded-2xl -z-10"
+						></div>
 						<!-- Form -->
 						<div class="relative bg-background rounded-xl shadow-2xl">
 							<ReportForm allowNotes={true} demo={true} />
