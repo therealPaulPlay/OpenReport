@@ -82,5 +82,5 @@
 
 * {
   font-family: Geist, sans-serif;
-  -webkit-font-smoothing: antialiased
+  font-synthesis: none !important;
 }
