@@ -6,8 +6,6 @@
 	import { Code } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
-	import { tableData } from "$lib/stores/tableStore";
-	import { fetchTableData } from "$lib/utils/fetchTableData";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	const { appId, table } = $props();
@@ -42,8 +40,7 @@
 		}
 	}
 
-	let exampleResponse = $state("");
-
+	let exampleResponse = $state("No response.");
 	let exampleType = $state("user");
 	let exampleReferenceId = $state("user-1");
 
@@ -55,10 +52,10 @@ async function getEntry(referenceId, type) {
             appId: ${appId},
             table: "${table}",
             type: type,
-            secret: "${key || "your-app-secret"}",
+            secret: "${showKey ? key || "your-app-secret" : "********************************"}",
             referenceId: referenceId
         });
-        console.log('Entry Data:', response.data);
+        console.log('Entry Data:', response.entry);
     } catch (error) {
         console.error('Error:', error.message);
     }
@@ -67,6 +64,8 @@ async function getEntry(referenceId, type) {
 getEntry("${exampleReferenceId}", "${exampleType}");`);
 
 	async function getTestEntry(referenceId, type) {
+		if (!key || !showKey) return toast.error("Please reveal the key for testing.");
+
 		try {
 			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/report/get-entry`, {
 				method: "PUT",
@@ -83,7 +82,7 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 			});
 
 			const data = await response.json();
-			exampleResponse = data;
+			exampleResponse = JSON.stringify(data, null, 2);
 		} catch (error) {
 			toast.error(error.message);
 		}
@@ -94,12 +93,12 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
 		<Code /><span class="max-sm:hidden">Check via API</span>
 	</Dialog.Trigger>
-	<Dialog.Content>
+	<Dialog.Content class="overflow-auto max-h-[75vh]">
 		<Dialog.Header>
 			<Dialog.Title>Get entry via the API</Dialog.Title>
-			<Dialog.Description
-				>Here's how you can access the API on your server to check for a {table} entry.</Dialog.Description
-			>
+			<Dialog.Description>
+				Here's how you can access the API on your server to check for a {table} entry.
+			</Dialog.Description>
 		</Dialog.Header>
 		<div class="space-y-6">
 			<div>
@@ -110,10 +109,28 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 				</div>
 			</div>
 			<div>
+				<Label for="referenceId">Example Reference ID</Label>
+				<Input id="referenceId" bind:value={exampleReferenceId} placeholder="Enter reference ID" />
+			</div>
+			<div>
+				<Label for="type">Example Type</Label>
+				<Input id="type" bind:value={exampleType} placeholder="Enter type" />
+			</div>
+			<div>
+				<Button onclick={() => getTestEntry(exampleReferenceId, exampleType)}>Test Request</Button>
+			</div>
+			<div>
 				<Label for="codeField">Example Node.js integration</Label>
 				<div class="mt-1">
 					<pre
 						class="text-xs overflow-auto p-4 bg-neutral-800 text-white rounded-lg whitespace-pre-wrap">{@html code}</pre>
+				</div>
+			</div>
+			<div>
+				<Label for="responseField">API Response</Label>
+				<div class="mt-1">
+					<pre
+						class="text-xs overflow-auto p-4 bg-neutral-800 text-white rounded-lg whitespace-pre-wrap">{exampleResponse}</pre>
 				</div>
 			</div>
 		</div>

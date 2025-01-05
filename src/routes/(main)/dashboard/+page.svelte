@@ -16,7 +16,7 @@
 	import { isAuthenticated } from "$lib/stores/accountStore";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { onMount } from "svelte";
-	import { blur, fade } from "svelte/transition";
+	import { blur } from "svelte/transition";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { toast } from "svelte-sonner";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
@@ -121,6 +121,11 @@
 				{/if}
 			</div>
 		{/each}
+		{#if apps.length == 0}
+			<div class="w-full h-full flex items-center justify-center">
+				<p class="opacity-50 text-sm">No apps yet.</p>
+			</div>
+		{/if}
 	</div>
 	<div class="mt-5">
 		<SettingsPopup />
