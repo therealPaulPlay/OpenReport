@@ -234,7 +234,7 @@
 					<div class="p-2 h-full space-y-2">
 						{#if moderators.length > 0}
 							{#each moderators as moderator}
-								<div class="flex items-center justify-between px-2 pr-0 bg-gray-200 rounded-sm">
+								<div class="flex items-center justify-between px-2 pr-0 bg-neutral-100 dark:bg-neutral-800 rounded-sm">
 									<span class="text-sm">{moderator}</span>
 									<Button variant="ghost" size="icon" onclick={() => removeModerator(moderator)}>
 										<X size={16} />
