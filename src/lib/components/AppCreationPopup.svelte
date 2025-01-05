@@ -3,7 +3,7 @@
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Input } from "$lib/components/ui/input";
 	import { Label } from "$lib/components/ui/label";
-	import { Plus, Info } from "lucide-svelte";
+	import { Plus, Info, Loader2 } from "lucide-svelte";
 	import { userDatabase } from "$lib/stores/accountStore";
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -77,7 +77,9 @@
 		{#if $userDatabase}
 			<div class="space-y-4">
 				<!-- Info Note -->
-				<div class="flex items-center p-4 bg-neutral-100 dark:bg-neutral-800 rounded-md text-sm text-neutral-700 dark:text-neutral-200">
+				<div
+					class="flex items-center p-4 bg-neutral-100 dark:bg-neutral-800 rounded-md text-sm text-neutral-700 dark:text-neutral-200"
+				>
 					<Info size={50} class="mr-4" />
 					<p>
 						Your app name must be in lowercase and without spaces. This is required because the app name will be used as
@@ -95,7 +97,9 @@
 				</div>
 			</div>
 			<Dialog.Footer>
-				<Button onclick={handleCreate} disabled={loading}>Create App</Button>
+				<Button onclick={handleCreate} disabled={loading}
+					>{#if loading}<Loader2 class="animate-spin" />{/if}{loading ? "Creating" : "Create App"}</Button
+				>
 			</Dialog.Footer>
 		{:else}
 			<div class="flex flex-wrap space-y-4 justify-start items-center">
