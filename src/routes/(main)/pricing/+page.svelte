@@ -113,45 +113,51 @@
 	<script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
 </svelte:head>
 
-<div class="min-h-screen max-w-screen-xl mx-auto p-4">
-	<section class="text-center py-16">
-		<h1 class="text-4xl font-bold mb-4">Choose Your Plan</h1>
-		<p class="text-muted-foreground mb-8">Pick the plan that suits your needs.</p>
-		<div class="grid gap-8 md:grid-cols-3">
-			<PurchaseTier
-				title="Free"
-				tier={0}
-				price="$0/month"
-				onclick={handleManageSubscription}
-				features={["2,500 monthly reports per app", "Max. 10 moderators per app"]}
-			/>
-			<PurchaseTier
-				title="Plus"
-				tier={1}
-				price="$5/month"
-				onclick={() => handleSubscribe(1)}
-				features={["25,000 monthly reports per app", "Max. 50 moderators per app"]}
-			/>
-			<PurchaseTier
-				title="Professional"
-				tier={2}
-				price="$19/month"
-				onclick={() => handleSubscribe(2)}
-				highlight={true}
-				features={["100,000 monthly reports per app", "Max. 200 moderators per app"]}
-			/>
-		</div>
-		<div class="mt-8">
-			<Button variant="outline" onclick={handleManageSubscription}>Manage Subscription <UserRoundCog /></Button>
-		</div>
-	</section>
+<div class="max-w-screen-xl mx-auto p-4">
+	<div class="min-h-screen">
+		<section class="text-center py-16">
+			<h1 class="text-4xl font-bold mb-4">Choose Your Plan</h1>
+			<p class="text-muted-foreground mb-8">Pick the plan that suits your needs.</p>
+			<div class="grid gap-8 md:grid-cols-3">
+				<PurchaseTier
+					title="Free"
+					tier={0}
+					price="$0/month"
+					onclick={handleManageSubscription}
+					features={["2,500 monthly reports per app", "Max. 10 moderators per app"]}
+				/>
+				<PurchaseTier
+					title="Plus"
+					tier={1}
+					price="$5/month"
+					onclick={() => handleSubscribe(1)}
+					features={["25,000 monthly reports per app", "Max. 50 moderators per app"]}
+				/>
+				<PurchaseTier
+					title="Professional"
+					tier={2}
+					price="$19/month"
+					onclick={() => handleSubscribe(2)}
+					highlight={true}
+					features={["100,000 monthly reports per app", "Max. 200 moderators per app"]}
+				/>
+			</div>
+			<div class="mt-8">
+				<Button variant="outline" onclick={handleManageSubscription}>Manage Subscription <UserRoundCog /></Button>
+			</div>
+		</section>
 
-	<section class="py-8 text-center flex justify-center items-center flex-col bg-neutral-100 dark:bg-neutral-900 rounded-2xl">
-		<h2 class="text-2xl font-bold mb-4">Need More?</h2>
-		<p class="text-muted-foreground mb-8 max-w-xl">
-			We'll figure out the best and cheapest solution for you. Just let us know in case we need to upgrade some servers
-			:^)
-		</p>
-		<Button href="mailto:paulplaystudio@gmail.com">Contact <Mail /></Button>
-	</section>
+		<section
+			class="py-8 text-center flex justify-center items-center flex-col bg-neutral-100 dark:bg-neutral-900 rounded-2xl mb-10"
+		>
+			<h2 class="text-2xl font-bold mb-4">Need More?</h2>
+			<p class="text-muted-foreground mb-8 max-w-xl">
+				We'll figure out the best and cheapest solution for you. Just let us know in case we need to upgrade some
+				servers :^)
+			</p>
+			<Button href="mailto:paulplaystudio@gmail.com">Contact <Mail /></Button>
+		</section>
+	</div>
+
+	<Footer />
 </div>

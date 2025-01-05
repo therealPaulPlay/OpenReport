@@ -49,7 +49,7 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Captions /><span class="max-sm:hidden">Create Form</span>
+		<Captions /><span class="max-md:hidden">Create Form</span>
 	</Dialog.Trigger>
 	<Dialog.Content class="max-w-2xl max-h-[80vh] overflow-y-auto overflow-x-hidden">
 		<Dialog.Header>

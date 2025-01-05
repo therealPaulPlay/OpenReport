@@ -164,16 +164,16 @@
 			<div class="max-lg:mt-12">
 				<Tabs.Root value={activeTab} onValueChange={(value) => (activeTab = value)}>
 					<!-- Tabs and Toolbar -->
-					<div class="flex flex-wrap gap-3">
+					<div class="flex gap-3 overflow-x-auto py-1">
 						<Tabs.List class="w-full flex justify-start max-w-80">
 							<Tabs.Trigger value="reports" class="w-full text-center"
-								>Reports <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Reports</span> <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 							<Tabs.Trigger value="warnlist" class="w-full text-center"
-								>Warnlist <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Warnlist</span> <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 							<Tabs.Trigger value="blacklist" class="w-full text-center"
-								>Blacklist <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Blacklist</span> <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
 							>
 						</Tabs.List>
 						<Button

@@ -21,7 +21,7 @@
 				<Goal class="h-6 w-6" />
 				<span class="bold max-sm:hidden">OpenReport</span>
 				{#if $subscriptionTier > 0}
-					<span class="rounded-sm text-sm bg-violet-800 dark:bg-violet-500 px-1 text-white mt-0.5" transition:blur
+					<span class="rounded-sm text-sm bg-violet-800 dark:bg-violet-500 px-1 text-white mt-0.25" transition:blur
 						>{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span
 					>
 				{/if}

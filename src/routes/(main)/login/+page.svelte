@@ -109,7 +109,7 @@
 	<title>Login</title>
 </svelte:head>
 
-<div class="min-h-screen flex items-center justify-center p-4">
+<div class="min-h-[90vh] flex items-center justify-center p-4">
 	<Card class="w-full max-w-md">
 		<CardHeader>
 			<CardTitle>

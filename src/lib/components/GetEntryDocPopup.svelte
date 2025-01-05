@@ -91,7 +91,7 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Code /><span class="max-sm:hidden">Check via API</span>
+		<Code /><span class="max-md:hidden">Check via API</span>
 	</Dialog.Trigger>
 	<Dialog.Content class="overflow-auto max-h-[75vh]">
 		<Dialog.Header>
