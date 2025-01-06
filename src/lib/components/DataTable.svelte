@@ -54,6 +54,9 @@
 				<Table.Head>Notes</Table.Head>
 			{/if}
 			<Table.Head>Link</Table.Head>
+			{#if table == "warnlist" || table == "blacklist"}
+				<Table.Head>Created by</Table.Head>
+			{/if}
 			<Table.Head>Timestamp</Table.Head>
 			{#if table == "warnlist" || table == "blacklist"}
 				<Table.Head>Expiry</Table.Head>
@@ -81,6 +84,9 @@
 						>
 					{/if}
 					<Table.Cell><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell>
+					{#if table == "warnlist" || table == "blacklist"}
+						<Table.Cell class="text-ellipsis overflow-hidden max-w-28">{item.created_by}</Table.Cell>
+					{/if}
 					<Table.Cell>{new Date(item.timestamp).toLocaleString()}</Table.Cell>
 					{#if table == "warnlist" || table == "blacklist"}
 						<Table.Cell>{item.expires_at ? new Date(item.expires_at).toLocaleString() : "never"}</Table.Cell>
@@ -89,7 +95,7 @@
 						<Table.Cell>{item.reporter_ip}</Table.Cell>
 					{/if}
 					<Table.Cell>
-						<div class="space-x-2">
+						<div class="flex flex-wrap gap-2">
 							{#if table == "warnlist" || table == "blacklist"}
 								<ExpiryEditPopup {appId} {table} entryId={item.id} />
 							{/if}

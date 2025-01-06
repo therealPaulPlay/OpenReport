@@ -77,7 +77,7 @@
 		<Dialog.Header>
 			<Dialog.Title>Captcha</Dialog.Title>
 		</Dialog.Header>
-		<div id="captchaContainer" class="min-h-20" transition:blur>
+		<div id="captchaContainer" class="min-h-20 flex items-center" transition:blur>
 			<!-- Captcha will be loaded here -->
 		</div>
 	</Dialog.Content>

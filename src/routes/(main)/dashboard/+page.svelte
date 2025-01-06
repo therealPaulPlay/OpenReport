@@ -146,7 +146,7 @@
 			<Menu size={24} />
 		</SheetTrigger>
 		<SheetContent side="left" class="lg:hidden w-64 p-4">
-			<div class="max-h-full overflow-auto">
+			<div class="max-h-full overflow-auto mt-14">
 				{@render sidebarContent()}
 			</div>
 		</SheetContent>

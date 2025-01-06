@@ -35,7 +35,7 @@
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger class="{buttonVariants({ variant: 'secondary' })} w-full !bg-neutral-200 hover:!bg-neutral-300 dark:!bg-neutral-800 dark:hover:!bg-neutral-700">
+	<Dialog.Trigger class="{buttonVariants({ variant: 'secondary' })} w-full !bg-neutral-200 hover:!bg-neutral-300 dark:!bg-neutral-800 dark:hover:!bg-neutral-700 !rounded-lg">
 		<span class="icon-wrapper flex items-center gap-3 w-full"><Settings size={20} /> Settings</span>
 	</Dialog.Trigger>
 	<Dialog.Content>
