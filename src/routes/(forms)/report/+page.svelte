@@ -24,7 +24,10 @@
 			link: params.get("link"),
 			allowNotes: params.get("allow-notes") === "false" ? false : true,
 			requireNotes: params.get("require-notes") === "true",
-			reportReasons: params.get("reasons")?.split(","),
+			reportReasons: params
+				.get("reasons")
+				?.split(",")
+				?.filter((reason) => reason.trim() !== ""),
 		};
 	};
 </script>
