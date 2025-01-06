@@ -1,9 +1,10 @@
 <script>
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
+	import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import { Label } from "$lib/components/ui/label";
 	import { Input } from "$lib/components/ui/input";
-	import { Code, FlaskConical } from "lucide-svelte";
+	import { Code, FlaskConical, RefreshCw } from "lucide-svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
 	import { BASE_API_URL } from "$lib/stores/configStore";
@@ -37,6 +38,30 @@
 			}
 		} else {
 			showKey = false;
+		}
+	}
+
+	async function rotateSecretKey() {
+		try {
+			const response = await fetchWithErrorHandling(`${$BASE_API_URL}/app/rotate-secret`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: Number(localStorage.getItem("id")),
+					appId: appId,
+				}),
+			});
+
+			const data = await response.json();
+			secretRotatePopup = false;
+			key = data.secret;
+			showKey = true;
+			toast.success("Secret key rotated successfully");
+		} catch (error) {
+			toast.error(error.message);
 		}
 	}
 
@@ -87,6 +112,8 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 			toast.error(error.message);
 		}
 	}
+
+	let secretRotatePopup = $state(false);
 </script>
 
 <Dialog.Root>
@@ -102,10 +129,30 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 		</Dialog.Header>
 		<div class="space-y-6">
 			<div>
-				<Label for="key">Your secret key</Label>
-				<div class="flex w-full max-w-sm items-center gap-2 mt-">
+				<Label for="key">This app's secret key</Label>
+				<div class="flex w-full max-w-sm items-center gap-2 mt-1">
 					<Input id="key" readonly={true} value={keyInputValue}></Input>
 					<Button variant="outline" onclick={loadSecretKey}>{showKey ? "Hide" : "Reveal"}</Button>
+					<AlertDialog.Root bind:open={secretRotatePopup}>
+						<AlertDialog.Trigger asChild>
+							<Button variant="outline" class="px-2">
+								<RefreshCw class="h-4 w-4" />
+							</Button>
+						</AlertDialog.Trigger>
+						<AlertDialog.Content>
+							<AlertDialog.Header>
+								<AlertDialog.Title>Rotate Secret Key</AlertDialog.Title>
+								<AlertDialog.Description>
+									Are you sure you want to rotate this app's secret key? All existing integrations will need to be
+									updated with the new key.
+								</AlertDialog.Description>
+							</AlertDialog.Header>
+							<AlertDialog.Footer>
+								<AlertDialog.Cancel>Cancel</AlertDialog.Cancel>
+								<AlertDialog.Action onclick={rotateSecretKey}>Continue</AlertDialog.Action>
+							</AlertDialog.Footer>
+						</AlertDialog.Content>
+					</AlertDialog.Root>
 				</div>
 			</div>
 			<div>
@@ -117,7 +164,9 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 				<Input id="type" bind:value={exampleType} placeholder="Enter type" />
 			</div>
 			<div>
-				<Button variant="outline" onclick={() => getTestEntry(exampleReferenceId, exampleType)}><FlaskConical />Test Request</Button>
+				<Button variant="outline" onclick={() => getTestEntry(exampleReferenceId, exampleType)}
+					><FlaskConical />Test Request</Button
+				>
 			</div>
 			<div>
 				<Label for="codeField">Example Node.js integration</Label>
