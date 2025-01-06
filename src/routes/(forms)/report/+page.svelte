@@ -38,7 +38,7 @@
 </svelte:head>
 
 <main class="w-full h-screen flex justify-center items-center p-4">
-	<div class="flex justify-center items-center flex-col w-full">
+	<div class="flex justify-center-safe items-center flex-col w-full">
 		<ReportForm {...getReportParams()} />
 		<p class="opacity-35 mt-3">
 			powered by <a href="https://openreport.dev" target="_blank" class="underline">OpenReport</a>
@@ -60,3 +60,9 @@
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>
+
+<style>
+	.justify-center-safe {
+		justify-content: safe center;
+	}
+</style>
