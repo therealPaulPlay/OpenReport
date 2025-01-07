@@ -36,8 +36,7 @@
 			renderCaptcha("#captchaContainer", window.onReportTurnstile);
 		}
 
-		console.log(window.parent.location);
-		console.log(document.referrer);
+		console.log(document.referrer); // returns correct domain
 	});
 
 	if (typeof window !== "undefined") {
@@ -49,12 +48,17 @@
 			loading = true;
 
 			try {
+				const headers = {
+					"Content-Type": "application/json",
+					"cf-turnstile-response": captchaToken,
+				};
+
+				// Add document.referrer as a custom header if it exists
+				if (document.referrer) headers["x-custom-referrer"] = document.referrer;
+
 				await fetchWithErrorHandling(`${$BASE_API_URL}/report/submit`, {
 					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						"cf-turnstile-response": captchaToken,
-					},
+					headers: headers,
 					body: JSON.stringify({
 						key: apiKey,
 						referenceId,
