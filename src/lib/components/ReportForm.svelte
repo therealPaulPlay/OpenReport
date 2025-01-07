@@ -35,8 +35,6 @@
 		if (captchaVisible) {
 			renderCaptcha("#captchaContainer", window.onReportTurnstile);
 		}
-
-		console.log(document.referrer); // returns correct domain
 	});
 
 	if (typeof window !== "undefined") {
@@ -53,8 +51,15 @@
 					"cf-turnstile-response": captchaToken,
 				};
 
-				// Add document.referrer as a custom header if it exists
-				if (document.referrer) headers["x-custom-referrer"] = document.referrer;
+				// Add document.referrer as a custom header if it exists (more reliable than standard "Referer")
+				if (document.referrer) {
+					try {
+						const referrerHostname = new URL(document.referrer).hostname;
+						headers["x-custom-referrer"] = referrerHostname;
+					} catch (error) {
+						console.warn("Invalid referrer URL", error);
+					}
+				}
 
 				await fetchWithErrorHandling(`${$BASE_API_URL}/report/submit`, {
 					method: "POST",
