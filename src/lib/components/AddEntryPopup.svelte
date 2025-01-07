@@ -7,6 +7,7 @@
 	import { toast } from "svelte-sonner";
 	import { tableData } from "$lib/stores/tableStore";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
+	import { Label } from "$lib/components/ui/label";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 
 	let dialogOpen = $state(false);
@@ -14,7 +15,6 @@
 	let type = $state("");
 	let reason = $state("");
 	let link = $state("");
-
 	const { appId, table } = $props();
 
 	async function handleCreate() {
@@ -66,11 +66,26 @@
 			<Dialog.Description>Manually add an entry to the {table}.</Dialog.Description>
 		</Dialog.Header>
 		<div class="space-y-4">
-			<div class="space-y-2">
-				<Input placeholder="Reference ID" bind:value={referenceId} />
-				<Input placeholder="Type" bind:value={type} />
-				<Input placeholder="Reason" bind:value={reason} />
-				<Input placeholder="Link (optional)" bind:value={link} />
+			<div class="grid gap-4">
+				<div class="grid gap-2">
+					<Label for="reference-id">Reference ID</Label>
+					<Input id="reference-id" placeholder="e.g. user-5" bind:value={referenceId} />
+				</div>
+
+				<div class="grid gap-2">
+					<Label for="type">Type</Label>
+					<Input id="type" placeholder="e.g. user" bind:value={type} />
+				</div>
+
+				<div class="grid gap-2">
+					<Label for="reason">Reason</Label>
+					<Input id="reason" placeholder="e.g. spam" bind:value={reason} />
+				</div>
+
+				<div class="grid gap-2">
+					<Label for="link">Link (Optional)</Label>
+					<Input id="link" placeholder="e.g. https://example.com" bind:value={link} />
+				</div>
 			</div>
 
 			<Button class="w-full" onclick={handleCreate} disabled={!isValid()}>

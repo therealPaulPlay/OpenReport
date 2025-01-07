@@ -8,7 +8,7 @@
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
-	import Label from "./ui/label/label.svelte";
+	import { Label } from "./ui/label";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
 
 	let { appId, table, entryId } = $props();
