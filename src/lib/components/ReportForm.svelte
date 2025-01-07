@@ -35,6 +35,9 @@
 		if (captchaVisible) {
 			renderCaptcha("#captchaContainer", window.onReportTurnstile);
 		}
+
+		console.log(window.parent.location);
+		console.log(document.referrer);
 	});
 
 	if (typeof window !== "undefined") {
