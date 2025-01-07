@@ -52,14 +52,7 @@
 				};
 
 				// Add document.referrer as a custom header if it exists (more reliable than standard "Referer")
-				if (document.referrer) {
-					try {
-						const referrerHostname = new URL(document.referrer).hostname;
-						headers["x-custom-referrer"] = referrerHostname;
-					} catch (error) {
-						console.warn("Invalid referrer URL", error);
-					}
-				}
+				if (document.referrer) headers["x-custom-referrer"] = document.referrer;
 
 				await fetchWithErrorHandling(`${$BASE_API_URL}/report/submit`, {
 					method: "POST",
