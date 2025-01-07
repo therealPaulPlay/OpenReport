@@ -208,7 +208,7 @@
 						<Input
 							id="domains"
 							bind:value={domains}
-							placeholder="new-website.com, localhost:5173"
+							placeholder="new-website.com, localhost"
 							class="mt-2 grow grow-[4] w-fit"
 						/>
 						<Button variant="outline" onclick={updateDomains} class="mt-2 grow max-w-28">Update</Button>

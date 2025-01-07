@@ -93,7 +93,7 @@
 				</div>
 				<div>
 					<Label for="domains">Domains (allowed referrers, comma-separated)</Label>
-					<Input id="domains" bind:value={domains} placeholder="your-website.com, localhost:3000" />
+					<Input id="domains" bind:value={domains} placeholder="your-website.com, localhost" />
 				</div>
 			</div>
 			<Dialog.Footer>
