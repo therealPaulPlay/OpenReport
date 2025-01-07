@@ -4,7 +4,7 @@
 	import { Button } from "$lib/components/ui/button";
 	import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "$lib/components/ui/card";
 	import { Textarea } from "$lib/components/ui/textarea";
-	import { Check } from "lucide-svelte";
+	import { Check, Loader2 } from "lucide-svelte";
 	import { blur, slide } from "svelte/transition";
 	import { toast } from "svelte-sonner";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
@@ -140,7 +140,11 @@
 					captchaVisible = true;
 				}}
 				disabled={loading || (requireNotes && notes.length < 15 && allowNotes)}
-				>{loading ? "Submitting..." : "Submit"}</Button
+			>
+				{#if loading}
+					<Loader2 class="animate-spin" />
+				{/if}
+				{loading ? "Submitting..." : "Submit"}</Button
 			>
 		{/if}
 	</CardFooter>
