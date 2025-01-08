@@ -7,7 +7,7 @@
 		<h1 class="text-4xl font-bold mb-8">Terms of Use</h1>
 
 		<div class="max-w-none">
-			<p class="text-muted-foreground mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+			<p class="text-muted-foreground mb-6">Last updated: Jan. 8th, 2025</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">1. Acceptance of Terms</h2>
 			<p>

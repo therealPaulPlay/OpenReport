@@ -7,7 +7,7 @@
 		<h1 class="text-4xl font-bold mb-8">Privacy Policy</h1>
 
 		<div class="prose prose-slate max-w-none">
-			<p class="text-muted-foreground mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+			<p class="text-muted-foreground mb-6">Last updated: Jan. 8th, 2025</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
 			<p>
@@ -25,7 +25,11 @@
 			</p>
 
 			<p class="mt-4">2.2. Website Usage</p>
-			<p>When you visit our website or use our services, we may collect standard technical information such as:</p>
+			<p>
+				When you visit our website or use our services, we may collect standard technical information. Moderators,
+				website owners and authorized 3rd parties may access this data. This information includes, but is not limited
+				to:
+			</p>
 			<ul class="list-disc pl-6 mb-4">
 				<li>IP addresses</li>
 				<li>Browser type and version</li>
