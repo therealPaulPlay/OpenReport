@@ -67,22 +67,22 @@
 		</Dialog.Header>
 		<div class="space-y-4">
 			<div class="grid gap-4">
-				<div class="grid gap-2">
+				<div class="space-y-1">
 					<Label for="reference-id">Reference ID</Label>
 					<Input id="reference-id" placeholder="e.g. user-5" bind:value={referenceId} />
 				</div>
 
-				<div class="grid gap-2">
+				<div class="space-y-1">
 					<Label for="type">Type</Label>
 					<Input id="type" placeholder="e.g. user" bind:value={type} />
 				</div>
 
-				<div class="grid gap-2">
+				<div class="space-y-1">
 					<Label for="reason">Reason</Label>
 					<Input id="reason" placeholder="e.g. spam" bind:value={reason} />
 				</div>
 
-				<div class="grid gap-2">
+				<div class="space-y-1">
 					<Label for="link">Link (Optional)</Label>
 					<Input id="link" placeholder="e.g. https://example.com" bind:value={link} />
 				</div>

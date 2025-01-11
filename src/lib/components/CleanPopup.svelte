@@ -8,8 +8,10 @@
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { fetchTableData } from "$lib/utils/fetchTableData";
+	import AutoCleanupPopup from "./AutoCleanupPopup.svelte";
+	import Label from "./ui/label/label.svelte";
 
-	let { appId, table } = $props();
+	let { appId, table, isOwner } = $props();
 
 	let days = $state(7);
 
@@ -73,7 +75,7 @@
 		<div class="space-y-4">
 			<div class="flex flex-col space-y-2">
 				<!-- svelte-ignore a11y_label_has_associated_control -->
-				<label class="text-sm font-medium">Delete entries older than:</label>
+				<Label for="deletion">Delete entries older than:</Label>
 				<div class="flex items-center space-x-2">
 					<Button variant="outline" size="icon" class="h-8 w-8" onclick={decrementDays} disabled={days <= 1}>
 						<Minus class="h-4 w-4" />
@@ -116,6 +118,12 @@
 					</AlertDialog.Footer>
 				</AlertDialog.Content>
 			</AlertDialog.Root>
+			<div
+				class="flex flex-col space-y-2 {table != 'reports' || isOwner == false ? 'pointer-events-none opacity-50' : ''}"
+			>
+				<Label class="!mt-6" for="Auto Cleanup">Automatic report cleanup:</Label>
+				<AutoCleanupPopup {appId} {isOwner} />
+			</div>
 		</div>
 	</Dialog.Content>
 </Dialog.Root>

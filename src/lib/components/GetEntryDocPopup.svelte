@@ -155,11 +155,11 @@ getEntry("${exampleReferenceId}", "${exampleType}");`);
 					</AlertDialog.Root>
 				</div>
 			</div>
-			<div>
+			<div class="space-y-1">
 				<Label for="referenceId">Example Reference ID</Label>
 				<Input id="referenceId" bind:value={exampleReferenceId} placeholder="Enter reference ID" />
 			</div>
-			<div>
+			<div class="space-y-1">
 				<Label for="type">Example Type</Label>
 				<Input id="type" bind:value={exampleType} placeholder="Enter type" />
 			</div>

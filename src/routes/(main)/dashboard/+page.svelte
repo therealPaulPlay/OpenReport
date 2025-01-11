@@ -182,7 +182,7 @@
 								fetchTableData(activeApp.app_id, activeTab, true);
 							}}><RefreshCcw /></Button
 						>
-						<CleanPopup table={activeTab} appId={activeApp.app_id} />
+						<CleanPopup table={activeTab} appId={activeApp.app_id} isOwner={activeApp.owner == 1} />
 						{#if activeTab == "reports"}
 							<FormLinkCreator apiKey={activeApp.api_key} />
 						{:else}

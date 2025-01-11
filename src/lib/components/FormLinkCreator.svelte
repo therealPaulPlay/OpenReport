@@ -83,7 +83,7 @@
 						<div>
 							<Tooltip.Provider>
 								<Tooltip.Root>
-									<Tooltip.Trigger class="text-left">
+									<Tooltip.Trigger class="text-left space-y-1">
 										<Label for="type">Type</Label>
 										<Input id="type" bind:value={type} placeholder="e.g. comment" />
 									</Tooltip.Trigger>
@@ -98,7 +98,7 @@
 						<div>
 							<Tooltip.Provider>
 								<Tooltip.Root>
-									<Tooltip.Trigger class="text-left">
+									<Tooltip.Trigger class="text-left space-y-1">
 										<Label for="reference">Reference ID</Label>
 										<Input id="reference" bind:value={referenceId} placeholder="e.g. comment-33295" />
 									</Tooltip.Trigger>
@@ -110,7 +110,7 @@
 								</Tooltip.Root>
 							</Tooltip.Provider>
 						</div>
-						<div>
+						<div class="space-y-1">
 							<Label for="apiKey">Public API Key</Label>
 							<Input id="apiKey" value={apiKey} disabled class="bg-muted" />
 						</div>
@@ -123,7 +123,7 @@
 						<div>
 							<Tooltip.Provider>
 								<Tooltip.Root>
-									<Tooltip.Trigger class="text-left">
+									<Tooltip.Trigger class="text-left space-y-1">
 										<Label for="link">Link</Label>
 										<Input id="link" bind:value={link} placeholder="e.g. https://site.com/?comment=33295" />
 									</Tooltip.Trigger>
@@ -135,7 +135,7 @@
 								</Tooltip.Root>
 							</Tooltip.Provider>
 						</div>
-						<div>
+						<div class="space-y-1">
 							<Label for="reasons">Reasons (comma-separated)</Label>
 							<Input id="reasons" bind:value={reasons} placeholder="Spam, Cheating, Harassment" />
 						</div>

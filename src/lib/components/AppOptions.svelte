@@ -196,23 +196,21 @@
 			<div>
 				<Label for="monthlyReports">Monthly report limit</Label>
 				<p class="text-sm text-muted-foreground mt-1" id="monthlyReports">
-					You have used {app.monthly_report_count?.toLocaleString()} of your {$reportLimit.toLocaleString()} monthly
-					reports for this app.
+					You have used {app.monthly_report_count?.toLocaleString()} of your {$reportLimit.toLocaleString()} monthly reports
+					for this app.
 				</p>
 				<Progress value={Number(app.monthly_report_count)} max={$reportLimit} class="w-[60%] mt-2" />
 			</div>
-			<div class="space-y-2">
-				<div>
-					<Label for="domains">Update allowed domains (comma-separated)</Label>
-					<div class="flex flex-wrap items-center gap-2">
-						<Input
-							id="domains"
-							bind:value={domains}
-							placeholder="new-website.com, localhost"
-							class="mt-2 grow grow-[4] w-fit"
-						/>
-						<Button variant="outline" onclick={updateDomains} class="mt-2 grow max-w-28">Update</Button>
-					</div>
+			<div class="space-y-1">
+				<Label for="domains">Update allowed domains (comma-separated)</Label>
+				<div class="flex flex-wrap items-center gap-2">
+					<Input
+						id="domains"
+						bind:value={domains}
+						placeholder="new-website.com, localhost"
+						class="grow grow-[4] w-fit"
+					/>
+					<Button variant="outline" onclick={updateDomains} class="grow max-w-28">Update</Button>
 				</div>
 			</div>
 			<div class="space-y-2">
@@ -260,7 +258,7 @@
 				</div>
 
 				<div class="grid grid-cols-2 gap-4">
-					<div class="space-y-2">
+					<div class="space-y-1">
 						<Label for="warnlistInput">Warnlist Threshold</Label>
 						<Input
 							type="number"
@@ -274,7 +272,7 @@
 						/>
 					</div>
 
-					<div class="space-y-2">
+					<div class="space-y-1">
 						<Label for="blacklistInput">Blacklist Threshold</Label>
 						<Input
 							type="number"
