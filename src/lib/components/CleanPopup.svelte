@@ -121,7 +121,7 @@
 			<div
 				class="flex flex-col space-y-2 {table != 'reports' || isOwner == false ? 'pointer-events-none opacity-50' : ''}"
 			>
-				<Label class="!mt-6" for="Auto Cleanup">Automatic report cleanup:</Label>
+				<Label class="!mt-6" for="Auto Cleanup">Auto-Cleanup</Label>
 				<AutoCleanupPopup {appId} {isOwner} />
 			</div>
 		</div>
