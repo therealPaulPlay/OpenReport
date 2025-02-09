@@ -83,7 +83,9 @@
 							}}>{item.notes}</Table.Cell
 						>
 					{/if}
-					<Table.Cell><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell>
+					<Table.Cell class="max-w-60 overflow-hidden truncate text-nowrap"
+						><a href={item.link} target="_blank" class="hover:underline">{item.link}</a></Table.Cell
+					>
 					{#if table == "warnlist" || table == "blacklist"}
 						<Table.Cell class="text-ellipsis overflow-hidden max-w-28">{item.created_by}</Table.Cell>
 					{/if}
