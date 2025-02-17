@@ -73,27 +73,19 @@
 			<!-- Form Container with 3D Effect -->
 			<div class="w-full lg:w-1/2 flex items-center justify-center lg:justify-end p-4">
 				<div
-					class="w-full max-w-md transform perspective-1000"
+					class="w-full max-w-md transform perspective-1000 bg-background rounded-xl shadow-2xl"
 					style="transform: perspective(1000px) rotateX(2deg) rotateY(-5deg);"
 				>
-					<div class="relative">
-						<!-- Shadow overlay -->
-						<div
-							class="absolute -bottom-4 left-2 right-2 h-full bg-black/1 dark:bg-black blur-xl rounded-2xl -z-10"
-						></div>
-						<!-- Form -->
-						<div class="relative bg-background rounded-xl shadow-2xl">
-							<ReportForm allowNotes={true} demo={true} />
-						</div>
-					</div>
+					<!-- Form -->
+					<ReportForm allowNotes={true} demo={true} />
 				</div>
 			</div>
 		</section>
 
 		<!-- Features Section -->
-		<section class="py-20">
+		<section class="py-20 pb-12">
 			<div class="text-center mb-16">
-				<h2 class="text-3xl font-bold mb-4">Everything you need to manage reports</h2>
+				<h2 class="text-3xl font-bold mb-4">Everything you need to manage reports.</h2>
 				<p class="text-muted-foreground max-w-2xl mx-auto">
 					Simple integration, powerful features, complete control over your data.
 				</p>
@@ -107,6 +99,25 @@
 						<p class="text-muted-foreground">{feature.description}</p>
 					</div>
 				{/each}
+			</div>
+		</section>
+
+		<!-- Dashboard Container -->
+		<section class="w-full flex flex-col lg:flex-row gap-8 items-center justify-center my-20 max-md:mt-6">
+			<div class="w-full lg:w-2/5 mr-auto p-4">
+				<h2 class="text-3xl font-bold mt-2">A powerful dashboard.</h2>
+				<p class="mt-4 text-lg text-muted-foreground">
+					Create forms, explore automations, invite moderators and learn to use the API via our clean dashboard.
+				</p>
+				<p class="mt-4 text-lg text-muted-foreground">
+					OpenReport prevents misuse by censoring profanity, limiting moderator's actions, ban and
+					warning expirations & site restrictions.
+				</p>
+			</div>
+			<div class="w-full lg:w-3/5 flex items-center justify-center lg:justify-end p-4">
+				<div class="w-full h-full">
+					<img alt="dashboard example" src="/images/dashboard.png" class="w-full h-full rounded-xl shadow-xl" />
+				</div>
 			</div>
 		</section>
 
