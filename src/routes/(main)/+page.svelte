@@ -110,8 +110,7 @@
 					Create forms, explore automations, invite moderators and learn to use the API via our clean dashboard.
 				</p>
 				<p class="mt-4 text-lg text-muted-foreground">
-					OpenReport prevents misuse by censoring profanity, limiting moderator's actions, ban and
-					warning expirations & site restrictions.
+					OpenReport prevents misuse by censoring profanity, limiting moderator's actions & enforcing site restrictions.
 				</p>
 			</div>
 			<div class="w-full lg:w-3/5 flex items-center justify-center lg:justify-end p-4">
