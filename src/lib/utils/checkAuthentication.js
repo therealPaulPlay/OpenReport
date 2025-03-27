@@ -3,6 +3,7 @@ import { fetchWithErrorHandling } from "./fetchWithErrorHandling";
 import { BASE_API_URL } from "$lib/stores/configStore";
 import { get } from "svelte/store";
 import { toast } from "svelte-sonner";
+import { goto } from "$app/navigation";
 
 export async function getUser() {
     try {
@@ -43,7 +44,7 @@ export async function checkAuthenticationStatus() {
         // Load basic details
         const data = await getUser();
     } else {
-        isAuthenticated.set(false);
+        signOut();
     }
 }
 
