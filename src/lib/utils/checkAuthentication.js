@@ -29,7 +29,6 @@ export async function getUser() {
         return data;
     } catch (error) {
         console.error("Error occurred while fetching the user: ", error);
-        error = error;
     }
 };
 
