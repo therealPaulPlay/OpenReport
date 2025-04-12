@@ -92,7 +92,7 @@
 			</div>
 
 			<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{#each [{ icon: Database, title: "Your Database", description: "Bring your own database and keep full control over your data." }, { icon: Shield, title: "Secure By Design", description: "Built with security best practices. Your data stays on your db." }, { icon: LayoutDashboard, title: "Advanced Dashboard", description: "Manage reports with a beautiful dashboard. Invite mods for collaboration." }, { icon: Code2, title: "Easy Integration", description: "Simple API and form site. Integrate in minutes, not days." }, { icon: Settings2, title: "Customizable", description: "Custom fields, automated warnings and bans, and more." }, { icon: Blocks, title: "Multiple Apps", description: "Manage reports from multiple applications in one central dashboard." }] as feature}
+				{#each [{ icon: Database, title: "Your database", description: "Bring your own database and keep full control over your data." }, { icon: Shield, title: "Secure by design", description: "Built with security best practices. Your data stays on your db." }, { icon: LayoutDashboard, title: "Advanced dashboard", description: "Manage reports with a beautiful dashboard. Invite mods for collaboration." }, { icon: Code2, title: "Easy integration", description: "Simple API and form site. Integrate in minutes, not days." }, { icon: Settings2, title: "Customizable", description: "Custom fields, automated warnings and bans, and more." }, { icon: Blocks, title: "Multiple apps", description: "Manage reports from multiple applications in one central dashboard." }] as feature}
 					<div class="flex flex-col items-center text-center p-6 rounded-lg border bg-card">
 						<feature.icon class="w-12 h-12 mb-4 text-primary" />
 						<h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -128,7 +128,7 @@
 					Experience how effortless integrating a report sytem can be.
 				</p>
 				<div class="flex flex-wrap gap-4 justify-center">
-					<Button href="/login?signup=true">Get Started for Free</Button>
+					<Button href="/login?signup=true">Get started for free</Button>
 					<GithubReposView />
 				</div>
 			</div>
@@ -153,7 +153,7 @@
 				onclick={() => {
 					showSuccessDialog = false;
 					goto("/dashboard");
-				}}>Open Dashboard</Button
+				}}>Open dashboard</Button
 			>
 		</Dialog.Footer>
 	</Dialog.Content>

@@ -71,7 +71,7 @@
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>Create an Application</Dialog.Title>
+			<Dialog.Title>Create an application</Dialog.Title>
 			<Dialog.Description>Fill in the details below to create your application.</Dialog.Description>
 		</Dialog.Header>
 		{#if $userDatabase}
@@ -88,7 +88,7 @@
 				</div>
 
 				<div>
-					<Label for="appName">App Name</Label>
+					<Label for="appName">App name</Label>
 					<Input id="appName" bind:value={appName} placeholder="your_app_name" />
 				</div>
 				<div>

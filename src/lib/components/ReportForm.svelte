@@ -91,7 +91,7 @@
 <Card class="w-full max-w-md mx-auto">
 	<CardHeader>
 		{#if !submitted}
-			<CardTitle>Submit Report</CardTitle>
+			<CardTitle>Report</CardTitle>
 		{/if}
 	</CardHeader>
 
@@ -108,7 +108,8 @@
 
 			{#if allowNotes}
 				<div class="space-y-2">
-					<label for="notes" class="text-sm font-medium">{requireNotes ? "Notes (required)" : "Optional Notes"}</label>
+					<label for="notes" class="text-sm font-medium">{requireNotes ? "Notes (required)" : "Notes (optional)"}</label
+					>
 					<Textarea id="notes" bind:value={notes} placeholder="Add additional details..." rows="4" />
 				</div>
 				{#if requireNotes && notes.length < 15 && notes.length >= 1}

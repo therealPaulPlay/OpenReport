@@ -48,7 +48,7 @@
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-		<Database size={16} class="mr-2" />Database Config
+		<Database size={16} class="mr-2" />Database config
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
@@ -79,7 +79,7 @@
 			<Input placeholder="Name of your database" id="name" bind:value={dbConfig.database} />
 		</div>
 		<Dialog.Footer>
-			<Button onclick={handleSubmit}>Test & Save</Button>
+			<Button onclick={handleSubmit}>Test & save</Button>
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>

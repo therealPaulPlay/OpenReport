@@ -51,7 +51,7 @@
 			<p class="text-sm text-muted-foreground">Account - {$username}</p>
 			<div class="flex flex-wrap gap-3 !mt-1">
 				<Button variant="outline" onclick={() => goto("/login?reset=true")}
-					><Lock size={16} class="mr-2" />Change Password</Button
+					><Lock size={16} class="mr-2" />Change password</Button
 				>
 				<Button
 					variant="outline"
@@ -62,11 +62,11 @@
 				>
 				<Dialog.Root>
 					<Dialog.Trigger class={buttonVariants({ variant: "outline" })}>
-						<Trash size={16} class="mr-2" />Delete Account
+						<Trash size={16} class="mr-2" />Delete account
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Header>
-							<Dialog.Title>Confirm Account Deletion</Dialog.Title>
+							<Dialog.Title>Confirm account deletion</Dialog.Title>
 							<Dialog.Description>Enter your password to confirm account deletion.</Dialog.Description>
 						</Dialog.Header>
 						<Input type="password" placeholder="Password" bind:value={confirmPassword} />
@@ -76,7 +76,7 @@
 								onclick={() => {
 									if (confirmPassword) deleteAccount();
 								}}
-								disabled={!confirmPassword}>Delete Account</Button
+								disabled={!confirmPassword}>Delete account</Button
 							>
 						</Dialog.Footer>
 					</Dialog.Content>

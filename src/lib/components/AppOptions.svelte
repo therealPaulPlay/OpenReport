@@ -250,7 +250,7 @@
 
 			<div class="space-y-2">
 				<div>
-					<Label>Default Report Thresholds</Label>
+					<Label>Default report thresholds</Label>
 					<p class="text-sm text-muted-foreground mt-1">
 						Current: Warnlist after {app.warnlist_threshold || "UNSET"} reports, Blacklist after {app.blacklist_threshold ||
 							"UNSET"} reports
@@ -259,7 +259,7 @@
 
 				<div class="grid grid-cols-2 gap-4">
 					<div class="space-y-1">
-						<Label for="warnlistInput">Warnlist Threshold</Label>
+						<Label for="warnlistInput">Warnlist threshold</Label>
 						<Input
 							type="number"
 							id="warnlistInput"
@@ -273,7 +273,7 @@
 					</div>
 
 					<div class="space-y-1">
-						<Label for="blacklistInput">Blacklist Threshold</Label>
+						<Label for="blacklistInput">Blacklist threshold</Label>
 						<Input
 							type="number"
 							id="blacklistInput"

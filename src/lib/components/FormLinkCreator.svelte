@@ -49,16 +49,16 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class={buttonVariants({ variant: "secondary" })}>
-		<Captions /><span class="max-md:hidden">Create Form</span>
+		<Captions /><span class="max-md:hidden">Create form</span>
 	</Dialog.Trigger>
 	<Dialog.Content class="max-w-2xl max-h-[80vh] overflow-y-auto overflow-x-hidden">
 		<Dialog.Header>
-			<Dialog.Title>Form Link Creator</Dialog.Title>
+			<Dialog.Title>Form link creator</Dialog.Title>
 		</Dialog.Header>
 
 		<div class="space-y-6">
 			<div class="space-y-2 mt-4">
-				<Label>Direct Link</Label>
+				<Label>Direct link</Label>
 				<div class="flex flex-wrap gap-2 items-center">
 					<div class="p-3 bg-muted rounded-md flex text-neutral-500 dark:text-neutral-400">
 						<p class="font-mono text-xs text-break-chars">{currentUrl}</p>
@@ -70,7 +70,7 @@
 			</div>
 
 			<div class="space-y-2">
-				<Label>Iframe Code</Label>
+				<Label>Iframe code</Label>
 				<div class="p-4 bg-muted rounded-md text-neutral-500 dark:text-neutral-400">
 					<pre class="font-mono text-xs text-break-chars">{getFormattedCode(currentUrl)}</pre>
 				</div>
@@ -78,7 +78,7 @@
 
 			<div class="grid gap-4">
 				<div class="space-y-2 border-y py-5">
-					<Label>Required Parameters</Label>
+					<Label>Required parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>
@@ -111,14 +111,14 @@
 							</Tooltip.Provider>
 						</div>
 						<div class="space-y-1">
-							<Label for="apiKey">Public API Key</Label>
+							<Label for="apiKey">Public API key</Label>
 							<Input id="apiKey" value={apiKey} disabled class="bg-muted" />
 						</div>
 					</div>
 				</div>
 
 				<div class="space-y-2 border-b pb-5">
-					<Label>Optional Parameters</Label>
+					<Label>Optional parameters</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>
@@ -141,11 +141,11 @@
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox type="checkbox" id="allowNotes" bind:checked={allowNotes} />
-							<Label for="allowNotes">Allow Notes</Label>
+							<Label for="allowNotes">Allow notes</Label>
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox id="requireNotes" bind:checked={requireNotes} />
-							<Label for="requireNotes">Require Notes</Label>
+							<Label for="requireNotes">Require notes</Label>
 						</div>
 					</div>
 				</div>
