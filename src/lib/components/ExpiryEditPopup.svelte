@@ -93,15 +93,15 @@
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>Set Expiry</Dialog.Title>
+			<Dialog.Title>Set expiry</Dialog.Title>
 			<Dialog.Description>Choose an expiry duration in days from now or set to never expire.</Dialog.Description>
 		</Dialog.Header>
 
 		<!-- Tabs for switching between Entry and Global -->
 		<Tabs bind:value={activeTab}>
 			<TabsList>
-				<TabsTrigger value="entry">Entry Specific</TabsTrigger>
-				<TabsTrigger value="global">Global Default</TabsTrigger>
+				<TabsTrigger value="entry">Entry specific</TabsTrigger>
+				<TabsTrigger value="global">Global default</TabsTrigger>
 			</TabsList>
 
 			<!-- Entry Specific Tab -->
@@ -162,7 +162,7 @@
 		</Tabs>
 
 		<AlertDialog.Root bind:open={confirmOpen}>
-			<AlertDialog.Trigger class={buttonVariants({ variant: "outline" })}><Save />Save Expiry</AlertDialog.Trigger>
+			<AlertDialog.Trigger class={buttonVariants({ variant: "outline" })}><Save />Save expiry</AlertDialog.Trigger>
 			<AlertDialog.Content>
 				<AlertDialog.Header>
 					<AlertDialog.Title>Are you sure?</AlertDialog.Title>
