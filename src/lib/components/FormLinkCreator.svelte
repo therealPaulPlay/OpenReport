@@ -23,7 +23,7 @@
 		if (referenceId) params.set("reference-id", referenceId);
 		params.set("key", apiKey);
 		if (link) params.set("link", link);
-		if (reasons) params.set("reasons", reasons);
+		if (reasons) params.set("reasons", reasons.replaceAll(", ", ","));
 		if (!allowNotes) params.set("allow-notes", "false");
 		if (requireNotes) params.set("require-notes", "true");
 
