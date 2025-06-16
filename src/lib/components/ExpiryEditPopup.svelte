@@ -99,7 +99,7 @@
 
 		<!-- Tabs for switching between Entry and Global -->
 		<Tabs bind:value={activeTab}>
-			<TabsList>
+			<TabsList class="mb-4">
 				<TabsTrigger value="entry">Entry specific</TabsTrigger>
 				<TabsTrigger value="global">Global default</TabsTrigger>
 			</TabsList>

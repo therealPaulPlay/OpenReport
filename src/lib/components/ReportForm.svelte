@@ -107,10 +107,10 @@
 			</RadioGroup>
 
 			{#if allowNotes}
-				<div class="space-y-2">
+				<div>
 					<label for="notes" class="text-sm font-medium">{requireNotes ? "Notes (required)" : "Notes (optional)"}</label
 					>
-					<Textarea id="notes" bind:value={notes} placeholder="Add additional details..." rows="4" />
+					<Textarea id="notes" bind:value={notes} class="mt-2" placeholder="Add additional details..." rows="4" />
 				</div>
 				{#if requireNotes && notes.length < 15 && notes.length >= 1}
 					<p class="text-sm" transition:slide>Answer too short.</p>

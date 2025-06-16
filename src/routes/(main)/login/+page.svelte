@@ -167,7 +167,7 @@
 				{/if}
 			</CardContent>
 
-			<CardFooter class="flex flex-col space-y-4">
+			<CardFooter class="flex flex-col space-y-4 mt-6">
 				<Button type="submit" class="w-full" disabled={loading}>
 					{#if loading}
 						Please wait...
@@ -186,7 +186,7 @@
 					<div class="flex flex-col items-center gap-2 text-sm">
 						<button
 							type="button"
-							class="text-muted-foreground hover:text-primary"
+							class="text-muted-foreground transition hover:text-primary"
 							onclick={() => {
 								resetForm();
 								currentView = "reset";
@@ -196,7 +196,7 @@
 						</button>
 						<button
 							type="button"
-							class="text-muted-foreground hover:text-primary"
+							class="text-muted-foreground transition hover:text-primary"
 							onclick={() => {
 								resetForm();
 								currentView = "signup";
@@ -208,7 +208,7 @@
 				{:else if currentView !== "set-new-password"}
 					<button
 						type="button"
-						class="text-sm text-muted-foreground hover:text-primary"
+						class="text-sm text-muted-foreground transition hover:text-primary"
 						onclick={() => {
 							resetForm();
 							currentView = "login";

@@ -141,11 +141,11 @@
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox type="checkbox" id="allowNotes" bind:checked={allowNotes} />
-							<Label for="allowNotes">Allow notes</Label>
+							<Label for="allowNotes" class="mb-0">Allow notes</Label>
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox id="requireNotes" bind:checked={requireNotes} />
-							<Label for="requireNotes">Require notes</Label>
+							<Label for="requireNotes" class="mb-0">Require notes</Label>
 						</div>
 					</div>
 				</div>
