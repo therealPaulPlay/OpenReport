@@ -78,7 +78,7 @@
 
 			<div class="grid gap-4">
 				<div class="space-y-2 border-y py-5">
-					<Label>Required parameters</Label>
+					<Label class="mb-6 text-muted-foreground">Required</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>
@@ -118,7 +118,7 @@
 				</div>
 
 				<div class="space-y-2 border-b pb-5">
-					<Label>Optional parameters</Label>
+					<Label class="mb-6 text-muted-foreground">Optional</Label>
 					<div class="grid gap-4 sm:grid-cols-2">
 						<div>
 							<Tooltip.Provider>

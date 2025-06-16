@@ -7,8 +7,8 @@
 				>
 			</div>
 			<nav class="flex gap-6">
-				<a href="/terms" class="text-sm text-muted-foreground hover:text-primary"> Terms of Use </a>
-				<a href="/privacy" class="text-sm text-muted-foreground hover:text-primary"> Privacy Policy </a>
+				<a href="/terms" class="text-sm text-muted-foreground hover:text-primary transition-colors"> Terms of Use </a>
+				<a href="/privacy" class="text-sm text-muted-foreground hover:text-primary transition-colors"> Privacy Policy </a>
 				<a
 					href="https://paulplay.studio/imprint"
 					target="_blank"
