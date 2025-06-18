@@ -151,7 +151,7 @@
 			class="py-8 text-center flex justify-center items-center flex-col bg-neutral-100 dark:bg-neutral-900 rounded-2xl mb-10"
 		>
 			<h2 class="text-2xl font-bold mb-4">Need more?</h2>
-			<p class="text-muted-foreground mb-8 max-w-xl">
+			<p class="text-muted-foreground mb-8 max-w-xl px-8">
 				We'll figure out the best and cheapest solution for you. Just let us know in case we need to upgrade some
 				servers :^)
 			</p>
