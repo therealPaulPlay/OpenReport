@@ -11,9 +11,6 @@ export async function fetchWithErrorHandling(url, options) {
 
         return response;
     } catch (error) {
-        if (error instanceof TypeError && error.message === "Failed to fetch") {
-            throw new Error("Network error. Please check your connection & the server status.");
-        }
         throw error;
     }
 }
