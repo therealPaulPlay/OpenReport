@@ -2,7 +2,7 @@
 	import PurchaseTier from "$lib/components/PurchaseTier.svelte";
 	import { Button } from "$lib/components/ui/button";
 	import { Mail, UserRoundCog } from "lucide-svelte";
-	import { STRIPE_PUBLIC_KEY, BASE_API_URL } from "$lib/stores/configStore";
+	import { BASE_API_URL } from "$lib/stores/configStore";
 	import { onMount } from "svelte";
 	import { fetchWithErrorHandling } from "$lib/utils/fetchWithErrorHandling";
 	import { toast } from "svelte-sonner";
@@ -10,7 +10,6 @@
 	import { goto } from "$app/navigation";
 	import Footer from "$lib/components/Footer.svelte";
 
-	let stripe;
 	let loadingTier = null;
 
 	// Lookup keys for each subscription tier
@@ -18,22 +17,6 @@
 		1: "openreport_standard_monthly_plus",
 		2: "openreport_standard_monthly_professional",
 	};
-
-	function loadStripe() {
-		return new Promise((resolve) => {
-			if (window.Stripe) {
-				resolve(window.Stripe($STRIPE_PUBLIC_KEY));
-			} else {
-				document.querySelector("#stripe-js").addEventListener("load", () => {
-					resolve(window.Stripe($STRIPE_PUBLIC_KEY));
-				});
-			}
-		});
-	}
-
-	onMount(async () => {
-		stripe = await loadStripe();
-	});
 
 	async function handleSubscribe(tier) {
 		if (!$isAuthenticated) {
@@ -110,7 +93,6 @@
 
 <svelte:head>
 	<title>Pricing</title>
-	<script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
 </svelte:head>
 
 <div class="max-w-screen-xl mx-auto p-4">
