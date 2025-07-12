@@ -55,7 +55,7 @@
 						Open-code reporting and moderation system for websites, online communities or web games. Self-hostable and
 						customizable.
 					</p>
-					<div class="mt-10 ml-1 flex gap-4">
+					<div class="mt-10 ml-1 flex gap-4 flex-wrap">
 						{#if !$isAuthenticated}
 							<Button href="/login?signup=true">
 								Get started <ArrowRight class="w-4 h-4" />

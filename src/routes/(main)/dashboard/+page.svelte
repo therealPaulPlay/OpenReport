@@ -146,15 +146,13 @@
 		<SheetTrigger asChild class="{buttonVariants()} lg:hidden fixed top-20 left-4 z-10">
 			<Menu size={24} />
 		</SheetTrigger>
-		<SheetContent side="left" class="lg:hidden w-64 p-4">
-			<div class="max-h-full overflow-auto mt-14">
-				{@render sidebarContent()}
-			</div>
+		<SheetContent side="left" class="lg:hidden w-64 p-4 overflow-auto pt-18">
+			{@render sidebarContent()}
 		</SheetContent>
 	</Sheet>
 
 	<!-- Main Content -->
-	<div class="flex-1 p-6 flex flex-col relative overflow-auto mb-20">
+	<div class="flex-1 p-6 flex flex-col relative overflow-auto pb-22">
 		<!-- App selection notice -->
 		{#if activeApp == null}
 			<div class="flex items-center justify-center flex-grow text-center text-muted-foreground mb-6">

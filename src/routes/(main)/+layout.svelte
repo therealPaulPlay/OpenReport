@@ -27,7 +27,6 @@
 		</a>
 		<div class="flex gap-5 items-center">
 			<a href="/pricing" class="text-muted-foreground transition-colors hover:text-foreground">Pricing</a>
-			<a href="/dashboard" class="text-muted-foreground transition-colors hover:text-foreground">Dashboard</a>
 			<a href="/login" class="text-muted-foreground transition-colors hover:text-foreground">Login</a>
 			<Button onclick={toggleMode} variant="outline" size="icon">
 				<Sun class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

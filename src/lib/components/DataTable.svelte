@@ -116,7 +116,7 @@
 	</Table.Body>
 
 	<Table.Caption>
-		<!-- Load More Button -->
+		<!-- Load more Button -->
 		{#if $hasNextPage}
 			<Button
 				onclick={() => {
@@ -126,7 +126,7 @@
 				variant="outline"
 				class="mt-2"
 			>
-				Load More
+				Load more
 				<ArrowDownIcon />
 			</Button>
 		{/if}
