@@ -49,7 +49,7 @@
 				<div class="flex flex-col max-w-xl">
 					<p class="uppercase ml-1 text-md font-bold tracking-wide">Free & Selfhost-ready</p>
 					<h1 class="text-4xl md:text-6xl font-bold mt-2">
-						Stop bad actors with <span class="text-violet-800 dark:text-violet-500">report forms</span>.
+						Stop bad actors with <span class="text-violet-800 dark:text-violet-500">report forms</span>
 					</h1>
 					<p class="mt-6 text-lg text-muted-foreground">
 						Open-code reporting and moderation system for websites, online communities or web games. Self-hostable and
@@ -85,7 +85,7 @@
 		<!-- Features Section -->
 		<section class="py-20 pb-12">
 			<div class="text-center mb-16">
-				<h2 class="text-3xl font-bold mb-4">Everything you need to manage reports.</h2>
+				<h2 class="text-3xl font-bold mb-4">Everything you need to manage reports</h2>
 				<p class="text-muted-foreground max-w-2xl mx-auto">
 					Simple integration, powerful features, complete control over your data.
 				</p>
@@ -105,7 +105,7 @@
 		<!-- Dashboard Container -->
 		<section class="w-full flex flex-col lg:flex-row gap-8 items-center justify-center my-20 max-md:mt-6">
 			<div class="w-full lg:w-2/5 mr-auto p-4">
-				<h2 class="text-3xl font-bold mt-2">A powerful dashboard.</h2>
+				<h2 class="text-3xl font-bold mt-2">A powerful dashboard</h2>
 				<p class="mt-4 text-lg text-muted-foreground">
 					Create forms, explore automations, invite moderators and learn to use the API via our clean dashboard.
 				</p>
