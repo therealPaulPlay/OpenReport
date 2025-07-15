@@ -62,7 +62,7 @@
 							</Button>
 						{:else}
 							<Button href="/dashboard">
-								Open Dashboard <ArrowRight class="w-4 h-4" />
+								Open dashboard <ArrowRight class="w-4 h-4" />
 							</Button>
 						{/if}
 						<GithubReposView />
