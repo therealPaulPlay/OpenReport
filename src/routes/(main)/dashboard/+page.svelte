@@ -6,7 +6,6 @@
 	import CleanPopup from "$lib/components/CleanPopup.svelte";
 	import AddEntryPopup from "$lib/components/AddEntryPopup.svelte";
 	import FormLinkCreator from "$lib/components/FormLinkCreator.svelte";
-
 	import { Sheet, SheetTrigger, SheetContent } from "$lib/components/ui/sheet";
 	import * as Tabs from "$lib/components/ui/tabs/index.js";
 	import * as Select from "$lib/components/ui/select/index.js";
@@ -166,13 +165,13 @@
 					<div class="flex gap-3 overflow-x-auto py-1">
 						<Tabs.List class="w-full flex justify-start max-w-80">
 							<Tabs.Trigger value="reports" class="w-full text-center"
-								><span class="max-lg:hidden">Reports</span> <Flag class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Reports</span> <Flag class="size-4" /></Tabs.Trigger
 							>
 							<Tabs.Trigger value="warnlist" class="w-full text-center"
-								><span class="max-lg:hidden">Warnlist</span> <TriangleAlert class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Warnlist</span> <TriangleAlert class="size-4" /></Tabs.Trigger
 							>
 							<Tabs.Trigger value="blacklist" class="w-full text-center"
-								><span class="max-lg:hidden">Blacklist</span> <Ban class="size-4 ml-1 mt-0.5" /></Tabs.Trigger
+								><span class="max-lg:hidden">Blacklist</span> <Ban class="size-4" /></Tabs.Trigger
 							>
 						</Tabs.List>
 						<Button
