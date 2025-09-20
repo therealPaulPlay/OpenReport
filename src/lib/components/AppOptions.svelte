@@ -19,6 +19,8 @@
 	let moderators = $state([]);
 	let newModeratorEmail = $state("");
 	let domains = $state("");
+	let webhookUrl = $state(app.webhook_url || "");
+	let webhookSecret = $state("");
 
 	let dialogOpen = $state(false);
 
@@ -159,6 +161,27 @@
 		}
 	}
 
+	async function updateWebhook() {
+		try {
+			await fetchWithErrorHandling(`${$BASE_API_URL}/app/set-webhook`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+				},
+				body: JSON.stringify({
+					id: Number(localStorage.getItem("id")),
+					appId: app.app_id,
+					webhookUrl: webhookUrl.trim(),
+					webhookSecret: webhookSecret.trim(),
+				}),
+			});
+			toast.success("Webhook updated successfully.");
+		} catch (error) {
+			toast.error(error.message);
+		}
+	}
+
 	function handleWarnThresholdInput(event) {
 		const value = parseInt(event.target.value);
 		if (!isNaN(value)) {
@@ -257,7 +280,7 @@
 					</p>
 				</div>
 
-				<div class="grid grid-cols-2 gap-4">
+				<div class="grid grid-cols-2 gap-2">
 					<div class="space-y-1">
 						<Label for="warnlistInput">Warnlist threshold</Label>
 						<Input
@@ -292,6 +315,31 @@
 				{/if}
 
 				<Button variant="outline" onclick={updateThresholds} disabled={!isValid}><Save />Save thresholds</Button>
+			</div>
+
+			<div class="space-y-2">
+				<Label>Webhook (experimental)</Label>
+
+				<div class="grid grid-cols-2 gap-2">
+					<div class="space-y-1">
+						<Input type="url" id="webhookUrl" placeholder="https://your-app.com/webhook" bind:value={webhookUrl} />
+					</div>
+
+					<div class="space-y-1">
+						<div class="flex gap-2">
+							<Input
+								type="password"
+								id="webhookSecret"
+								placeholder="secret123"
+								bind:value={webhookSecret}
+								class="grow"
+							/>
+							<Button variant="outline" onclick={updateWebhook}>
+								<Save />Save
+							</Button>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="pt-2 border-t pt-5">

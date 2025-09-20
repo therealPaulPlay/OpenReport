@@ -36,7 +36,7 @@
 
 <Dialog.Root>
 	<Dialog.Trigger class="{buttonVariants({ variant: 'secondary' })} w-full !bg-neutral-200 hover:!bg-neutral-300 dark:!bg-neutral-800 dark:hover:!bg-neutral-700 !rounded-lg">
-		<span class="icon-wrapper flex items-center gap-3 w-full"><Settings size={20} /> Settings</span>
+		<span class="icon-wrapper flex items-center gap-2 w-full"><Settings size={20} /> Settings</span>
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
@@ -49,7 +49,7 @@
 				<DatabaseConfig />
 			</div>
 			<p class="text-sm text-muted-foreground">Account - {$username}</p>
-			<div class="flex flex-wrap gap-3 !mt-1">
+			<div class="flex flex-wrap gap-2 !mt-1">
 				<Button variant="outline" onclick={() => goto("/login?reset=true")}
 					><Lock size={16} class="mr-2" />Change password</Button
 				>
