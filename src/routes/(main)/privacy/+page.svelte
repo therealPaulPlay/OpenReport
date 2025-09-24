@@ -12,7 +12,7 @@
 			<h2 class="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
 			<p>
 				OpenReport ("we," "us," or "our") is committed to protecting the privacy of our users. This Privacy Policy
-				explains how we handle information in relation to our open-code reporting system ("Service").
+				explains how we handle information in relation to our open-source reporting system ("Service").
 			</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">2. Information Collection</h2>

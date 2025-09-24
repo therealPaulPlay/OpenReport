@@ -52,7 +52,7 @@
 						Stop bad actors with <span class="text-violet-800 dark:text-violet-500">report forms</span>
 					</h1>
 					<p class="mt-6 text-lg text-muted-foreground">
-						Open-code reporting and moderation system for websites, online communities or web games. Self-hostable and
+						Open-source reporting and moderation system for websites, online communities or web games. Self-hostable and
 						customizable.
 					</p>
 					<div class="mt-10 ml-1 flex gap-4 flex-wrap">
