@@ -233,7 +233,7 @@
 						placeholder="new-website.com, localhost"
 						class="grow grow-[4] w-fit"
 					/>
-					<Button variant="outline" onclick={updateDomains} class="grow max-w-28">Update</Button>
+					<Button variant="outline" onclick={updateDomains} disabled={!domains} class="grow max-w-28">Update</Button>
 				</div>
 			</div>
 			<div class="space-y-2">
@@ -330,11 +330,12 @@
 							<Input
 								type="password"
 								id="webhookSecret"
+								autocomplete="off"
 								placeholder="secret123"
 								bind:value={webhookSecret}
 								class="grow"
 							/>
-							<Button variant="outline" onclick={updateWebhook}>
+							<Button variant="outline" onclick={updateWebhook} disabled={!webhookSecret || !webhookUrl}>
 								<Save />Save
 							</Button>
 						</div>

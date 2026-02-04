@@ -95,7 +95,7 @@
 	<div class="w-full flex justify-start">
 		<AppCreationPopup {fetchApps} />
 	</div>
-	<p class="text-base font-bold text-muted-foreground mt-5">Your apps</p>
+	<p class="text-sm font-medium text-muted-foreground mt-5">Your apps</p>
 	<div
 		class="space-y-2 mt-2 bg-neutral-200 dark:bg-neutral-800 p-2 rounded-lg overflow-hidden overflow-y-auto h-[calc(100%-13.5rem)] relative"
 	>

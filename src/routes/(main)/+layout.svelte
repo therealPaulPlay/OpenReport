@@ -18,7 +18,7 @@
 	<nav class="flex gap-6 text-base justify-between items-center w-full">
 		<a href="/" class="flex items-center gap-2 text-lg font-semibold">
 			<Goal class="h-6 w-6" />
-			<span class="max-sm:hidden">OpenReport</span>
+			<span class="max-sm:hidden font-medium">OpenReport</span>
 			{#if $subscriptionTier > 0}
 				<span class="rounded-sm text-sm bg-violet-800 dark:bg-violet-500 px-1 text-white mt-0.25" transition:blur
 					>{$subscriptionTier == 1 ? "Plus" : $subscriptionTier == 2 ? "Pro" : "Unknown Tier"}</span
