@@ -25,7 +25,8 @@
 	let submitted = $state(false);
 	let loading = $state(false);
 
-	let selectedReason = $state(reportReasons[0]);
+	// svelte-ignore state_referenced_locally
+	let selectedReason = $state(reportReasons[0]); // Should only initialize as reason idx 0, then reflect user selection
 	let notes = $state("");
 
 	let captchaVisible = $state(false);

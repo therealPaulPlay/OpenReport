@@ -79,7 +79,7 @@
 
 				<div class="space-y-1">
 					<Label for="reason">Reason</Label>
-					<Input id="reason" placeholder="e.g. spam" bind:value={reason} />
+					<Input id="reason" maxlength={75} placeholder="e.g. spam" bind:value={reason} />
 				</div>
 
 				<div class="space-y-1">

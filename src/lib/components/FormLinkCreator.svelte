@@ -3,7 +3,7 @@
 	import { Label } from "$lib/components/ui/label";
 	import { Button, buttonVariants } from "$lib/components/ui/button";
 	import * as Dialog from "$lib/components/ui/dialog/index.js";
-	import { Captions, Copy } from "lucide-svelte";
+	import { Captions, Copy, TriangleAlert } from "lucide-svelte";
 	import { toast } from "svelte-sonner";
 	import * as Tooltip from "$lib/components/ui/tooltip/index.js";
 	import Checkbox from "./ui/checkbox/checkbox.svelte";
@@ -23,7 +23,7 @@
 		if (referenceId) params.set("reference-id", referenceId);
 		params.set("key", apiKey);
 		if (link) params.set("link", link);
-		if (reasons) params.set("reasons", reasons.replaceAll(", ", ","));
+		if (reasons) params.set("reasons", normalizedReasons);
 		if (!allowNotes) params.set("allow-notes", "false");
 		if (requireNotes) params.set("require-notes", "true");
 
@@ -31,6 +31,8 @@
 	});
 
 	let currentUrl = $state("");
+	let normalizedReasons = $derived(reasons.replaceAll(", ", ","));
+	let reasonTooLong = $derived(normalizedReasons.split(",").some((reason) => reason.length > 75));
 
 	function copyToClipboard(text) {
 		navigator.clipboard.writeText(text);
@@ -138,6 +140,12 @@
 						<div class="space-y-1">
 							<Label for="reasons">Reasons (comma-separated)</Label>
 							<Input id="reasons" bind:value={reasons} placeholder="Spam, Cheating, Harassment" />
+							{#if reasonTooLong}
+								<p class="flex items-center gap-2 text-xs text-destructive">
+									<TriangleAlert class="w-4 h-4 shrink-0" />
+									Each reason should be max. 75 characters long.
+								</p>
+							{/if}
 						</div>
 						<div class="flex items-center space-x-2">
 							<Checkbox type="checkbox" id="allowNotes" bind:checked={allowNotes} />
