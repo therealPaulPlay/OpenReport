@@ -4,7 +4,7 @@
 
 <div class="min-h-screen max-w-screen-xl mx-auto p-4 py-8">
 	<div class="max-w-3xl mx-auto">
-		<h1 class="text-4xl font-semibold mb-8">Terms of Use</h1>
+		<h1 class="text-4xl font-semibold mb-8">Terms of use</h1>
 
 		<div class="max-w-none">
 			<p class="text-muted-foreground mb-6">Last updated: Sept. 12th, 2026</p>
@@ -12,7 +12,7 @@
 			<h2 class="text-2xl font-semibold mt-8 mb-4">1. Acceptance of terms</h2>
 			<p>
 				By accessing or using OpenReport ("Service") provided by PaulPlay ("we," "us," or "our"), you agree to be bound
-				by these Terms of Use. If you do not agree to these terms, please do not use the Service.
+				by these terms of use. If you do not agree to these terms, please do not use the Service.
 			</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">2. Description of service</h2>
@@ -101,7 +101,7 @@
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">11. Contact information</h2>
 			<p>
-				For questions about these Terms of Use, please contact us through our <a
+				For questions about these terms of use, please contact us through our <a
 					href="https://paulplay.studio/contact"
 					target="_blank"
 					class="underline">contact form</a
@@ -110,8 +110,8 @@
 
 			<div class="mt-12 mb-8 text-sm text-muted-foreground">
 				<p>
-					By using the Service, you acknowledge that you have read, understood, and agree to be bound by these Terms of
-					Use.
+					By using the Service, you acknowledge that you have read, understood, and agree to be bound by these terms of
+					use.
 				</p>
 			</div>
 		</div>

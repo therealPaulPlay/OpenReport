@@ -4,7 +4,7 @@
 
 <div class="min-h-screen max-w-screen-xl mx-auto p-4 py-8">
 	<div class="max-w-3xl mx-auto">
-		<h1 class="text-4xl font-semibold mb-8">Privacy Policy</h1>
+		<h1 class="text-4xl font-semibold mb-8">Privacy policy</h1>
 
 		<div class="prose prose-slate max-w-none">
 			<p class="text-muted-foreground mb-6">Last updated: Sept. 12th, 2026</p>
@@ -12,7 +12,7 @@
 			<h2 class="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
 			<p>
 				PaulPlay ("we," "us," or "our") builds and maintains OpenReport ("Service") and is committed to protecting user
-				privacy. This Privacy Policy explains how we handle information in relation to the Service.
+				privacy. This privacy policy explains how we handle information in relation to the Service.
 			</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">2. Information collection</h2>
@@ -99,15 +99,15 @@
 				under 13. If you become aware that a child has provided us with personal information, please contact us.
 			</p>
 
-			<h2 class="text-2xl font-semibold mt-8 mb-4">8. Changes to this Privacy Policy</h2>
+			<h2 class="text-2xl font-semibold mt-8 mb-4">8. Changes to this privacy policy</h2>
 			<p>
-				We may update this Privacy Policy from time to time. We will notify users of any material changes by posting the
-				new Privacy Policy on this page and updating the "Last updated" date.
+				We may update this privacy policy from time to time. We will notify users of any material changes by posting the
+				new privacy policy on this page and updating the "Last updated" date.
 			</p>
 
 			<h2 class="text-2xl font-semibold mt-8 mb-4">9. Contact us</h2>
 			<p>
-				For questions about this Privacy Policy, please contact us through our <a
+				For questions about this privacy policy, please contact us through our <a
 					href="https://paulplay.studio/contact"
 					target="_blank"
 					class="underline">contact form</a
@@ -115,7 +115,7 @@
 			</p>
 
 			<div class="mt-12 mb-8 text-sm text-muted-foreground">
-				<p>By using the Service, you acknowledge that you have read and understood this Privacy Policy.</p>
+				<p>By using the Service, you acknowledge that you have read and understood this privacy policy.</p>
 			</div>
 		</div>
 	</div>

@@ -121,10 +121,10 @@
 			{#if !demo}
 				<p class="text-sm text-muted-foreground">
 					By submitting a report, you agree to the <a href="/terms" target="_blank" class=" hover:underline"
-						>Terms of Use</a
+						>terms of use</a
 					>
 					and the
-					<a href="/privacy" target="_blank" class="hover:underline">Privacy Policy</a>.
+					<a href="/privacy" target="_blank" class="hover:underline">privacy policy</a>.
 				</p>
 			{/if}
 		{:else}
