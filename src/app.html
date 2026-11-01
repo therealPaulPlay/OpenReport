@@ -9,6 +9,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="description"
 		content="Handle user report forms with ease. Prevent spam, inappropriate language, cheating or scamming on your website with our reporting solution." />
+	<script>
+		// Apply the correct theme before Svelte mounts to prevent a dark/white flash
+		{
+			const persistedMode = localStorage.getItem("mode-watcher-mode") ?? "system";
+			let isDark = persistedMode === "dark"; // Initialize as dark if that's saved
+
+			const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+			// If no preference is saved or the saved preference is system, apply dark unless the system is in light mode
+			if (persistedMode === "system") isDark = !systemPrefersLight;
+
+			document.documentElement.classList.toggle("dark", isDark);
+			document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+		}
+	</script>
 	%sveltekit.head%
 </head>
 
