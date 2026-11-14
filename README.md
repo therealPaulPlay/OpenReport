@@ -23,4 +23,4 @@ npm run build
 
 The production build can be previewed via `npm run preview`.
 
-> To deploy OpenReport, an adapter for your target environment [adapter](https://svelte.dev/docs/kit/adapters) may be needed.
+> To deploy OpenReport, an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment may be needed.
